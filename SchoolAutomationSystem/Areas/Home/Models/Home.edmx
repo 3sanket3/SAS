@@ -1,0 +1,178 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HomeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="HomeModelStoreContainer">
+          <EntitySet Name="Login" EntityType="HomeModel.Store.Login" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SecurityQuestion" EntityType="HomeModel.Store.SecurityQuestion" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Login_Login" Association="HomeModel.Store.FK_Login_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Login1" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecurityQuestion_Id" Association="HomeModel.Store.FK_SecurityQuestion_Id">
+            <End Role="SecurityQuestion" EntitySet="SecurityQuestion" />
+            <End Role="SecurityQuestion1" EntitySet="SecurityQuestion" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Login_Id" />
+          </Key>
+          <Property Name="Login_Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="nvarchar" MaxLength="15" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+          <Property Name="Security_Question_Id" Type="numeric" />
+          <Property Name="Security_Ans" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="SecurityQuestion">
+          <Key>
+            <PropertyRef Name="Security_Question_Id" />
+          </Key>
+          <Property Name="Security_Question_Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Security_Question" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <Association Name="FK_Login_Login">
+          <End Role="Login" Type="HomeModel.Store.Login" Multiplicity="1" />
+          <End Role="Login1" Type="HomeModel.Store.Login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Login_Id" />
+            </Principal>
+            <Dependent Role="Login1">
+              <PropertyRef Name="Login_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecurityQuestion_Id">
+          <End Role="SecurityQuestion" Type="HomeModel.Store.SecurityQuestion" Multiplicity="1" />
+          <End Role="SecurityQuestion1" Type="HomeModel.Store.SecurityQuestion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityQuestion">
+              <PropertyRef Name="Security_Question_Id" />
+            </Principal>
+            <Dependent Role="SecurityQuestion1">
+              <PropertyRef Name="Security_Question_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HomeModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="HomeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Logins" EntityType="HomeModel.Login" />
+          <EntitySet Name="SecurityQuestions" EntityType="HomeModel.SecurityQuestion" />
+          <AssociationSet Name="FK_Login_Login" Association="HomeModel.FK_Login_Login">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Login1" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecurityQuestion_Id" Association="HomeModel.FK_SecurityQuestion_Id">
+            <End Role="SecurityQuestion" EntitySet="SecurityQuestions" />
+            <End Role="SecurityQuestion1" EntitySet="SecurityQuestions" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Login_Id" />
+          </Key>
+          <Property Name="Login_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Security_Question_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Security_Ans" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="Login1" Relationship="HomeModel.FK_Login_Login" FromRole="Login" ToRole="Login1" />
+          <NavigationProperty Name="Login2" Relationship="HomeModel.FK_Login_Login" FromRole="Login1" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="SecurityQuestion">
+          <Key>
+            <PropertyRef Name="Security_Question_Id" />
+          </Key>
+          <Property Name="Security_Question_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Security_Question" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="SecurityQuestion1" Relationship="HomeModel.FK_SecurityQuestion_Id" FromRole="SecurityQuestion" ToRole="SecurityQuestion1" />
+          <NavigationProperty Name="SecurityQuestion2" Relationship="HomeModel.FK_SecurityQuestion_Id" FromRole="SecurityQuestion1" ToRole="SecurityQuestion" />
+        </EntityType>
+        <Association Name="FK_Login_Login">
+          <End Role="Login" Type="HomeModel.Login" Multiplicity="1" />
+          <End Role="Login1" Type="HomeModel.Login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Login_Id" />
+            </Principal>
+            <Dependent Role="Login1">
+              <PropertyRef Name="Login_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecurityQuestion_Id">
+          <End Role="SecurityQuestion" Type="HomeModel.SecurityQuestion" Multiplicity="1" />
+          <End Role="SecurityQuestion1" Type="HomeModel.SecurityQuestion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityQuestion">
+              <PropertyRef Name="Security_Question_Id" />
+            </Principal>
+            <Dependent Role="SecurityQuestion1">
+              <PropertyRef Name="Security_Question_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HomeModelStoreContainer" CdmEntityContainer="HomeEntities">
+          <EntitySetMapping Name="Logins"><EntityTypeMapping TypeName="HomeModel.Login"><MappingFragment StoreEntitySet="Login">
+            <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+            <ScalarProperty Name="Username" ColumnName="Username" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="Security_Question_Id" ColumnName="Security_Question_Id" />
+            <ScalarProperty Name="Security_Ans" ColumnName="Security_Ans" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SecurityQuestions"><EntityTypeMapping TypeName="HomeModel.SecurityQuestion"><MappingFragment StoreEntitySet="SecurityQuestion">
+            <ScalarProperty Name="Security_Question_Id" ColumnName="Security_Question_Id" />
+            <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Home">
+        <EntityTypeShape EntityType="HomeModel.Login" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3648893229166661" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.SecurityQuestion" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416657" IsExpanded="true" />
+        <AssociationConnector Association="HomeModel.FK_Login_Login" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.75" PointY="1.57465484775641" />
+          <ConnectorPoint PointX="2.5" PointY="1.57465484775641" />
+          <ConnectorPoint PointX="2.5" PointY="2.307272085336538" />
+          <ConnectorPoint PointX="2.75" PointY="2.307272085336538" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_SecurityQuestion_Id" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.2819230769230767" PointY="2.5379850260416656" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="2.7879850260416656" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="2.7879850260416656" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="2.5379850260416656" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

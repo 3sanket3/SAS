@@ -1,0 +1,23 @@
+﻿@{
+    
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    ViewBag.Title = "Login";
+    
+}
+@model SchoolAutomationSystem.Areas.Home.Models.LoginDetails
+<h2>Login</h2>
+@using (Html.BeginForm())
+{
+
+@Html.Label("User Name")
+
+@Html.TextBox("Model.username", Model.username == null ? string.Empty : Model.username, new { @maxlength = 15 })
+
+@Html.Label("Password")
+
+@Html.Password("Model.password", Model.password == null ? string.Empty : Model.password, new { @maxlength = 20 })
+
+<input type = "submit" value = "Log In"  />
+    <br/>
+    @Html.Label(Model.errorMessage == null ? string.Empty : Model.errorMessage)
+}
