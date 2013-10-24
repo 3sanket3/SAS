@@ -1,0 +1,22 @@
+﻿@{
+    ViewBag.Title = "ErrorScreen";
+}
+@model SchoolAutomationSystem.Models.ErrorDetails
+           
+
+<h2>ErrorScreen</h2>
+
+Application Name : 
+
+@MvcHtmlString.Create(Model.ApplicationName == null ? string.Empty : Model.ApplicationName)
+
+<br/>
+<br/>
+Error Message :
+
+@MvcHtmlString.Create(Model.ErrorMessage == null ? string.Empty : Model.ErrorMessage)
+
+<br/><br/>
+Stack Trace :
+@MvcHtmlString.Create(Model.AdditionalInfo == null ? string.Empty : Model.AdditionalInfo)
+

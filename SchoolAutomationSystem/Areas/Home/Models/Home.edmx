@@ -4,10 +4,20 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="HomeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+    <Schema Namespace="HomeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="HomeModelStoreContainer">
+          <EntitySet Name="Application" EntityType="HomeModel.Store.Application" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ErrorLog" EntityType="HomeModel.Store.ErrorLog" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Login" EntityType="HomeModel.Store.Login" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SecurityQuestion" EntityType="HomeModel.Store.SecurityQuestion" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_Exceptions_AppId" Association="HomeModel.Store.FK_Exceptions_AppId">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="ErrorLog" EntitySet="ErrorLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exceptions_UserId" Association="HomeModel.Store.FK_Exceptions_UserId">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="ErrorLog" EntitySet="ErrorLog" />
+          </AssociationSet>
           <AssociationSet Name="FK_Login_Login" Association="HomeModel.Store.FK_Login_Login">
             <End Role="Login" EntitySet="Login" />
             <End Role="Login1" EntitySet="Login" />
@@ -17,6 +27,25 @@
             <End Role="SecurityQuestion1" EntitySet="SecurityQuestion" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="ApplicationName" Type="varchar" MaxLength="50" />
+          <Property Name="Id" Type="numeric" Nullable="false" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExceptionMessage" Type="varchar" MaxLength="200" />
+          <Property Name="AdditionMessage" Type="varchar" MaxLength="2000" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="UserInfo" Type="numeric" />
+          <Property Name="AppId" Type="numeric" />
+        </EntityType>
         <EntityType Name="Login">
           <Key>
             <PropertyRef Name="Login_Id" />
@@ -34,6 +63,30 @@
           <Property Name="Security_Question_Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Security_Question" Type="nvarchar" MaxLength="200" />
         </EntityType>
+        <Association Name="FK_Exceptions_AppId">
+          <End Role="Application" Type="HomeModel.Store.Application" Multiplicity="0..1" />
+          <End Role="ErrorLog" Type="HomeModel.Store.ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exceptions_UserId">
+          <End Role="Login" Type="HomeModel.Store.Login" Multiplicity="0..1" />
+          <End Role="ErrorLog" Type="HomeModel.Store.ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Login_Id" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_Login_Login">
           <End Role="Login" Type="HomeModel.Store.Login" Multiplicity="1" />
           <End Role="Login1" Type="HomeModel.Store.Login" Multiplicity="0..1" />
@@ -58,8 +111,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="HomeModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
@@ -74,6 +126,16 @@
             <End Role="SecurityQuestion" EntitySet="SecurityQuestions" />
             <End Role="SecurityQuestion1" EntitySet="SecurityQuestions" />
           </AssociationSet>
+          <EntitySet Name="Applications" EntityType="HomeModel.Application" />
+          <EntitySet Name="ErrorLogs" EntityType="HomeModel.ErrorLog" />
+          <AssociationSet Name="FK_Exceptions_AppId1" Association="HomeModel.FK_Exceptions_AppId1">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="ErrorLog" EntitySet="ErrorLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exceptions_UserId1" Association="HomeModel.FK_Exceptions_UserId1">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="ErrorLog" EntitySet="ErrorLogs" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="Login">
           <Key>
@@ -86,6 +148,7 @@
           <Property Name="Security_Ans" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
           <NavigationProperty Name="Login1" Relationship="HomeModel.FK_Login_Login" FromRole="Login" ToRole="Login1" />
           <NavigationProperty Name="Login2" Relationship="HomeModel.FK_Login_Login" FromRole="Login1" ToRole="Login" />
+          <NavigationProperty Name="ErrorLogs" Relationship="HomeModel.FK_Exceptions_UserId1" FromRole="Login" ToRole="ErrorLog" />
         </EntityType>
         <EntityType Name="SecurityQuestion">
           <Key>
@@ -120,6 +183,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="String" Name="ApplicationName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="ErrorLogs" Relationship="HomeModel.FK_Exceptions_AppId1" FromRole="Application" ToRole="ErrorLog" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ExceptionMessage" MaxLength="200" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="AdditionMessage" MaxLength="2000" FixedLength="false" Unicode="false" />
+          <Property Type="DateTime" Name="CreatedOn" />
+          <Property Type="DateTime" Name="ModifiedOn" />
+          <Property Type="Decimal" Name="UserInfo" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="AppId" Precision="18" Scale="0" />
+          <NavigationProperty Name="Application" Relationship="HomeModel.FK_Exceptions_AppId1" FromRole="ErrorLog" ToRole="Application" />
+          <NavigationProperty Name="Login" Relationship="HomeModel.FK_Exceptions_UserId1" FromRole="ErrorLog" ToRole="Login" />
+        </EntityType>
+        <Association Name="FK_Exceptions_AppId1">
+          <End Type="HomeModel.Application" Role="Application" Multiplicity="0..1" />
+          <End Type="HomeModel.ErrorLog" Role="ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exceptions_UserId1">
+          <End Type="HomeModel.Login" Role="Login" Multiplicity="0..1" />
+          <End Type="HomeModel.ErrorLog" Role="ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Login_Id" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -137,6 +246,27 @@
             <ScalarProperty Name="Security_Question_Id" ColumnName="Security_Question_Id" />
             <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
           </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Applications">
+            <EntityTypeMapping TypeName="HomeModel.Application">
+              <MappingFragment StoreEntitySet="Application">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs">
+            <EntityTypeMapping TypeName="HomeModel.ErrorLog">
+              <MappingFragment StoreEntitySet="ErrorLog">
+                <ScalarProperty Name="AppId" ColumnName="AppId" />
+                <ScalarProperty Name="UserInfo" ColumnName="UserInfo" />
+                <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+                <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+                <ScalarProperty Name="AdditionMessage" ColumnName="AdditionMessage" />
+                <ScalarProperty Name="ExceptionMessage" ColumnName="ExceptionMessage" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -161,16 +291,28 @@
         <EntityTypeShape EntityType="HomeModel.Login" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3648893229166661" IsExpanded="true" />
         <EntityTypeShape EntityType="HomeModel.SecurityQuestion" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416657" IsExpanded="true" />
         <AssociationConnector Association="HomeModel.FK_Login_Login" ManuallyRouted="false">
-          <ConnectorPoint PointX="2.75" PointY="1.57465484775641" />
-          <ConnectorPoint PointX="2.5" PointY="1.57465484775641" />
-          <ConnectorPoint PointX="2.5" PointY="2.307272085336538" />
-          <ConnectorPoint PointX="2.75" PointY="2.307272085336538" />
+          <ConnectorPoint PointX="3.2819230769230767" PointY="3.4994921875" />
+          <ConnectorPoint PointX="3.2819230769230767" PointY="3.7494921874999996" />
+          <ConnectorPoint PointX="3.7284615384615383" PointY="3.7494921874999996" />
+          <ConnectorPoint PointX="3.7284615384615383" PointY="3.4994921875" />
         </AssociationConnector>
         <AssociationConnector Association="HomeModel.FK_SecurityQuestion_Id" ManuallyRouted="false">
           <ConnectorPoint PointX="1.2819230769230767" PointY="2.5379850260416656" />
           <ConnectorPoint PointX="1.2819230769230767" PointY="2.7879850260416656" />
           <ConnectorPoint PointX="1.7284615384615383" PointY="2.7879850260416656" />
           <ConnectorPoint PointX="1.7284615384615383" PointY="2.5379850260416656" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="HomeModel.Application" Width="1.5" PointX="0.75" PointY="5.5" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="HomeModel.ErrorLog" Width="1.5" PointX="8" PointY="2.625" Height="2.7494921874999996" />
+        <AssociationConnector Association="HomeModel.FK_Exceptions_AppId1" >
+          <ConnectorPoint PointX="2.25" PointY="6.297841796875" />
+          <ConnectorPoint PointX="8.75" PointY="6.297841796875" />
+          <ConnectorPoint PointX="8.75" PointY="5.3744921875" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Exceptions_UserId1" >
+          <ConnectorPoint PointX="4.25" PointY="1.6874995" />
+          <ConnectorPoint PointX="8.75" PointY="1.6874995" />
+          <ConnectorPoint PointX="8.75" PointY="2.625" />
         </AssociationConnector>
       </Diagram>
     </Diagrams>

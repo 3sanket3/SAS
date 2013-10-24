@@ -20,6 +20,8 @@ using System.Runtime.Serialization;
 
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_Login_Login", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Areas.Home.Models.Login), "Login1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Login), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_SecurityQuestion_Id", "SecurityQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Areas.Home.Models.SecurityQuestion), "SecurityQuestion1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.SecurityQuestion), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_AppId1", "Application", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Application), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ErrorLog), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_UserId1", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Login), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ErrorLog), true)]
 
 #endregion
 
@@ -102,6 +104,38 @@ namespace SchoolAutomationSystem.Areas.Home.Models
             }
         }
         private ObjectSet<SecurityQuestion> _SecurityQuestions;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Application> Applications
+        {
+            get
+            {
+                if ((_Applications == null))
+                {
+                    _Applications = base.CreateObjectSet<Application>("Applications");
+                }
+                return _Applications;
+            }
+        }
+        private ObjectSet<Application> _Applications;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ErrorLog> ErrorLogs
+        {
+            get
+            {
+                if ((_ErrorLogs == null))
+                {
+                    _ErrorLogs = base.CreateObjectSet<ErrorLog>("ErrorLogs");
+                }
+                return _ErrorLogs;
+            }
+        }
+        private ObjectSet<ErrorLog> _ErrorLogs;
 
         #endregion
         #region AddTo Methods
@@ -121,6 +155,22 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         {
             base.AddObject("SecurityQuestions", securityQuestion);
         }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Applications EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToApplications(Application application)
+        {
+            base.AddObject("Applications", application);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ErrorLogs EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToErrorLogs(ErrorLog errorLog)
+        {
+            base.AddObject("ErrorLogs", errorLog);
+        }
 
         #endregion
     }
@@ -129,6 +179,388 @@ namespace SchoolAutomationSystem.Areas.Home.Models
     #endregion
     
     #region Entities
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="HomeModel", Name="Application")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Application : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Application object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static Application CreateApplication(global::System.Decimal id)
+        {
+            Application application = new Application();
+            application.Id = id;
+            return application;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ApplicationName
+        {
+            get
+            {
+                return _ApplicationName;
+            }
+            set
+            {
+                OnApplicationNameChanging(value);
+                ReportPropertyChanging("ApplicationName");
+                _ApplicationName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ApplicationName");
+                OnApplicationNameChanged();
+            }
+        }
+        private global::System.String _ApplicationName;
+        partial void OnApplicationNameChanging(global::System.String value);
+        partial void OnApplicationNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Decimal _Id;
+        partial void OnIdChanging(global::System.Decimal value);
+        partial void OnIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Exceptions_AppId1", "ErrorLog")]
+        public EntityCollection<ErrorLog> ErrorLogs
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ErrorLog>("HomeModel.FK_Exceptions_AppId1", "ErrorLog");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ErrorLog>("HomeModel.FK_Exceptions_AppId1", "ErrorLog", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="HomeModel", Name="ErrorLog")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class ErrorLog : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new ErrorLog object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static ErrorLog CreateErrorLog(global::System.Decimal id)
+        {
+            ErrorLog errorLog = new ErrorLog();
+            errorLog.Id = id;
+            return errorLog;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Decimal _Id;
+        partial void OnIdChanging(global::System.Decimal value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String ExceptionMessage
+        {
+            get
+            {
+                return _ExceptionMessage;
+            }
+            set
+            {
+                OnExceptionMessageChanging(value);
+                ReportPropertyChanging("ExceptionMessage");
+                _ExceptionMessage = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("ExceptionMessage");
+                OnExceptionMessageChanged();
+            }
+        }
+        private global::System.String _ExceptionMessage;
+        partial void OnExceptionMessageChanging(global::System.String value);
+        partial void OnExceptionMessageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AdditionMessage
+        {
+            get
+            {
+                return _AdditionMessage;
+            }
+            set
+            {
+                OnAdditionMessageChanging(value);
+                ReportPropertyChanging("AdditionMessage");
+                _AdditionMessage = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("AdditionMessage");
+                OnAdditionMessageChanged();
+            }
+        }
+        private global::System.String _AdditionMessage;
+        partial void OnAdditionMessageChanging(global::System.String value);
+        partial void OnAdditionMessageChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> CreatedOn
+        {
+            get
+            {
+                return _CreatedOn;
+            }
+            set
+            {
+                OnCreatedOnChanging(value);
+                ReportPropertyChanging("CreatedOn");
+                _CreatedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("CreatedOn");
+                OnCreatedOnChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _CreatedOn;
+        partial void OnCreatedOnChanging(Nullable<global::System.DateTime> value);
+        partial void OnCreatedOnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.DateTime> ModifiedOn
+        {
+            get
+            {
+                return _ModifiedOn;
+            }
+            set
+            {
+                OnModifiedOnChanging(value);
+                ReportPropertyChanging("ModifiedOn");
+                _ModifiedOn = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ModifiedOn");
+                OnModifiedOnChanged();
+            }
+        }
+        private Nullable<global::System.DateTime> _ModifiedOn;
+        partial void OnModifiedOnChanging(Nullable<global::System.DateTime> value);
+        partial void OnModifiedOnChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> UserInfo
+        {
+            get
+            {
+                return _UserInfo;
+            }
+            set
+            {
+                OnUserInfoChanging(value);
+                ReportPropertyChanging("UserInfo");
+                _UserInfo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("UserInfo");
+                OnUserInfoChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _UserInfo;
+        partial void OnUserInfoChanging(Nullable<global::System.Decimal> value);
+        partial void OnUserInfoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> AppId
+        {
+            get
+            {
+                return _AppId;
+            }
+            set
+            {
+                OnAppIdChanging(value);
+                ReportPropertyChanging("AppId");
+                _AppId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("AppId");
+                OnAppIdChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _AppId;
+        partial void OnAppIdChanging(Nullable<global::System.Decimal> value);
+        partial void OnAppIdChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Exceptions_AppId1", "Application")]
+        public Application Application
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Application>("HomeModel.FK_Exceptions_AppId1", "Application").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Application>("HomeModel.FK_Exceptions_AppId1", "Application").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Application> ApplicationReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Application>("HomeModel.FK_Exceptions_AppId1", "Application");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Application>("HomeModel.FK_Exceptions_AppId1", "Application", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Exceptions_UserId1", "Login")]
+        public Login Login
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("HomeModel.FK_Exceptions_UserId1", "Login").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("HomeModel.FK_Exceptions_UserId1", "Login").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Login> LoginReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Login>("HomeModel.FK_Exceptions_UserId1", "Login");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Login>("HomeModel.FK_Exceptions_UserId1", "Login", value);
+                }
+            }
+        }
+
+        #endregion
+    }
     
     /// <summary>
     /// No Metadata Documentation available.
@@ -353,6 +785,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Login>("HomeModel.FK_Login_Login", "Login", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Exceptions_UserId1", "ErrorLog")]
+        public EntityCollection<ErrorLog> ErrorLogs
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<ErrorLog>("HomeModel.FK_Exceptions_UserId1", "ErrorLog");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ErrorLog>("HomeModel.FK_Exceptions_UserId1", "ErrorLog", value);
                 }
             }
         }
