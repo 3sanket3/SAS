@@ -15,7 +15,7 @@ namespace SchoolAutomationSystem.Controllers
         public ActionResult ErrorScreen(ErrorDetails errorDetails)
         {
             errorDetails = (ErrorDetails)TempData["errordetails"];
-
+            
             return View(errorDetails);
         }
 

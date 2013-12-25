@@ -46,8 +46,7 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
             catch (Exception ex)
             {
                 ErrorDetails errordetails =errorOperations.LogException(Constants.Home_Application, ex);
-
-            
+                           
                 TempData["errordetails"] = errordetails;
 
                 RouteValueDictionary rvd = new RouteValueDictionary(new { controller = "Error", action = "ErrorScreen"});

@@ -5,19 +5,50 @@
     
 }
 @model SchoolAutomationSystem.Areas.Home.Models.LoginDetails
-<h2>Login</h2>
-@using (Html.BeginForm())
-{
 
-@Html.Label("User Name")
+<div class="row main-content">
+        	<div class=".col-xs-18 .col-sm-12">
+    			<h1 class="mrgn-left10">Welcome to Login Page</h1>
+        	<!--	<div class=".col-xs-6 .col-sm-4 mrgn-top10"> -->
+				<div class="login-content pad5">
+                <div class="please-login mrgn-top10">
+                	<h3 class="pad10">Please Login</h3>
+                </div>
+                    @using (Html.BeginForm("Login","Home",FormMethod.Post,new { @style = "role : 'form'"}))
+                    {
+                    	<div class="form-group error-field">
+							@Html.Label("Username :")
+                            
+                             @Html.TextBox("Model.username", Model.username == null ? string.Empty : Model.username, new { @maxlength = 15, @style = "placeholder='Username'", @class = "form-control mrgn0 mandatory user width-200" })
+                            
+                    		
+							<div class="error-msg">Mandatory field</div>
+                        </div>
+                        <div class="form-group">
+							@Html.Label("Password :")
+                            
+                            @Html.Password("Model.password", Model.password == null ? string.Empty : Model.password, new { @maxlength = 20 , @style ="placeholder='Password'" , @class = "form-control mrgn0 mandatory pass width-200"})
+                            
+							<div class="error-msg">Mandatory field</div>
+                    	</div>
+						<div class="checkbox">
+                        @Html.CheckBox("Model.RememberMe",Model.rememberMe == true ?true : false)
+							<span class="font13">
+                            @Html.Label("Remember me")
+                            </span>
 
-@Html.TextBox("Model.username", Model.username == null ? string.Empty : Model.username, new { @maxlength = 15 })
+                            @Html.ActionLink("Forget Password?", "", null, new { @class = "password-link mrgn-left10" })
+                            
+						</div>
+						<div class="center mrgn-left100">
 
-@Html.Label("Password")
+							<input type="submit" class="button-submit" value="Submit" />
+						</div>
+                        
+                    @Html.Label(Model.errorMessage == null ? string.Empty : Model.errorMessage )
+                    }
+				</div>	
+            <!--    </div>-->
+        	</div>
+        </div>
 
-@Html.Password("Model.password", Model.password == null ? string.Empty : Model.password, new { @maxlength = 20 })
-
-<input type = "submit" value = "Log In"  />
-    <br/>
-    @Html.Label(Model.errorMessage == null ? string.Empty : Model.errorMessage)
-}
