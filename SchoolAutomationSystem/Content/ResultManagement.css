@@ -1,0 +1,18 @@
+﻿body {
+}
+.webGridHead
+{
+    background-color : Blue;
+}
+.webGridAltRow
+{
+    background-color : #CCCCCC;
+}
+.webGrid
+{
+    width : 70%;
+}
+.webGridSelectedRow
+{
+    background-color : #CAE5FF;
+}

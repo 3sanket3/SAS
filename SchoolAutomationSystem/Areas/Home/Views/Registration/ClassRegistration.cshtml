@@ -1,0 +1,52 @@
+﻿@{
+    ViewBag.Title = "Class Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SchoolAutomationSystem.Areas.Home.Models.ClassDetailViewModel
+
+@using (Html.BeginForm( FormMethod.Post))
+{
+    @Html.LabelFor(m=>m.className)
+    @Html.TextBox("Model.className", Model.className == null ? string.Empty : Model.className)
+    @Html.Hidden("Model.id", Model.id)
+    <input type="button" id="addClass" value = "Add" />
+    <div id="myGrid">
+    @{
+        var grid = new WebGrid(Model.lstClassDetails, rowsPerPage: 4, canSort : true,canPage: true,ajaxUpdateContainerId : "myGrid");
+    @grid.GetHtml(
+    tableStyle : "webGrid",
+        headerStyle: "webGridHead",
+            alternatingRowStyle: "webGridAltRow",
+            selectedRowStyle : "webGridSelectedRow",
+    columns : grid.Columns(
+    
+            grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<div  style='width : 25px'><a id = edit_" + item.id + " href='#' onclick='editClick(event);'>Edit </a>  </div>")),
+            grid.Column("ClassName", "Class", format: (item) => item.ClassName)
+    )
+    )
+         }
+         </div>
+    
+}
+
+<script type="text/javascript">
+    $(document).ready(function () {
+
+        jQuery("#addClass").click(function () {
+            $('form')[0].submit();
+            $("#Model_id")[0].value = "";
+        });
+
+    });
+
+    function editClick(e) {
+
+        var $element = e.target.id;
+        var tempId = $element.split("_");
+
+        e.preventDefault();
+
+        editClass(tempId[1]);
+
+    } 
+</script>
