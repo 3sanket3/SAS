@@ -58,7 +58,7 @@
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Name="Id" Type="numeric" Nullable="false" />
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="Div" Type="varchar" MaxLength="50" />
           <Property Name="Active" Type="bit" />
           <Property Name="ClassId" Type="numeric" />
@@ -119,6 +119,7 @@
           </Key>
           <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="SubjectName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <Association Name="FK_DivDetails_ClassDetails">
           <End Role="ClassDetails" Type="HomeModel.Store.ClassDetails" Multiplicity="0..1" />
@@ -217,19 +218,19 @@
             <End Role="Login" EntitySet="Logins" />
             <End Role="ErrorLog" EntitySet="ErrorLogs" />
           </AssociationSet>
-          <EntitySet Name="ClassDetails" EntityType="HomeModel.ClassDetail" />
           <EntitySet Name="DivDetails" EntityType="HomeModel.DivDetail" />
-          <EntitySet Name="StudentDetails" EntityType="HomeModel.StudentDetail" />
-          <EntitySet Name="SubjectDetails" EntityType="HomeModel.SubjectDetail" />
-          <AssociationSet Name="FK_StudentDetails_DivDetails" Association="HomeModel.FK_StudentDetails_DivDetails">
-            <End Role="DivDetail" EntitySet="DivDetails" />
-            <End Role="StudentDetail" EntitySet="StudentDetails" />
-          </AssociationSet>
+          <EntitySet Name="ClassDetails" EntityType="HomeModel.ClassDetail" />
           <AssociationSet Name="FK_DivDetails_ClassDetails" Association="HomeModel.FK_DivDetails_ClassDetails">
             <End Role="ClassDetail" EntitySet="ClassDetails" />
             <End Role="DivDetail" EntitySet="DivDetails" />
           </AssociationSet>
-        </EntityContainer>
+          <EntitySet Name="StudentDetails" EntityType="HomeModel.StudentDetail" />
+          <AssociationSet Name="FK_StudentDetails_DivDetails" Association="HomeModel.FK_StudentDetails_DivDetails">
+            <End Role="DivDetail" EntitySet="DivDetails" />
+            <End Role="StudentDetail" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <EntitySet Name="SubjectDetails" EntityType="HomeModel.SubjectDetail" />
+          </EntityContainer>
         <EntityType Name="Login">
           <Key>
             <PropertyRef Name="Login_Id" />
@@ -322,26 +323,38 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="ClassDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
-          <Property Type="String" Name="ClassName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="Active" />
-          <NavigationProperty Name="DivDetails" Relationship="HomeModel.FK_DivDetails_ClassDetails" FromRole="ClassDetail" ToRole="DivDetail" />
-        </EntityType>
         <EntityType Name="DivDetail">
           <Key>
             <PropertyRef Name="Id" />
           </Key>
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="String" Name="Div" MaxLength="50" FixedLength="false" Unicode="false" />
-          <NavigationProperty Name="StudentDetails" Relationship="HomeModel.FK_StudentDetails_DivDetails" FromRole="DivDetail" ToRole="StudentDetail" />
           <Property Type="Boolean" Name="Active" />
           <Property Type="Decimal" Name="ClassId" Precision="18" Scale="0" />
           <NavigationProperty Name="ClassDetail" Relationship="HomeModel.FK_DivDetails_ClassDetails" FromRole="DivDetail" ToRole="ClassDetail" />
+          <NavigationProperty Name="StudentDetails" Relationship="HomeModel.FK_StudentDetails_DivDetails" FromRole="DivDetail" ToRole="StudentDetail" />
         </EntityType>
+        <EntityType Name="ClassDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="ClassName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" />
+          <NavigationProperty Name="DivDetails" Relationship="HomeModel.FK_DivDetails_ClassDetails" FromRole="ClassDetail" ToRole="DivDetail" />
+        </EntityType>
+        <Association Name="FK_DivDetails_ClassDetails">
+          <End Type="HomeModel.ClassDetail" Role="ClassDetail" Multiplicity="0..1" />
+          <End Type="HomeModel.DivDetail" Role="DivDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DivDetail">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="StudentDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -364,13 +377,6 @@
           <Property Type="String" Name="PLName" MaxLength="50" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="DivDetail" Relationship="HomeModel.FK_StudentDetails_DivDetails" FromRole="StudentDetail" ToRole="DivDetail" />
         </EntityType>
-        <EntityType Name="SubjectDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="SubjectName" MaxLength="50" FixedLength="false" Unicode="false" />
-        </EntityType>
         <Association Name="FK_StudentDetails_DivDetails">
           <End Type="HomeModel.DivDetail" Role="DivDetail" Multiplicity="0..1" />
           <End Type="HomeModel.StudentDetail" Role="StudentDetail" Multiplicity="*" />
@@ -383,19 +389,15 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_DivDetails_ClassDetails">
-          <End Type="HomeModel.ClassDetail" Role="ClassDetail" Multiplicity="0..1" />
-          <End Type="HomeModel.DivDetail" Role="DivDetail" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="ClassDetail">
-              <PropertyRef Name="Id" />
-            </Principal>
-            <Dependent Role="DivDetail">
-              <PropertyRef Name="ClassId" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-      </Schema>
+        <EntityType Name="SubjectDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SubjectName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -433,21 +435,21 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="ClassDetails">
-            <EntityTypeMapping TypeName="HomeModel.ClassDetail">
-              <MappingFragment StoreEntitySet="ClassDetails">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="DivDetails">
             <EntityTypeMapping TypeName="HomeModel.DivDetail">
               <MappingFragment StoreEntitySet="DivDetails">
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="Div" ColumnName="Div" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClassDetails">
+            <EntityTypeMapping TypeName="HomeModel.ClassDetail">
+              <MappingFragment StoreEntitySet="ClassDetails">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="ClassName" ColumnName="ClassName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -477,6 +479,7 @@
           <EntitySetMapping Name="SubjectDetails">
             <EntityTypeMapping TypeName="HomeModel.SubjectDetail">
               <MappingFragment StoreEntitySet="SubjectDetails">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
@@ -502,7 +505,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Home">
+      <Diagram Name="Home" ZoomLevel="64">
         <EntityTypeShape EntityType="HomeModel.Login" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3648893229166661" IsExpanded="true" />
         <EntityTypeShape EntityType="HomeModel.SecurityQuestion" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416657" IsExpanded="true" />
         <AssociationConnector Association="HomeModel.FK_Login_Login" ManuallyRouted="false">
@@ -520,30 +523,37 @@
         <EntityTypeShape EntityType="HomeModel.Application" Width="1.5" PointX="0.75" PointY="5.5" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="HomeModel.ErrorLog" Width="1.5" PointX="8" PointY="2.625" Height="2.7494921874999996" />
         <AssociationConnector Association="HomeModel.FK_Exceptions_AppId1" >
-          <ConnectorPoint PointX="2.25" PointY="6.672841796875" />
-          <ConnectorPoint PointX="4.416666666666667" PointY="6.6728417968749989" />
-          <ConnectorPoint PointX="4.583333333333333" PointY="6.672841796875" />
-          <ConnectorPoint PointX="8.75" PointY="6.672841796875" />
-          <ConnectorPoint PointX="8.75" PointY="5.3744921875" />
+          <ConnectorPoint PointX="1.0159615384615384" PointY="5.5" />
+          <ConnectorPoint PointX="1.0159615384615384" PointY="4.2473453776041667" />
+          <ConnectorPoint PointX="6.666666666666667" PointY="4.2473453776041659" />
+          <ConnectorPoint PointX="6.833333333333333" PointY="4.2473453776041667" />
+          <ConnectorPoint PointX="7.0729191666666669" PointY="4.2473453776041659" />
+          <ConnectorPoint PointX="7.2395858333333329" PointY="4.2473453776041667" />
+          <ConnectorPoint PointX="8" PointY="4.2473453776041667" />
         </AssociationConnector>
         <AssociationConnector Association="HomeModel.FK_Exceptions_UserId1" >
-          <ConnectorPoint PointX="4.25" PointY="1.6874995" />
-          <ConnectorPoint PointX="8.75" PointY="1.6874995" />
-          <ConnectorPoint PointX="8.75" PointY="2.625" />
+          <ConnectorPoint PointX="4.25" PointY="3.0980664648437513" />
+          <ConnectorPoint PointX="6.666666666666667" PointY="3.0980664648437508" />
+          <ConnectorPoint PointX="6.833333333333333" PointY="3.0980664648437513" />
+          <ConnectorPoint PointX="7.0729191666666669" PointY="3.0980664648437508" />
+          <ConnectorPoint PointX="7.2395858333333329" PointY="3.0980664648437513" />
+          <ConnectorPoint PointX="8" PointY="3.0980664648437513" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="HomeModel.ClassDetail" Width="1.5" PointX="3.75" PointY="4.75" Height="1.4033821614583317" />
-        <EntityTypeShape EntityType="HomeModel.DivDetail" Width="1.5" PointX="3.75" PointY="8.375" Height="1.5956835937499996" />
-        <EntityTypeShape EntityType="HomeModel.StudentDetail" Width="1.5" PointX="6" PointY="7" Height="4.2879036458333317" />
-        <EntityTypeShape EntityType="HomeModel.SubjectDetail" Width="1.5" PointX="0.75" PointY="8.75" Height="1.4033821614583317" />
-        <AssociationConnector Association="HomeModel.FK_StudentDetails_DivDetails" >
-          <ConnectorPoint PointX="5.25" PointY="9.4612939453125" />
-          <ConnectorPoint PointX="6" PointY="9.4612939453125" />
-        </AssociationConnector>
+        <EntityTypeShape EntityType="HomeModel.DivDetail" Width="1.5" PointX="6" PointY="0.75" Height="2.1725878906249996" />
+        <EntityTypeShape EntityType="HomeModel.ClassDetail" Width="1.5" PointX="3.75" PointY="5" Height="1.7879850260416674" />
         <AssociationConnector Association="HomeModel.FK_DivDetails_ClassDetails" >
-          <ConnectorPoint PointX="4.5" PointY="6.5379850260416665" />
-          <ConnectorPoint PointX="4.5" PointY="8.375" />
+          <ConnectorPoint PointX="5.25" PointY="5.8939925130208337" />
+          <ConnectorPoint PointX="6.75" PointY="5.8939925130208337" />
+          <ConnectorPoint PointX="6.75" PointY="2.922587890625" />
         </AssociationConnector>
-      </Diagram>
+        <EntityTypeShape EntityType="HomeModel.StudentDetail" Width="1.5" PointX="8.25" PointY="6.875" Height="4.2879036458333353" />
+        <AssociationConnector Association="HomeModel.FK_StudentDetails_DivDetails" >
+          <ConnectorPoint PointX="7.1562525" PointY="2.922587890625" />
+          <ConnectorPoint PointX="7.1562525" PointY="9.0189518229166676" />
+          <ConnectorPoint PointX="8.25" PointY="9.0189518229166676" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="HomeModel.SubjectDetail" Width="1.5" PointX="3.375" PointY="7.75" Height="1.5956835937499996" />
+        </Diagram>
     </Diagrams>
   </Designer>
 </edmx:Edmx>

@@ -1,28 +1,33 @@
 ﻿@{
-    ViewBag.Title = "Class Registration";
+    ViewBag.Title = "Div Registration";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model SchoolAutomationSystem.Areas.Home.Models.ClassDetailViewModel
+@model SchoolAutomationSystem.Areas.Home.Models.DivDetailViewModel
 <div class="row">
     <div class="main-content .col-xs-18 .col-sm-12">
         <h1 class="mrgn-left10">
             Welcome User</h1>
         <div class="login-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
-            @using (Html.BeginForm(FormMethod.Post))
-            {
+            @using (Html.BeginForm( FormMethod.Post))
+    {
                 <div class="fieldset-content">
                     <fieldset class="scheduler-border">
-                        <legend class="scheduler-border">Class Registration</legend>
+                        <legend class="scheduler-border">Div Registration</legend>
                         <div class="form-group">
                             <div class="pad5 float-left">
                                 @Html.Label("Class Name")</div>
                             <div class="float-left">
-                                @Html.TextBox("Model.className", Model.className == null ? string.Empty : Model.className, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Class'" })
+                                @Html.DropDownList("Model.classID", Model.getAllClassNames())
+                            </div>
+                            <div class="pad5 float-left">
+                                @Html.Label("Div Name")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.divName", Model.divName == null ? string.Empty : Model.divName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Class'" })
                             </div>
                           
-                            @Html.Hidden("Model.id", Model.id, new { id = "Model_id" })
+                            @Html.Hidden("Model.divId", Model.divId, new { id = "Model_divId" })
                             <div class="float-left pad-left15">
-                                <button id="addClass" class="btn btn-default width-100" >Add</button>
+                                <button id="addDiv" class="btn btn-default width-100" >Add</button>
                                 
                             </div>
                             <div class="float-left pad-left15">
@@ -31,47 +36,59 @@
                             </div>
                         </div>
                     </fieldset>
+                    @if (Model.lstDivDetails.Count() > 0)
+                    {
                     <div id="myGrid">
                         @{
-                if (Model.lstClassDetails != null && Model.lstClassDetails.Count() > 0)
-                {
-                           var grid = new WebGrid(Model.lstClassDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
+                        var grid = new WebGrid(Model.lstDivDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
                             @grid.GetHtml(
-    tableStyle: "class_table mrgn-auto border",
+    tableStyle : "class_table mrgn-auto border",
         headerStyle: "",
         rowStyle: "odd",
             alternatingRowStyle: "even",
-            selectedRowStyle: "",
-    columns: grid.Columns(
+            selectedRowStyle : "",
+    columns : grid.Columns(
 
-            grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.id + " href='#' onclick='editClick(event);'>Edit </a>")),
-            grid.Column("ClassName", "Class", format: (item) => item.ClassName)
+               grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.Id + " href='#' onclick='editClick(event);'>Edit </a>")),
+                grid.Column("divName", "Div", format: (item) => item.Div)
     )
     )
-                       }
-            }
+                        }
                     </div>
+                    }
                 </div>
-                
-    
+                @Html.Hidden("Action",null, new { id = "Action" })
+
+   
     
 }
 </div>
 </div></div>
             <script type="text/javascript">
                 $("#reset").click(function () {
-                    $("#Model_className")[0].value = "";
-                    $("#Model_id")[0].value = "";
+                    $("#Model_divName")[0].value = "";
+                    $("#Model_divId")[0].value = "";
                     return false;
                 });
                 $(document).ready(function () {
-                    $("#Model_className")[0].value = "";
-                    $("#Model_id")[0].value = "";
-                    $("#addClass").click(function () {
+
+                    $("#Model_divName")[0].value = "";
+
+                    $("#Model_divId")[0].value = "";
+
+                    $("#addDiv").click(function () {
+                  
+                        $("#Action")[0].value = "Submit";
                         $('form')[0].submit();
                         //$("#Model_id")[0].value = "";
                     });
-                    
+
+
+                    $("#Model_classID").change(function () {
+                        $("#Action")[0].value = "ClassChange";
+                        $('form')[0].submit();
+
+                    });
                 });
 
                 function editClick(e) {
@@ -87,21 +104,20 @@
                     url = url.substring(0, url.lastIndexOf("/Registration"));
                     // alert("url");
                     $.ajax({
-                        url: url + "/Registration/GetClassName",
+                        url: url + "/Registration/GetDivName",
                         type: "POST",
-                        data: { ClassId: tempId[1] },
+                        data: { DivId: tempId[1] },
 
                         success: function (result) {
-                            var a = result;
-                            $("#Model_className")[0].value = result;
-                            $("#Model_id")[0].value = tempId[1];
-                            
+                            $("#Model_divName")[0].value = result;
+                            $("#Model_divId")[0].value = tempId[1];
+
                         },
                         error: function (xhr, status, error) {
                         }
                     });
-                    
+
                     return false;
-                    
+
                 } 
             </script>

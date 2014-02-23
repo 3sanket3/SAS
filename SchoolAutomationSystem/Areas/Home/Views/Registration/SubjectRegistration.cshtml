@@ -1,8 +1,8 @@
 ﻿@{
-    ViewBag.Title = "Class Registration";
+    ViewBag.Title = "Subject Registration";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-@model SchoolAutomationSystem.Areas.Home.Models.ClassDetailViewModel
+@model SchoolAutomationSystem.Areas.Home.Models.SubjectDetailViewModel
 <div class="row">
     <div class="main-content .col-xs-18 .col-sm-12">
         <h1 class="mrgn-left10">
@@ -12,17 +12,17 @@
             {
                 <div class="fieldset-content">
                     <fieldset class="scheduler-border">
-                        <legend class="scheduler-border">Class Registration</legend>
+                        <legend class="scheduler-border">Subject Registration</legend>
                         <div class="form-group">
                             <div class="pad5 float-left">
-                                @Html.Label("Class Name")</div>
+                                @Html.Label("Subject Name")</div>
                             <div class="float-left">
-                                @Html.TextBox("Model.className", Model.className == null ? string.Empty : Model.className, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Class'" })
+                                @Html.TextBox("Model.SubjectName", Model.SubjectName == null ? string.Empty : Model.SubjectName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Subject'" })
                             </div>
                           
-                            @Html.Hidden("Model.id", Model.id, new { id = "Model_id" })
+                            @Html.Hidden("Model.ID", Model.ID, new { id = "Model_ID" })
                             <div class="float-left pad-left15">
-                                <button id="addClass" class="btn btn-default width-100" >Add</button>
+                                <button id="addSubject" class="btn btn-default width-100" >Add</button>
                                 
                             </div>
                             <div class="float-left pad-left15">
@@ -33,9 +33,9 @@
                     </fieldset>
                     <div id="myGrid">
                         @{
-                if (Model.lstClassDetails != null && Model.lstClassDetails.Count() > 0)
+                if (Model.lstSubjectDetails != null && Model.lstSubjectDetails.Count() > 0)
                 {
-                           var grid = new WebGrid(Model.lstClassDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
+                    var grid = new WebGrid(Model.lstSubjectDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
                             @grid.GetHtml(
     tableStyle: "class_table mrgn-auto border",
         headerStyle: "",
@@ -44,8 +44,8 @@
             selectedRowStyle: "",
     columns: grid.Columns(
 
-            grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.id + " href='#' onclick='editClick(event);'>Edit </a>")),
-            grid.Column("ClassName", "Class", format: (item) => item.ClassName)
+            grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.Id + " href='#' onclick='editClick(event);'>Edit </a>")),
+      grid.Column("SubjectName", "Subject", format: (item) => item.SubjectName)
     )
     )
                        }
@@ -60,18 +60,18 @@
 </div></div>
             <script type="text/javascript">
                 $("#reset").click(function () {
-                    $("#Model_className")[0].value = "";
-                    $("#Model_id")[0].value = "";
+                    $("#Model_SubjectName")[0].value = "";
+                    $("#Model_ID")[0].value = "";
                     return false;
                 });
                 $(document).ready(function () {
-                    $("#Model_className")[0].value = "";
-                    $("#Model_id")[0].value = "";
-                    $("#addClass").click(function () {
+                    $("#Model_SubjectName")[0].value = "";
+                    $("#Model_ID")[0].value = "";
+                    $("#addSubject").click(function () {
                         $('form')[0].submit();
                         //$("#Model_id")[0].value = "";
                     });
-                    
+
                 });
 
                 function editClick(e) {
@@ -87,21 +87,21 @@
                     url = url.substring(0, url.lastIndexOf("/Registration"));
                     // alert("url");
                     $.ajax({
-                        url: url + "/Registration/GetClassName",
+                        url: url + "/Registration/GetSubjectName",
                         type: "POST",
-                        data: { ClassId: tempId[1] },
+                        data: { SubjectID: tempId[1] },
 
                         success: function (result) {
                             var a = result;
-                            $("#Model_className")[0].value = result;
-                            $("#Model_id")[0].value = tempId[1];
-                            
+                            $("#Model_SubjectName")[0].value = result;
+                            $("#Model_ID")[0].value = tempId[1];
+
                         },
                         error: function (xhr, status, error) {
                         }
                     });
-                    
+
                     return false;
-                    
+
                 } 
             </script>

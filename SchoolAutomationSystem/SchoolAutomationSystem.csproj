@@ -69,12 +69,14 @@
     <Compile Include="Areas\Home\DataOperations.cs" />
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\ClassDetailViewModel.cs" />
+    <Compile Include="Areas\Home\Models\DivDetailViewModel.cs" />
     <Compile Include="Areas\Home\Models\Home.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Home.edmx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Home\Models\Login.cs" />
+    <Compile Include="Areas\Home\Models\SubjectDetailViewModel.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="ErrorOperations.cs" />
@@ -92,11 +94,21 @@
     <Content Include="Content\bootstrap-theme.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\global.css" />
+    <Content Include="Content\images\border-right.png" />
+    <Content Include="Content\images\box_edit-512.png" />
+    <Content Include="Content\images\box_edit-51215.png" />
+    <Content Include="Content\images\clean-and-simple-login-form-psd-sources.jpg" />
     <Content Include="Content\images\login-bg.png" />
+    <Content Include="Content\images\login-button.png" />
+    <Content Include="Content\images\login-button1.png" />
     <Content Include="Content\images\login-div.png" />
+    <Content Include="Content\images\login-header-bg - Copy.png" />
+    <Content Include="Content\images\login-header-bg.png" />
     <Content Include="Content\images\login-header-bg1.png" />
-    <Content Include="Content\images\outer-div.png" />
+    <Content Include="Content\images\login-header-bottom.png" />
+    <Content Include="Content\images\login-header-top.png" />
     <Content Include="Content\images\password.png" />
+    <Content Include="Content\images\Untitled.png" />
     <Content Include="Content\images\username.png" />
     <Content Include="Content\ResultManagement.css" />
     <Content Include="Content\themes\base\images\ui-bg_flat_0_aaaaaa_40x100.png" />
@@ -195,6 +207,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Home\Views\Registration\ClassRegistration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Home\Views\Registration\DivRegistration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Home\Views\Registration\SubjectRegistration.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

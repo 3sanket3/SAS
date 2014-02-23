@@ -22,8 +22,8 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_SecurityQuestion_Id", "SecurityQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Areas.Home.Models.SecurityQuestion), "SecurityQuestion1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.SecurityQuestion), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_AppId1", "Application", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Application), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ErrorLog), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_UserId1", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Login), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ErrorLog), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_StudentDetails_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), "StudentDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.StudentDetail), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_DivDetails_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.ClassDetail), "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_StudentDetails_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), "StudentDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.StudentDetail), true)]
 
 #endregion
 
@@ -142,22 +142,6 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<ClassDetail> ClassDetails
-        {
-            get
-            {
-                if ((_ClassDetails == null))
-                {
-                    _ClassDetails = base.CreateObjectSet<ClassDetail>("ClassDetails");
-                }
-                return _ClassDetails;
-            }
-        }
-        private ObjectSet<ClassDetail> _ClassDetails;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<DivDetail> DivDetails
         {
             get
@@ -170,6 +154,22 @@ namespace SchoolAutomationSystem.Areas.Home.Models
             }
         }
         private ObjectSet<DivDetail> _DivDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<ClassDetail> ClassDetails
+        {
+            get
+            {
+                if ((_ClassDetails == null))
+                {
+                    _ClassDetails = base.CreateObjectSet<ClassDetail>("ClassDetails");
+                }
+                return _ClassDetails;
+            }
+        }
+        private ObjectSet<ClassDetail> _ClassDetails;
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -239,19 +239,19 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the ClassDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToClassDetails(ClassDetail classDetail)
-        {
-            base.AddObject("ClassDetails", classDetail);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the DivDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToDivDetails(DivDetail divDetail)
         {
             base.AddObject("DivDetails", divDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the ClassDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToClassDetails(ClassDetail classDetail)
+        {
+            base.AddObject("ClassDetails", classDetail);
         }
     
         /// <summary>
@@ -643,28 +643,6 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         [XmlIgnoreAttribute()]
         [SoapIgnoreAttribute()]
         [DataMemberAttribute()]
-        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_StudentDetails_DivDetails", "StudentDetail")]
-        public EntityCollection<StudentDetail> StudentDetails
-        {
-            get
-            {
-                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentDetail>("HomeModel.FK_StudentDetails_DivDetails", "StudentDetail");
-            }
-            set
-            {
-                if ((value != null))
-                {
-                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentDetail>("HomeModel.FK_StudentDetails_DivDetails", "StudentDetail", value);
-                }
-            }
-        }
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [XmlIgnoreAttribute()]
-        [SoapIgnoreAttribute()]
-        [DataMemberAttribute()]
         [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_DivDetails_ClassDetails", "ClassDetail")]
         public ClassDetail ClassDetail
         {
@@ -693,6 +671,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ClassDetail>("HomeModel.FK_DivDetails_ClassDetails", "ClassDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_StudentDetails_DivDetails", "StudentDetail")]
+        public EntityCollection<StudentDetail> StudentDetails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<StudentDetail>("HomeModel.FK_StudentDetails_DivDetails", "StudentDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentDetail>("HomeModel.FK_StudentDetails_DivDetails", "StudentDetail", value);
                 }
             }
         }
@@ -1918,6 +1918,30 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         private global::System.String _SubjectName;
         partial void OnSubjectNameChanging(global::System.String value);
         partial void OnSubjectNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Active
+        {
+            get
+            {
+                return _Active;
+            }
+            set
+            {
+                OnActiveChanging(value);
+                ReportPropertyChanging("Active");
+                _Active = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Active");
+                OnActiveChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Active;
+        partial void OnActiveChanging(Nullable<global::System.Boolean> value);
+        partial void OnActiveChanged();
 
         #endregion
     
