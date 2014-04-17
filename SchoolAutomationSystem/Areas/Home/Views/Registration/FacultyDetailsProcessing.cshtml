@@ -1,0 +1,88 @@
+﻿@{
+    ViewBag.Title = "Class Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SchoolAutomationSystem.Areas.Home.Models.FacultyDetailsViewModel
+
+           
+                <div class="fieldset-content">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Faculty Details</legend>
+                        <div class="form-group">
+                         <div class="pad5 float-left">
+                                @Html.Label("Faculty ID")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.FacultyProcessingData.FacultyId", Model.FacultyProcessingData.FacultyId == null ? 0 : Model.FacultyProcessingData.FacultyId, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Short Name'" })
+                            </div>
+
+                            <div class="pad5 float-left">
+                                @Html.Label("Faculty Short Name")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.FacultyProcessingData.FacultyUniqueName", Model.FacultyProcessingData.FacultyUniqueName == null ? string.Empty : Model.FacultyProcessingData.FacultyUniqueName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Short Name'" })
+                            </div>
+                          
+                        @*    @Html.Hidden("Model.FacultyProcessingData.FacultyId", Model.FacultyProcessingData.FacultyId, new { id = "Model_FacultyId" })*@
+
+                            <div class="pad5 float-left">
+                                @Html.Label("Faculty First Name")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.FacultyProcessingData.FirstName", Model.FacultyProcessingData.FirstName == null ? string.Empty : Model.FacultyProcessingData.FirstName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Name'" })
+                            </div>
+                          
+                           <div class="pad5 float-left">
+                                @Html.Label("Faculty Last Name")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.FacultyProcessingData.LastName", Model.FacultyProcessingData.LastName == null ? string.Empty : Model.FacultyProcessingData.LastName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Name'" })
+                            </div>
+
+                            <div class="pad5 float-left">
+                                @Html.Label("Email Id")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.FacultyProcessingData.EmailAddress", Model.FacultyProcessingData.EmailId == null ? string.Empty : Model.FacultyProcessingData.EmailId, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Email Address'" })
+                            </div>
+
+                            <div class="pad5 float-left">
+                                @Html.Label("Password")</div>
+                            <div class="float-left">
+                                @Html.Password("Model.FacultyProcessingData.Password", Model.FacultyProcessingData.Password == null ? string.Empty : Model.FacultyProcessingData.Password, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Password'" })
+                            </div>
+
+                            <div class="pad5 float-left">
+                                @Html.Label("Birthdate")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.FacultyProcessingData.BirthDate", Model.FacultyProcessingData.BirthDate == null ? string.Empty : Model.FacultyProcessingData.BirthDate, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Birth Date'" })
+                            </div>
+
+                            <div class="pad5 float-left">
+                                @Html.Label("Phone No")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.FacultyProcessingData.PhoneNo", Model.FacultyProcessingData.PhoneNo == null ? 0 : Model.FacultyProcessingData.PhoneNo, new { @class = "form-control mrgn0 width-150"})
+                            </div>
+
+                            <div class="pad5 float-left">
+                                @Html.Label("Blood Group")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.FacultyProcessingData.BloodGroupId", Model.FacultyProcessingData.BloodGroupId == null ? 0 : Model.FacultyProcessingData.BloodGroupId, new { @class = "form-control mrgn0 width-150"})
+                            </div>
+
+                             <div class="pad5 float-left">
+                                @Html.Label("Address")</div>
+                            <div class="float-left">
+                            
+                                @Html.TextArea("Model.FacultyProcessingData.Address", Model.FacultyProcessingData.Address == null ? string.Empty : Model.FacultyProcessingData.Address, new { @class = "form-control mrgn0 width-150" })
+                            </div>
+                            <div class="float-left pad-left15">
+                                <button id="AddFacultyDetails1" class="btn btn-default width-100">Add Faculty</button>
+                                
+                            </div>
+                            <div class="float-left pad-left15">
+                                <button id="reset" type="reset" class="btn btn-default width-100">
+                                    Reset</button>
+                            </div>
+
+                        </div>
+                    </fieldset>
+                    
+                </div>
+
+

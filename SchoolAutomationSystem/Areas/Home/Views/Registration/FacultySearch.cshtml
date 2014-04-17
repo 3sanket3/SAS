@@ -1,0 +1,131 @@
+﻿@{
+    ViewBag.Title = "Faculty Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SchoolAutomationSystem.Areas.Home.Models.FacultyDetailsViewModel
+<div class="row">
+    <div class="main-content .col-xs-18 .col-sm-12">
+        <h1 class="mrgn-left10">
+            Welcome User</h1>
+        <div class="login-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                <div class="fieldset-content">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Faculty Search</legend>
+                        <div class="form-group">
+                            <div class="pad5 float-left">
+                                @Html.Label("Faculty Short Name")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.UniqueName", Model.UniqueName == null ? string.Empty : Model.UniqueName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Short Name'" })
+                            </div>
+                          
+                            @Html.Hidden("Model.FacultyId", Model.FacultyId, new { id = "Model_FacultyId"})
+
+                            <div class="pad5 float-left">
+                                @Html.Label("Faculty Name")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.Name", Model.Name == null ? string.Empty : Model.Name, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Name'" })
+                            </div>
+                          
+                            <div class="pad5 float-left">
+                                @Html.Label("Email Id")</div>
+                            <div class="float-left">
+                                @Html.TextBox("Model.EmailAddress", Model.EmailAddress == null ? string.Empty : Model.EmailAddress, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Email Address'" })
+                            </div>
+
+                            <div class="float-left pad-left15">
+                                <button id="Search" class="btn btn-default width-100" >Search</button>
+                                
+                            </div>
+                            <div class="float-left pad-left15">
+                                <button id="reset" type="reset" class="btn btn-default width-100">
+                                    Reset</button>
+                            </div>
+
+                            <div class="float-left pad-left15">
+                                <button id="AddNewFaculty" class="btn btn-default width-100" onclick='editClick(event,0);' type ="button">Add New Faculty</button>
+                             </div>
+
+                             @Html.Hidden("Action", null, new { id = "Action" });
+                        </div>
+                    </fieldset>
+
+                    <div id = "FacultyProcessing">
+                    </div>
+                    <div id="myGrid">
+                        @{
+                if (Model.LstFacultyDetails != null && Model.LstFacultyDetails.Count() > 0)
+                {
+                    var grid = new WebGrid(Model.LstFacultyDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
+                            @grid.GetHtml(
+    tableStyle: "class_table mrgn-auto border",
+        headerStyle: "",
+        rowStyle: "odd",
+            alternatingRowStyle: "even",
+            selectedRowStyle: "",
+    columns: grid.Columns(
+
+      grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.FacultyId + " href='#' onclick='editClick(event," + item.FacultyId + ");'>Edit </a>")),
+            grid.Column("Name", format: (item) => item.FirstName +" "+ item.LastName),
+            grid.Column("FacultyUniqueName","Unique Name"),
+                grid.Column("EmailId","Email Address")
+    )
+    )
+                       }
+            }
+                    </div>
+
+                </div>
+        
+}
+</div>
+</div></div>
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+
+                    $("#AddFacultyDetails1").click(function () {
+                        //alert($("#Action")[0].value);
+                        $("#Action")[0].value = "AddFacultyDetails";
+                        //alert($("#Action")[0].value);
+                        $('form')[0].submit();
+                    });
+
+                    $("#Search").click(function () {
+                        //alert($("#AddFacultyDetails1")[0]);
+                        $("#Action")[0].value = "Search";
+                        $('form')[0].submit();
+                    });
+                });
+
+                function editClick(e,facultyId) {
+
+                    var $element = e.target.id;
+                   // var tempId = $element.split("_");
+                    e.preventDefault();
+
+                    //editClass(tempId[1]);
+
+                    var url = window.location.href;
+                    url = url.substring(0, url.lastIndexOf("/Registration"));
+                    // alert("url");
+                    $.ajax({
+                        url: url + "/Registration/GetFacultyDetailView",
+                        type: "POST",
+                        data: { FacultyId: facultyId },
+                        success: function (result) {
+                            $("#FacultyProcessing").html(result);
+                        },
+                        error: function (xhr, status, error) {
+                        }
+                    });
+
+                    return false;
+
+                } 
+
+
+
+
+            </script>

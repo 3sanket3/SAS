@@ -20,3 +20,7 @@
     });
     return false;
 }
+
+function AddNewFaculty() {
+
+}

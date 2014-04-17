@@ -70,12 +70,14 @@
     <Compile Include="Areas\Home\HomeAreaRegistration.cs" />
     <Compile Include="Areas\Home\Models\ClassDetailViewModel.cs" />
     <Compile Include="Areas\Home\Models\DivDetailViewModel.cs" />
+    <Compile Include="Areas\Home\Models\FacultyDetailsViewModel.cs" />
     <Compile Include="Areas\Home\Models\Home.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Home.edmx</DependentUpon>
     </Compile>
     <Compile Include="Areas\Home\Models\Login.cs" />
+    <Compile Include="Areas\Home\Models\StudentDetailsViewModel.cs" />
     <Compile Include="Areas\Home\Models\SubjectDetailViewModel.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
@@ -214,6 +216,15 @@
   <ItemGroup>
     <Content Include="Areas\Home\Views\Registration\SubjectRegistration.cshtml" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Home\Views\Registration\FacultySearch.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\Home\Views\Registration\FacultyDetailsProcessing.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Views\Shared\Navigation.cshtml" />
+  </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
@@ -231,7 +242,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>3069</DevelopmentServerPort>
+          <DevelopmentServerPort>1529</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -180,5 +180,195 @@ namespace SchoolAutomationSystem.Areas.Home
 
         }
         #endregion
+
+        #region Faculty Methos
+
+        internal List<FacultyDetail> getFacultyDetailsList()
+        {
+            List<FacultyDetail> FacultyDetails = new List<FacultyDetail>();
+
+            FacultyDetails = (from faculties in homeEntities.FacultyDetails
+                              select faculties).ToList();
+
+            return FacultyDetails;
+        }
+
+        internal FacultyDetail getFacultyDetailFromID(int ID)
+        {
+            return (from faculty in homeEntities.FacultyDetails
+                    where faculty.FacultyId == ID
+                    select faculty).First();
+
+        }
+
+        internal void SaveFacultyDetails(FacultyDetail model)
+        {
+            FacultyDetail faculty;
+            if (model.FacultyId > 0)
+            {
+                //Update Faculty Details
+                 faculty= (from facultyDetails in homeEntities.FacultyDetails
+                                         where facultyDetails.FacultyId == model.FacultyId
+                                         select facultyDetails).FirstOrDefault();
+                 if (faculty != null)
+                 {
+                     CopyFacultyDetails(model, faculty);
+                 }
+            }
+            else
+            {
+                faculty = new FacultyDetail();
+                CopyFacultyDetails(model, faculty);
+                homeEntities.AddToFacultyDetails(faculty);
+            }
+            homeEntities.SaveChanges();
+            
+        }
+
+        public void CopyFacultyDetails(FacultyDetail source, FacultyDetail destination)
+        {
+            destination.FacultyUniqueName = source.FacultyUniqueName;
+            destination.FirstName = source.FirstName;
+            destination.LastName = source.LastName;
+            destination.MiddleName = source.MiddleName;
+            destination.Password = source.Password;
+            destination.PhoneNo = source.PhoneNo;
+            destination.Address = source.Address;
+            destination.BirthDate = source.BirthDate;
+            destination.BloodGroup = source.BloodGroup;
+            destination.EmailId = source.EmailId;
+            destination.Active = source.Active;
+        }
+
+        public List<FacultyDetail> SearchFaculties(FacultyDetail faculty)
+        {
+            List<FacultyDetail> lstAllFaculties = (from faculties in homeEntities.FacultyDetails
+                                                   where faculties.Active == true
+                                                   select faculties).ToList();
+
+            if (!string.IsNullOrEmpty(faculty.FirstName))
+            {
+                lstAllFaculties = (from faculties in lstAllFaculties
+                                   where faculties.FirstName != null && faculties.FirstName.StartsWith(faculty.FirstName)
+                                   select faculties).ToList();
+            }
+            if (!string.IsNullOrEmpty(faculty.LastName))
+            {
+                lstAllFaculties = (from faculties in lstAllFaculties
+                                   where faculties.LastName != null && faculties.LastName.StartsWith(faculty.LastName)
+                                   select faculties).ToList();
+            }
+            if (!string.IsNullOrEmpty(faculty.FacultyUniqueName))
+            {
+                lstAllFaculties = (from faculties in lstAllFaculties
+                                   where faculties.FacultyUniqueName != null && faculties.FacultyUniqueName.StartsWith(faculty.FacultyUniqueName)
+                                   select faculties).ToList();
+            }
+            if (!string.IsNullOrEmpty(faculty.EmailId))
+            {
+                lstAllFaculties = (from faculties in lstAllFaculties
+                                   where faculties.EmailId != null && faculties.EmailId.StartsWith(faculty.EmailId)
+                                   select faculties).ToList();
+            }
+            return lstAllFaculties;
+        }
+        #endregion
+
+        #region Student Methos
+
+        internal List<StudentDetail> getStudentDetailsList()
+        {
+            List<StudentDetail> StudetnDetails = new List<StudentDetail>();
+
+            StudetnDetails = (from studetns in homeEntities.StudentDetails
+                              select studetns).ToList();
+
+            return StudetnDetails;
+        }
+
+        //internal FacultyDetail getFacultyDetailFromID(int ID)
+        //{
+        //    return (from faculty in homeEntities.FacultyDetails
+        //            where faculty.FacultyId == ID
+        //            select faculty).First();
+
+        //}
+
+        internal void SaveFacultyDetails(StudentDetail model)
+        {
+            StudentDetail Student;
+            if (model.Id > 0)
+            {
+                //Update Faculty Details
+                Student = (from studentDetails in homeEntities.StudentDetails
+                           where studentDetails.Id == model.Id
+                           select studentDetails).FirstOrDefault();
+                if (Student != null)
+                {
+                    CopyStudentDetails(model, Student);
+                }
+            }
+            else
+            {
+                Student= new StudentDetail();
+                CopyStudentDetails(model, Student);
+                homeEntities.AddToStudentDetails(Student);
+            }
+            homeEntities.SaveChanges();
+
+        }
+
+        public void CopyStudentDetails(StudentDetail source, StudentDetail destination)
+        {
+
+            destination.FirstName = source.FirstName;
+            destination.GRNo = source.GRNo;
+            destination.RollNo = source.RollNo;
+            destination.ClassId = source.DivId;
+            destination.LastName = source.LastName;
+            destination.MiddleName = source.MiddleName;
+            destination.PhoneNo = source.PhoneNo;
+            destination.Address = source.Address;
+            destination.BirthDate = source.BirthDate;
+            destination.BloodGroup = source.BloodGroup;
+            destination.PFName = source.PFName;
+            destination.PMName = source.PMName;
+            destination.PLName = source.PLName;
+            destination.Active = source.Active;
+        }
+
+        public List<StudentDetail> SearchStudents(SearchStudentData searchStudentDetails)
+        {
+            List<StudentDetail> lstAllStudents = (from students in homeEntities.StudentDetails
+                                                  where students.Active == true
+                                                  select students).ToList();
+
+            if (!string.IsNullOrEmpty(searchStudentDetails.StudentFirstName))
+            {
+                lstAllStudents = (from students in lstAllStudents
+                                  where students.FirstName != null && students.FirstName.StartsWith(searchStudentDetails.StudentFirstName)
+                                  select students).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchStudentDetails.StudentLastName))
+            {
+                lstAllStudents = (from students in lstAllStudents
+                                  where students.LastName != null && students.LastName.StartsWith(searchStudentDetails.StudentLastName)
+                                  select students).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchStudentDetails.GRNO.ToString()))
+            {
+                lstAllStudents = (from students in lstAllStudents
+                                  where students.GRNo != null && students.GRNo== searchStudentDetails.GRNO
+                                  select students).ToList();
+            }
+            if (!string.IsNullOrEmpty(searchStudentDetails.RollNo.ToString()))
+            {
+                lstAllStudents = (from students in lstAllStudents
+                                  where students.RollNo != null && students.RollNo == searchStudentDetails.RollNo
+                                  select students).ToList();
+            }
+            return lstAllStudents;
+        }
+        #endregion
     }
 }

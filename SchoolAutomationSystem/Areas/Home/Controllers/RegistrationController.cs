@@ -16,6 +16,8 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
             return View();
         }
 
+        #region Div Actions
+
         public ActionResult DivRegistration()
         {
             DivDetailViewModel Model = new DivDetailViewModel();
@@ -49,6 +51,22 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
             model.lstDivDetails = repository.getAllDiv(model.classID);
             return View(model);
         }
+
+
+
+        [HttpPost]
+        public ActionResult GetDivName(int DivId)
+        {
+            String Divname = repository.getDivNameById(DivId);
+            return Json(Divname);
+            //return new JsonResult(){ Data = classname };
+            //return Json(new { success = true });
+
+        }
+
+#endregion
+
+        #region Class Actions
 
         public ActionResult ClassRegistration()
         {
@@ -91,16 +109,7 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
             
         }
 
-        
-        [HttpPost]
-        public ActionResult GetDivName(int DivId)
-        {
-            String Divname = repository.getDivNameById(DivId);
-            return Json(Divname);
-            //return new JsonResult(){ Data = classname };
-            //return Json(new { success = true });
-
-        }
+        #endregion
 
         #region Subject Actions
         public ActionResult SubjectRegistration()
@@ -145,5 +154,141 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
         }
 
         #endregion
+
+        #region Faculty Actions
+
+        public ActionResult FacultySearch()
+        {
+            FacultyDetailsViewModel model = new FacultyDetailsViewModel();
+            model.LstFacultyDetails = repository.getFacultyDetailsList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult FacultySearch(FacultyDetailsViewModel model, FormCollection collection)
+        {
+
+            if (collection["Action"] != "Search")
+            {
+                repository.SaveFacultyDetails(model.FacultyProcessingData);
+                model.LstFacultyDetails = repository.getFacultyDetailsList();
+            }
+            else
+            {
+                FacultyDetail searchFacultyDetails = new FacultyDetail();
+                searchFacultyDetails.FacultyUniqueName= collection["Model.UniqueName"];
+                searchFacultyDetails.FirstName = collection["Model.Name"];
+                searchFacultyDetails.EmailId = collection["Model.EmailAddress"];
+                model.LstFacultyDetails= repository.SearchFaculties(searchFacultyDetails);
+
+            }
+            
+            
+            return View(model);
+        }
+
+        //public ActionResult FacultyDetailsProcessing(int id)
+        //{
+        //    FacultyDetail Faculty = new FacultyDetail();
+
+        //    Faculty = repository.getFacultyDetailFromID(id);
+
+        //    return View(Faculty);
+
+        //}
+        //[HttpPost]
+        //public ActionResult FacultyDetailsProcessing(FacultyDetailsViewModel model)
+        //{
+        //    FacultyDetail Faculty = new FacultyDetail();
+
+        //    Faculty = repository.getFacultyDetailFromID(model.FacultyId);
+
+        //    return View(Faculty);
+
+        //}
+
+        public ActionResult GetFacultyDetailView(int FacultyId)
+        {
+            FacultyDetailsViewModel FacultyDetailsViewModel = new FacultyDetailsViewModel();
+            if (FacultyId > 0)
+            {
+                FacultyDetailsViewModel.FacultyProcessingData = repository.getFacultyDetailFromID(FacultyId);
+            }
+            else
+            {
+                FacultyDetailsViewModel.FacultyProcessingData = new FacultyDetail();
+            }
+            return View("FacultyDetailsProcessing", FacultyDetailsViewModel);
+        }
+        #endregion
+
+        #region Student Actions
+
+        public ActionResult StudentSearch()
+        {
+            StudentDetailsViewModel model = new StudentDetailsViewModel();
+            model.LstStudentDetails = repository.getStudentDetailsList();
+            return View(model);
+        }
+
+        [HttpPost]
+        public ActionResult StudentSearch(StudentDetailsViewModel model, FormCollection collection)
+        {
+
+            if (collection["Action"] != "Search")
+            {
+                repository.SaveFacultyDetails(model.StudentProcessingData);
+                model.LstStudentDetails = repository.getStudentDetailsList();
+            }
+            else
+            {
+                SearchStudentData searchStudentData = new SearchStudentData();
+                model.LstStudentDetails = repository.SearchStudents(searchStudentData);
+
+            }
+
+
+            return View(model);
+        }
+
+        //public ActionResult FacultyDetailsProcessing(int id)
+        //{
+        //    FacultyDetail Faculty = new FacultyDetail();
+
+        //    Faculty = repository.getFacultyDetailFromID(id);
+
+        //    return View(Faculty);
+
+        //}
+        //[HttpPost]
+        //public ActionResult FacultyDetailsProcessing(FacultyDetailsViewModel model)
+        //{
+        //    FacultyDetail Faculty = new FacultyDetail();
+
+        //    Faculty = repository.getFacultyDetailFromID(model.FacultyId);
+
+        //    return View(Faculty);
+
+        //}
+
+        //public ActionResult GetFacultyDetailView(int FacultyId)
+        //{
+        //    FacultyDetailsViewModel FacultyDetailsViewModel = new FacultyDetailsViewModel();
+        //    if (FacultyId > 0)
+        //    {
+        //        FacultyDetailsViewModel.FacultyProcessingData = repository.getFacultyDetailFromID(FacultyId);
+        //    }
+        //    else
+        //    {
+        //        FacultyDetailsViewModel.FacultyProcessingData = new FacultyDetail();
+        //    }
+        //    return View("FacultyDetailsProcessing", FacultyDetailsViewModel);
+        //}
+
+
+
+        #endregion
+
+
     }
 }

@@ -7,9 +7,11 @@
     <Schema Namespace="HomeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="HomeModelStoreContainer">
           <EntitySet Name="Application" EntityType="HomeModel.Store.Application" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BloodGroup" EntityType="HomeModel.Store.BloodGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ClassDetails" EntityType="HomeModel.Store.ClassDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DivDetails" EntityType="HomeModel.Store.DivDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ErrorLog" EntityType="HomeModel.Store.ErrorLog" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FacultyDetails" EntityType="HomeModel.Store.FacultyDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Login" EntityType="HomeModel.Store.Login" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SecurityQuestion" EntityType="HomeModel.Store.SecurityQuestion" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StudentDetails" EntityType="HomeModel.Store.StudentDetails" store:Type="Tables" Schema="dbo" />
@@ -25,6 +27,10 @@
           <AssociationSet Name="FK_Exceptions_UserId" Association="HomeModel.Store.FK_Exceptions_UserId">
             <End Role="Login" EntitySet="Login" />
             <End Role="ErrorLog" EntitySet="ErrorLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacultyDetails_BloodGroup" Association="HomeModel.Store.FK_FacultyDetails_BloodGroup">
+            <End Role="BloodGroup" EntitySet="BloodGroup" />
+            <End Role="FacultyDetails" EntitySet="FacultyDetails" />
           </AssociationSet>
           <AssociationSet Name="FK_Login_Login" Association="HomeModel.Store.FK_Login_Login">
             <End Role="Login" EntitySet="Login" />
@@ -45,6 +51,13 @@
           </Key>
           <Property Name="ApplicationName" Type="varchar" MaxLength="50" />
           <Property Name="Id" Type="numeric" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="ClassDetails">
           <Key>
@@ -75,6 +88,23 @@
           <Property Name="UserInfo" Type="numeric" />
           <Property Name="AppId" Type="numeric" />
         </EntityType>
+        <EntityType Name="FacultyDetails">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="EmailId" Type="varchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="varchar" MaxLength="10" />
+          <Property Name="PhoneNo" Type="numeric" Precision="10" />
+          <Property Name="BloodGroupId" Type="numeric" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="FacultyUniqueName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
         <EntityType Name="Login">
           <Key>
             <PropertyRef Name="Login_Id" />
@@ -99,8 +129,8 @@
           <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
           <Property Name="GRNo" Type="numeric" Precision="10" />
           <Property Name="RollNo" Type="numeric" Precision="4" />
-          <Property Name="FisrtName" Type="varchar" MaxLength="50" />
-          <Property Name="LastName" Type="varbinary" MaxLength="50" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
           <Property Name="MiddleName" Type="varchar" MaxLength="50" />
           <Property Name="ClassId" Type="numeric" />
           <Property Name="DivId" Type="numeric" />
@@ -108,10 +138,11 @@
           <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
           <Property Name="Address" Type="varchar" MaxLength="200" />
           <Property Name="PhoneNo" Type="numeric" />
-          <Property Name="DOB" Type="date" />
+          <Property Name="BirthDate" Type="date" />
           <Property Name="PFName" Type="varchar" MaxLength="50" />
           <Property Name="PMName" Type="varchar" MaxLength="50" />
           <Property Name="PLName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
         </EntityType>
         <EntityType Name="SubjectDetails">
           <Key>
@@ -154,6 +185,18 @@
             </Principal>
             <Dependent Role="ErrorLog">
               <PropertyRef Name="UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacultyDetails_BloodGroup">
+          <End Role="BloodGroup" Type="HomeModel.Store.BloodGroup" Multiplicity="0..1" />
+          <End Role="FacultyDetails" Type="HomeModel.Store.FacultyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FacultyDetails">
+              <PropertyRef Name="BloodGroupId" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -224,12 +267,18 @@
             <End Role="ClassDetail" EntitySet="ClassDetails" />
             <End Role="DivDetail" EntitySet="DivDetails" />
           </AssociationSet>
+          <EntitySet Name="SubjectDetails" EntityType="HomeModel.SubjectDetail" />
+          <EntitySet Name="BloodGroups" EntityType="HomeModel.BloodGroup" />
+          <EntitySet Name="FacultyDetails" EntityType="HomeModel.FacultyDetail" />
+          <AssociationSet Name="FK_FacultyDetails_BloodGroup" Association="HomeModel.FK_FacultyDetails_BloodGroup">
+            <End Role="BloodGroup" EntitySet="BloodGroups" />
+            <End Role="FacultyDetail" EntitySet="FacultyDetails" />
+          </AssociationSet>
           <EntitySet Name="StudentDetails" EntityType="HomeModel.StudentDetail" />
           <AssociationSet Name="FK_StudentDetails_DivDetails" Association="HomeModel.FK_StudentDetails_DivDetails">
             <End Role="DivDetail" EntitySet="DivDetails" />
             <End Role="StudentDetail" EntitySet="StudentDetails" />
           </AssociationSet>
-          <EntitySet Name="SubjectDetails" EntityType="HomeModel.SubjectDetail" />
           </EntityContainer>
         <EntityType Name="Login">
           <Key>
@@ -355,6 +404,52 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="SubjectDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="SubjectName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" />
+        </EntityType>
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="BloodGroup1" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="FacultyDetails" Relationship="HomeModel.FK_FacultyDetails_BloodGroup" FromRole="BloodGroup" ToRole="FacultyDetail" />
+        </EntityType>
+        <EntityType Name="FacultyDetail">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Type="Decimal" Name="FacultyId" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="Password" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="EmailId" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="BirthDate" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Type="Decimal" Name="PhoneNo" Precision="10" Scale="0" />
+          <Property Type="Decimal" Name="BloodGroupId" Precision="18" Scale="0" />
+          <Property Type="String" Name="Address" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="FacultyUniqueName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" />
+          <NavigationProperty Name="BloodGroup" Relationship="HomeModel.FK_FacultyDetails_BloodGroup" FromRole="FacultyDetail" ToRole="BloodGroup" />
+        </EntityType>
+        <Association Name="FK_FacultyDetails_BloodGroup">
+          <End Type="HomeModel.BloodGroup" Role="BloodGroup" Multiplicity="0..1" />
+          <End Type="HomeModel.FacultyDetail" Role="FacultyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FacultyDetail">
+              <PropertyRef Name="BloodGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityType Name="StudentDetail">
           <Key>
             <PropertyRef Name="Id" />
@@ -362,8 +457,8 @@
           <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
           <Property Type="Decimal" Name="GRNo" Precision="10" Scale="0" />
           <Property Type="Decimal" Name="RollNo" Precision="4" Scale="0" />
-          <Property Type="String" Name="FisrtName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Binary" Name="LastName" MaxLength="50" FixedLength="false" />
+          <Property Type="String" Name="FirstName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="LastName" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="MiddleName" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Decimal" Name="ClassId" Precision="18" Scale="0" />
           <Property Type="Decimal" Name="DivId" Precision="18" Scale="0" />
@@ -371,10 +466,11 @@
           <Property Type="String" Name="BloodGroup" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="Address" MaxLength="200" FixedLength="false" Unicode="false" />
           <Property Type="Decimal" Name="PhoneNo" Precision="18" Scale="0" />
-          <Property Type="DateTime" Name="DOB" />
+          <Property Type="DateTime" Name="BirthDate" />
           <Property Type="String" Name="PFName" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="PMName" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="String" Name="PLName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="Boolean" Name="Active" />
           <NavigationProperty Name="DivDetail" Relationship="HomeModel.FK_StudentDetails_DivDetails" FromRole="StudentDetail" ToRole="DivDetail" />
         </EntityType>
         <Association Name="FK_StudentDetails_DivDetails">
@@ -389,14 +485,6 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityType Name="SubjectDetail">
-          <Key>
-            <PropertyRef Name="Id" />
-          </Key>
-          <Property Type="Decimal" Name="Id" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
-          <Property Type="String" Name="SubjectName" MaxLength="50" FixedLength="false" Unicode="false" />
-          <Property Type="Boolean" Name="Active" />
-        </EntityType>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -454,13 +542,49 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="SubjectDetails">
+            <EntityTypeMapping TypeName="HomeModel.SubjectDetail">
+              <MappingFragment StoreEntitySet="SubjectDetails">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+                <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BloodGroups">
+            <EntityTypeMapping TypeName="HomeModel.BloodGroup">
+              <MappingFragment StoreEntitySet="BloodGroup">
+                <ScalarProperty Name="BloodGroup1" ColumnName="BloodGroup" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="FacultyDetails">
+            <EntityTypeMapping TypeName="HomeModel.FacultyDetail">
+              <MappingFragment StoreEntitySet="FacultyDetails">
+                <ScalarProperty Name="Active" ColumnName="Active" />
+                <ScalarProperty Name="FacultyUniqueName" ColumnName="FacultyUniqueName" />
+                <ScalarProperty Name="Address" ColumnName="Address" />
+                <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+                <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+                <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+                <ScalarProperty Name="LastName" ColumnName="LastName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+                <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
           <EntitySetMapping Name="StudentDetails">
             <EntityTypeMapping TypeName="HomeModel.StudentDetail">
               <MappingFragment StoreEntitySet="StudentDetails">
+                <ScalarProperty Name="Active" ColumnName="Active" />
                 <ScalarProperty Name="PLName" ColumnName="PLName" />
                 <ScalarProperty Name="PMName" ColumnName="PMName" />
                 <ScalarProperty Name="PFName" ColumnName="PFName" />
-                <ScalarProperty Name="DOB" ColumnName="DOB" />
+                <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
                 <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
                 <ScalarProperty Name="Address" ColumnName="Address" />
                 <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
@@ -469,18 +593,9 @@
                 <ScalarProperty Name="ClassId" ColumnName="ClassId" />
                 <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
                 <ScalarProperty Name="LastName" ColumnName="LastName" />
-                <ScalarProperty Name="FisrtName" ColumnName="FisrtName" />
+                <ScalarProperty Name="FirstName" ColumnName="FirstName" />
                 <ScalarProperty Name="RollNo" ColumnName="RollNo" />
                 <ScalarProperty Name="GRNo" ColumnName="GRNo" />
-                <ScalarProperty Name="Id" ColumnName="Id" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="SubjectDetails">
-            <EntityTypeMapping TypeName="HomeModel.SubjectDetail">
-              <MappingFragment StoreEntitySet="SubjectDetails">
-                <ScalarProperty Name="Active" ColumnName="Active" />
-                <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
               </MappingFragment>
             </EntityTypeMapping>
@@ -505,7 +620,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Home" ZoomLevel="64">
+      <Diagram Name="Home" ZoomLevel="82">
         <EntityTypeShape EntityType="HomeModel.Login" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3648893229166661" IsExpanded="true" />
         <EntityTypeShape EntityType="HomeModel.SecurityQuestion" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416657" IsExpanded="true" />
         <AssociationConnector Association="HomeModel.FK_Login_Login" ManuallyRouted="false">
@@ -546,13 +661,19 @@
           <ConnectorPoint PointX="6.75" PointY="5.8939925130208337" />
           <ConnectorPoint PointX="6.75" PointY="2.922587890625" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="HomeModel.StudentDetail" Width="1.5" PointX="8.25" PointY="6.875" Height="4.2879036458333353" />
+        <EntityTypeShape EntityType="HomeModel.SubjectDetail" Width="1.5" PointX="3.375" PointY="7.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="HomeModel.BloodGroup" Width="1.5" PointX="9.375" PointY="7.75" Height="1.5956835937499996" />
+        <EntityTypeShape EntityType="HomeModel.FacultyDetail" Width="1.5" PointX="11.625" PointY="6.75" Height="3.5186979166666745" />
+        <AssociationConnector Association="HomeModel.FK_FacultyDetails_BloodGroup" >
+          <ConnectorPoint PointX="10.875" PointY="8.547841796875" />
+          <ConnectorPoint PointX="11.625" PointY="8.547841796875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="HomeModel.StudentDetail" Width="1.5" PointX="8.25" PointY="11.125" Height="4.4802050781250031" />
         <AssociationConnector Association="HomeModel.FK_StudentDetails_DivDetails" >
           <ConnectorPoint PointX="7.1562525" PointY="2.922587890625" />
-          <ConnectorPoint PointX="7.1562525" PointY="9.0189518229166676" />
-          <ConnectorPoint PointX="8.25" PointY="9.0189518229166676" />
+          <ConnectorPoint PointX="7.1562525" PointY="13.365102539062502" />
+          <ConnectorPoint PointX="8.25" PointY="13.365102539062502" />
         </AssociationConnector>
-        <EntityTypeShape EntityType="HomeModel.SubjectDetail" Width="1.5" PointX="3.375" PointY="7.75" Height="1.5956835937499996" />
         </Diagram>
     </Diagrams>
   </Designer>

@@ -26,6 +26,11 @@ b, strong{font-weight:bold}/* Makes browsers agree. IE + Opera = font-weight: bo
 html{-webkit-text-size-adjust: none; /* Prevent font scaling in landscape */}
 label{display:inline-block; padding:1px 10px 0 0; margin:0; vertical-align:top; min-width:10px; max-width:900px;}
 *{outline:0 !important}
+
+.middle-content .nav li a {font-size:14px}
+.middle-content .nav li .dropdown-menu a {font-size:13px}
+.middle-content .nav-pills > li.active > a,.middle-content  .nav-pills > li.active > a:hover,.middle-content  .nav-pills > li.active > a:focus {background:#6b6bb6}
+
 /********************************************************************************************************************************************/
 div,span,a{font-family:Tahoma, Geneva, sans-serif; font-size:11px}
 

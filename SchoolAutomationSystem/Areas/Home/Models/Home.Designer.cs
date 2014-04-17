@@ -23,6 +23,7 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_AppId1", "Application", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Application), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ErrorLog), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_UserId1", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Login), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ErrorLog), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_DivDetails_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.ClassDetail), "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_FacultyDetails_BloodGroup", "BloodGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.BloodGroup), "FacultyDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.FacultyDetail), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_StudentDetails_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), "StudentDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.StudentDetail), true)]
 
 #endregion
@@ -174,22 +175,6 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<StudentDetail> StudentDetails
-        {
-            get
-            {
-                if ((_StudentDetails == null))
-                {
-                    _StudentDetails = base.CreateObjectSet<StudentDetail>("StudentDetails");
-                }
-                return _StudentDetails;
-            }
-        }
-        private ObjectSet<StudentDetail> _StudentDetails;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<SubjectDetail> SubjectDetails
         {
             get
@@ -202,6 +187,54 @@ namespace SchoolAutomationSystem.Areas.Home.Models
             }
         }
         private ObjectSet<SubjectDetail> _SubjectDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<BloodGroup> BloodGroups
+        {
+            get
+            {
+                if ((_BloodGroups == null))
+                {
+                    _BloodGroups = base.CreateObjectSet<BloodGroup>("BloodGroups");
+                }
+                return _BloodGroups;
+            }
+        }
+        private ObjectSet<BloodGroup> _BloodGroups;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<FacultyDetail> FacultyDetails
+        {
+            get
+            {
+                if ((_FacultyDetails == null))
+                {
+                    _FacultyDetails = base.CreateObjectSet<FacultyDetail>("FacultyDetails");
+                }
+                return _FacultyDetails;
+            }
+        }
+        private ObjectSet<FacultyDetail> _FacultyDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<StudentDetail> StudentDetails
+        {
+            get
+            {
+                if ((_StudentDetails == null))
+                {
+                    _StudentDetails = base.CreateObjectSet<StudentDetail>("StudentDetails");
+                }
+                return _StudentDetails;
+            }
+        }
+        private ObjectSet<StudentDetail> _StudentDetails;
 
         #endregion
         #region AddTo Methods
@@ -255,19 +288,35 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the StudentDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToStudentDetails(StudentDetail studentDetail)
-        {
-            base.AddObject("StudentDetails", studentDetail);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the SubjectDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSubjectDetails(SubjectDetail subjectDetail)
         {
             base.AddObject("SubjectDetails", subjectDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the BloodGroups EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToBloodGroups(BloodGroup bloodGroup)
+        {
+            base.AddObject("BloodGroups", bloodGroup);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the FacultyDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToFacultyDetails(FacultyDetail facultyDetail)
+        {
+            base.AddObject("FacultyDetails", facultyDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the StudentDetails EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToStudentDetails(StudentDetail studentDetail)
+        {
+            base.AddObject("StudentDetails", studentDetail);
         }
 
         #endregion
@@ -375,6 +424,110 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ErrorLog>("HomeModel.FK_Exceptions_AppId1", "ErrorLog", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="HomeModel", Name="BloodGroup")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class BloodGroup : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new BloodGroup object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        public static BloodGroup CreateBloodGroup(global::System.Decimal id)
+        {
+            BloodGroup bloodGroup = new BloodGroup();
+            bloodGroup.ID = id;
+            return bloodGroup;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Decimal _ID;
+        partial void OnIDChanging(global::System.Decimal value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String BloodGroup1
+        {
+            get
+            {
+                return _BloodGroup1;
+            }
+            set
+            {
+                OnBloodGroup1Changing(value);
+                ReportPropertyChanging("BloodGroup1");
+                _BloodGroup1 = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("BloodGroup1");
+                OnBloodGroup1Changed();
+            }
+        }
+        private global::System.String _BloodGroup1;
+        partial void OnBloodGroup1Changing(global::System.String value);
+        partial void OnBloodGroup1Changed();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_FacultyDetails_BloodGroup", "FacultyDetail")]
+        public EntityCollection<FacultyDetail> FacultyDetails
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<FacultyDetail>("HomeModel.FK_FacultyDetails_BloodGroup", "FacultyDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<FacultyDetail>("HomeModel.FK_FacultyDetails_BloodGroup", "FacultyDetail", value);
                 }
             }
         }
@@ -981,6 +1134,366 @@ namespace SchoolAutomationSystem.Areas.Home.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="HomeModel", Name="FacultyDetail")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class FacultyDetail : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new FacultyDetail object.
+        /// </summary>
+        /// <param name="facultyId">Initial value of the FacultyId property.</param>
+        public static FacultyDetail CreateFacultyDetail(global::System.Decimal facultyId)
+        {
+            FacultyDetail facultyDetail = new FacultyDetail();
+            facultyDetail.FacultyId = facultyId;
+            return facultyDetail;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal FacultyId
+        {
+            get
+            {
+                return _FacultyId;
+            }
+            set
+            {
+                if (_FacultyId != value)
+                {
+                    OnFacultyIdChanging(value);
+                    ReportPropertyChanging("FacultyId");
+                    _FacultyId = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("FacultyId");
+                    OnFacultyIdChanged();
+                }
+            }
+        }
+        private global::System.Decimal _FacultyId;
+        partial void OnFacultyIdChanging(global::System.Decimal value);
+        partial void OnFacultyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FirstName
+        {
+            get
+            {
+                return _FirstName;
+            }
+            set
+            {
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
+            }
+        }
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String LastName
+        {
+            get
+            {
+                return _LastName;
+            }
+            set
+            {
+                OnLastNameChanging(value);
+                ReportPropertyChanging("LastName");
+                _LastName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("LastName");
+                OnLastNameChanged();
+            }
+        }
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
+        partial void OnLastNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String MiddleName
+        {
+            get
+            {
+                return _MiddleName;
+            }
+            set
+            {
+                OnMiddleNameChanging(value);
+                ReportPropertyChanging("MiddleName");
+                _MiddleName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("MiddleName");
+                OnMiddleNameChanged();
+            }
+        }
+        private global::System.String _MiddleName;
+        partial void OnMiddleNameChanging(global::System.String value);
+        partial void OnMiddleNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Password
+        {
+            get
+            {
+                return _Password;
+            }
+            set
+            {
+                OnPasswordChanging(value);
+                ReportPropertyChanging("Password");
+                _Password = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Password");
+                OnPasswordChanged();
+            }
+        }
+        private global::System.String _Password;
+        partial void OnPasswordChanging(global::System.String value);
+        partial void OnPasswordChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String EmailId
+        {
+            get
+            {
+                return _EmailId;
+            }
+            set
+            {
+                OnEmailIdChanging(value);
+                ReportPropertyChanging("EmailId");
+                _EmailId = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("EmailId");
+                OnEmailIdChanged();
+            }
+        }
+        private global::System.String _EmailId;
+        partial void OnEmailIdChanging(global::System.String value);
+        partial void OnEmailIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String BirthDate
+        {
+            get
+            {
+                return _BirthDate;
+            }
+            set
+            {
+                OnBirthDateChanging(value);
+                ReportPropertyChanging("BirthDate");
+                _BirthDate = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("BirthDate");
+                OnBirthDateChanged();
+            }
+        }
+        private global::System.String _BirthDate;
+        partial void OnBirthDateChanging(global::System.String value);
+        partial void OnBirthDateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> PhoneNo
+        {
+            get
+            {
+                return _PhoneNo;
+            }
+            set
+            {
+                OnPhoneNoChanging(value);
+                ReportPropertyChanging("PhoneNo");
+                _PhoneNo = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("PhoneNo");
+                OnPhoneNoChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _PhoneNo;
+        partial void OnPhoneNoChanging(Nullable<global::System.Decimal> value);
+        partial void OnPhoneNoChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> BloodGroupId
+        {
+            get
+            {
+                return _BloodGroupId;
+            }
+            set
+            {
+                OnBloodGroupIdChanging(value);
+                ReportPropertyChanging("BloodGroupId");
+                _BloodGroupId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BloodGroupId");
+                OnBloodGroupIdChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _BloodGroupId;
+        partial void OnBloodGroupIdChanging(Nullable<global::System.Decimal> value);
+        partial void OnBloodGroupIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String Address
+        {
+            get
+            {
+                return _Address;
+            }
+            set
+            {
+                OnAddressChanging(value);
+                ReportPropertyChanging("Address");
+                _Address = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("Address");
+                OnAddressChanged();
+            }
+        }
+        private global::System.String _Address;
+        partial void OnAddressChanging(global::System.String value);
+        partial void OnAddressChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String FacultyUniqueName
+        {
+            get
+            {
+                return _FacultyUniqueName;
+            }
+            set
+            {
+                OnFacultyUniqueNameChanging(value);
+                ReportPropertyChanging("FacultyUniqueName");
+                _FacultyUniqueName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FacultyUniqueName");
+                OnFacultyUniqueNameChanged();
+            }
+        }
+        private global::System.String _FacultyUniqueName;
+        partial void OnFacultyUniqueNameChanging(global::System.String value);
+        partial void OnFacultyUniqueNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Active
+        {
+            get
+            {
+                return _Active;
+            }
+            set
+            {
+                OnActiveChanging(value);
+                ReportPropertyChanging("Active");
+                _Active = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Active");
+                OnActiveChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Active;
+        partial void OnActiveChanging(Nullable<global::System.Boolean> value);
+        partial void OnActiveChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_FacultyDetails_BloodGroup", "BloodGroup")]
+        public BloodGroup BloodGroup
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BloodGroup>("HomeModel.FK_FacultyDetails_BloodGroup", "BloodGroup").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BloodGroup>("HomeModel.FK_FacultyDetails_BloodGroup", "BloodGroup").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<BloodGroup> BloodGroupReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<BloodGroup>("HomeModel.FK_FacultyDetails_BloodGroup", "BloodGroup");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<BloodGroup>("HomeModel.FK_FacultyDetails_BloodGroup", "BloodGroup", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="HomeModel", Name="Login")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -1492,35 +2005,35 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.String FisrtName
+        public global::System.String FirstName
         {
             get
             {
-                return _FisrtName;
+                return _FirstName;
             }
             set
             {
-                OnFisrtNameChanging(value);
-                ReportPropertyChanging("FisrtName");
-                _FisrtName = StructuralObject.SetValidValue(value, true);
-                ReportPropertyChanged("FisrtName");
-                OnFisrtNameChanged();
+                OnFirstNameChanging(value);
+                ReportPropertyChanging("FirstName");
+                _FirstName = StructuralObject.SetValidValue(value, true);
+                ReportPropertyChanged("FirstName");
+                OnFirstNameChanged();
             }
         }
-        private global::System.String _FisrtName;
-        partial void OnFisrtNameChanging(global::System.String value);
-        partial void OnFisrtNameChanged();
+        private global::System.String _FirstName;
+        partial void OnFirstNameChanging(global::System.String value);
+        partial void OnFirstNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public global::System.Byte[] LastName
+        public global::System.String LastName
         {
             get
             {
-                return StructuralObject.GetValidValue(_LastName);
+                return _LastName;
             }
             set
             {
@@ -1531,8 +2044,8 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 OnLastNameChanged();
             }
         }
-        private global::System.Byte[] _LastName;
-        partial void OnLastNameChanging(global::System.Byte[] value);
+        private global::System.String _LastName;
+        partial void OnLastNameChanging(global::System.String value);
         partial void OnLastNameChanged();
     
         /// <summary>
@@ -1708,24 +2221,24 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
-        public Nullable<global::System.DateTime> DOB
+        public Nullable<global::System.DateTime> BirthDate
         {
             get
             {
-                return _DOB;
+                return _BirthDate;
             }
             set
             {
-                OnDOBChanging(value);
-                ReportPropertyChanging("DOB");
-                _DOB = StructuralObject.SetValidValue(value);
-                ReportPropertyChanged("DOB");
-                OnDOBChanged();
+                OnBirthDateChanging(value);
+                ReportPropertyChanging("BirthDate");
+                _BirthDate = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("BirthDate");
+                OnBirthDateChanged();
             }
         }
-        private Nullable<global::System.DateTime> _DOB;
-        partial void OnDOBChanging(Nullable<global::System.DateTime> value);
-        partial void OnDOBChanged();
+        private Nullable<global::System.DateTime> _BirthDate;
+        partial void OnBirthDateChanging(Nullable<global::System.DateTime> value);
+        partial void OnBirthDateChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -1798,6 +2311,30 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         private global::System.String _PLName;
         partial void OnPLNameChanging(global::System.String value);
         partial void OnPLNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Active
+        {
+            get
+            {
+                return _Active;
+            }
+            set
+            {
+                OnActiveChanging(value);
+                ReportPropertyChanging("Active");
+                _Active = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Active");
+                OnActiveChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Active;
+        partial void OnActiveChanging(Nullable<global::System.Boolean> value);
+        partial void OnActiveChanged();
 
         #endregion
     
