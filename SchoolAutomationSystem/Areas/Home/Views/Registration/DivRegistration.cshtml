@@ -7,33 +7,35 @@
     <div class="main-content .col-xs-18 .col-sm-12">
         <h1 class="mrgn-left10">
             Welcome User</h1>
-        <div class="login-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
-            @using (Html.BeginForm( FormMethod.Post))
+        <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+            @using (Html.BeginForm(FormMethod.Post))
     {
                 <div class="fieldset-content">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border">Div Registration</legend>
+                        <div class="forms">
+                        <div class="form-inline">
                         <div class="form-group">
-                            <div class="pad5 float-left">
-                                @Html.Label("Class Name")</div>
-                            <div class="float-left">
-                                @Html.DropDownList("Model.classID", Model.getAllClassNames())
+                                @Html.Label("Class Name")
+                            
+                                @Html.DropDownList("Model.classID", Model.getAllClassNames(), new { @class = "selectpicker dropup" })
                             </div>
-                            <div class="pad5 float-left">
-                                @Html.Label("Div Name")</div>
-                            <div class="float-left">
+                            <div class="form-group">
+                                @Html.Label("Div Name")
+                            
                                 @Html.TextBox("Model.divName", Model.divName == null ? string.Empty : Model.divName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Class'" })
                             </div>
                           
                             @Html.Hidden("Model.divId", Model.divId, new { id = "Model_divId" })
-                            <div class="float-left pad-left15">
+                            <div class="form-group">
                                 <button id="addDiv" class="btn btn-default width-100" >Add</button>
                                 
                             </div>
-                            <div class="float-left pad-left15">
+                            <div class="form-group">
                                 <button id="reset" type="reset" class="btn btn-default width-100">
                                     Reset</button>
                             </div>
+                        </div>
                         </div>
                     </fieldset>
                     @if (Model.lstDivDetails.Count() > 0)

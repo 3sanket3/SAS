@@ -47,6 +47,7 @@ a:hover,a:focus{text-decoration:none}
 .middle-content{box-shadow:0 0 6px #4c4c4c}
 .container h1{ color:#FFF;}
 .login-content {width:445px; background:url('/Content/images/login-bg.png') repeat; margin:0px auto;border: 1px solid #808080;}
+.middle-content{width:80%}
 .login-content .please-login { background:url('/Content/images/login-header-bg1.png') repeat;}
 .login-content .user { background:url('/Content/images/username.png') no-repeat; background-position:left center; padding:6px 20px;}
 .login-content .pass { background:url('/Content/images/password.png') no-repeat; background-position:left center;padding:6px 20px;} 
@@ -83,6 +84,17 @@ legend.scheduler-border {
 .class_table tr.odd {background: #F9F9F9;}
 .class_table tr.even {background: #E5E5E5;}
 .class_table tbody tr td a{background:url(/Content/images/box_edit-51215.png) no-repeat; font-size:13px; padding-left:18px;}
+
+.bootstrap-select.btn-group .dropdown-menu  {background:#6b6bb6;}
+.forms .form-group{width:40%;height:40px;margin:0 0 0 10px}
+.forms .form-group label{width:45%;text-align:right;float:left;margin-top:5px}
+.forms .form-group input{width:45%;text-align:left;float:left}
+.forms .form-group .radio-group {float:left;width:45%}
+.forms .form-group .radio-group input{width:10%;margin:10px 5px 0 0}
+.forms .form-group .radio-group label{width:35%;text-align:left}
+.bootstrap-select .btn-default {border:1px transparent #9c9c9c;width:150px}
+.bootstrap-select .dropdown-menu {line-height:20px;min-width:150px}
+
 /* End CSS -------------------------------------------------------------------------------------------------------------------------------- */
 .pos-rel{position:relative;}
 .pos-abs{position:absolute;}

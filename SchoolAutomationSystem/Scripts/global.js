@@ -87,3 +87,6 @@ $('.nav li').click(function () {
     $('.nav li').removeClass("active");
     $(this).addClass("active");
 });
+$(document).ready(function () {
+    $('.selectpicker').selectpicker();
+});
