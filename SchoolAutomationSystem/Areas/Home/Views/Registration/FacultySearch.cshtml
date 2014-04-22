@@ -5,50 +5,53 @@
 @model SchoolAutomationSystem.Areas.Home.Models.FacultyDetailsViewModel
 <div class="row">
     <div class="main-content .col-xs-18 .col-sm-12">
-        <h1 class="mrgn-left10">
-            Welcome User</h1>
-        <div class="login-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+        
+        <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
             @using (Html.BeginForm(FormMethod.Post))
             {
+                
                 <div class="fieldset-content">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border">Faculty Search</legend>
+                        <div class="forms">
+                        <div class="form-inline">
                         <div class="form-group">
-                            <div class="pad5 float-left">
-                                @Html.Label("Faculty Short Name")</div>
-                            <div class="float-left">
+                                @Html.Label("Short Name")
+                            
                                 @Html.TextBox("Model.UniqueName", Model.UniqueName == null ? string.Empty : Model.UniqueName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Short Name'" })
-                            </div>
+                           </div>
                           
                             @Html.Hidden("Model.FacultyId", Model.FacultyId, new { id = "Model_FacultyId"})
 
-                            <div class="pad5 float-left">
-                                @Html.Label("Faculty Name")</div>
-                            <div class="float-left">
+                            <div class="form-group">
+                                @Html.Label("Faculty Name")
+                            
                                 @Html.TextBox("Model.Name", Model.Name == null ? string.Empty : Model.Name, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Name'" })
                             </div>
                           
-                            <div class="pad5 float-left">
-                                @Html.Label("Email Id")</div>
-                            <div class="float-left">
+                            <div class="form-group">
+                                @Html.Label("Email Id")
+                            
                                 @Html.TextBox("Model.EmailAddress", Model.EmailAddress == null ? string.Empty : Model.EmailAddress, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Email Address'" })
                             </div>
 
-                            <div class="float-left pad-left15">
-                                <button id="Search" class="btn btn-default width-100" >Search</button>
+                            <div class="form-group double-btn">
+                                <button id="Search" class="btn btn-default" >Search</button>
                                 
-                            </div>
-                            <div class="float-left pad-left15">
-                                <button id="reset" type="reset" class="btn btn-default width-100">
+                           
+                                <button id="reset" type="reset" class="btn btn-default">
                                     Reset</button>
+                                 <button id="AddNewFaculty" class="btn btn-default" onclick='editClick(event,0);' type ="button">Add New Faculty</button>
                             </div>
 
-                            <div class="float-left pad-left15">
-                                <button id="AddNewFaculty" class="btn btn-default width-100" onclick='editClick(event,0);' type ="button">Add New Faculty</button>
+                            <div class="form-group single-btn">
+                                
                              </div>
 
-                             @Html.Hidden("Action", null, new { id = "Action" });
+                             @Html.Hidden("Action", null, new { id = "Action" })
                         </div>
+                        </div>
+                        
                     </fieldset>
 
                     <div id = "FacultyProcessing">

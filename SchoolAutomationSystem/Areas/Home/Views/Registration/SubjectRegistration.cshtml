@@ -7,25 +7,26 @@
     <div class="main-content .col-xs-18 .col-sm-12">
         <h1 class="mrgn-left10">
             Welcome User</h1>
-        <div class="login-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+        <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
             @using (Html.BeginForm(FormMethod.Post))
             {
                 <div class="fieldset-content">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border">Subject Registration</legend>
+                        <div class="forms">
+                        <div class="form-inline">
                         <div class="form-group">
-                            <div class="pad5 float-left">
-                                @Html.Label("Subject Name")</div>
-                            <div class="float-left">
+                                @Html.Label("Subject Name")
+                            
                                 @Html.TextBox("Model.SubjectName", Model.SubjectName == null ? string.Empty : Model.SubjectName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Subject'" })
-                            </div>
+                        </div>
                           
                             @Html.Hidden("Model.ID", Model.ID, new { id = "Model_ID" })
-                            <div class="float-left pad-left15">
+                        <div class="form-group">
                                 <button id="addSubject" class="btn btn-default width-100" >Add</button>
                                 
                             </div>
-                            <div class="float-left pad-left15">
+                            <div class="form-group">
                                 <button id="reset" type="reset" class="btn btn-default width-100">
                                     Reset</button>
                             </div>

@@ -1,0 +1,99 @@
+﻿
+@model SchoolAutomationSystem.Areas.Home.Models.StudentDetailsViewModel
+
+           
+                <div class="fieldset-content">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Faculty Details</legend>
+                        <div class="forms">
+                        <div class="form-inline">
+                        <div class="form-group">
+                                @Html.Label("Student ID")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.Id", Model.StudentProcessingData.Id == null ? 0 : Model.StudentProcessingData.Id, new { @class = "form-control mrgn0 width-150" })
+                        </div>
+
+                        <div class="form-group">
+                                @Html.Label("GR No")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.GRNo", Model.StudentProcessingData.GRNo == null ? string.Empty : Model.StudentProcessingData.GRNo.ToString(), new { @class = "form-control mrgn0 width-150" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Roll No")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.RollNo", Model.StudentProcessingData.RollNo == null ? string.Empty : Model.StudentProcessingData.RollNo.ToString(), new { @class = "form-control mrgn0 width-150" })
+                            </div>
+
+
+                            <div class="form-group">
+                                @Html.Label("First Name")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.FirstName", Model.StudentProcessingData.FirstName == null ? string.Empty : Model.StudentProcessingData.FirstName, new { @class = "form-control mrgn0 width-150"})
+                            </div>
+                          
+                        @*    @Html.Hidden("Model.FacultyProcessingData.FacultyId", Model.FacultyProcessingData.FacultyId, new { id = "Model_FacultyId" })*@
+
+                        <div class="form-group">
+                                @Html.Label("Middle Name")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.MiddleName", Model.StudentProcessingData.MiddleName == null ? string.Empty : Model.StudentProcessingData.MiddleName, new { @class = "form-control mrgn0 width-150" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Last Name")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.FirstName", Model.StudentProcessingData.FirstName == null ? string.Empty : Model.StudentProcessingData.FirstName, new { @class = "form-control mrgn0 width-150" })
+                            </div>
+                          
+                           <div class="form-group">
+                                @Html.Label("Class")
+                            
+                                @Html.DropDownList("Model.StudentProcessingData.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.StudentProcessingData.ClassId)), new { @class = "selectpicker dropup width-150", @style = " placeholder='Class'" })
+                        </div>
+
+                        <div class="form-group">
+                                @Html.Label("Div")
+                            
+                                @Html.DropDownList("Model.StudentProcessingData.DivId", Model.getAllDiv(Convert.ToInt16( Model.StudentProcessingData.DivId)), new { @class = "selectpicker dropup width-150", @style = " placeholder='Div'" })
+                        </div>
+    
+
+                            <div class="form-group">
+                                @Html.Label("Birthdate")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.BirthDate", Model.StudentProcessingData.BirthDate == null ? string.Empty : (Model.StudentProcessingData.BirthDate.Value.ToString("dd-MM-yyyy")), new { @class = "form-control mrgn0 width-150", @style = " placeholder='Birth Date'" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Phone No")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.PhoneNo", Model.StudentProcessingData.PhoneNo == null ? 0 : Model.StudentProcessingData.PhoneNo, new { @class = "form-control mrgn0 width-150" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Blood Group")
+                            
+                                @Html.TextBox("Model.StudentProcessingData.BloodGroup", Model.StudentProcessingData.BloodGroup == null ? string.Empty : Model.StudentProcessingData.BloodGroup , new { @class = "form-control mrgn0 width-150" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Address")
+                            
+                                @Html.TextArea("Model.StudentProcessingData.Address", Model.StudentProcessingData.Address == null ? string.Empty : Model.StudentProcessingData.Address, new { @class = "form-control mrgn0 width-150" })
+                            </div>
+                            <div class="form-group double-btn">
+                                <button id="AddStudentDetails1" class="btn btn-default ">Add Student</button>
+                                
+                            
+                                <button id="reset" type="reset" class="btn btn-default">
+                                    Reset</button>
+                            </div>
+
+                        </div>
+                        </div>
+                    </fieldset>
+                    
+                </div>
+
+

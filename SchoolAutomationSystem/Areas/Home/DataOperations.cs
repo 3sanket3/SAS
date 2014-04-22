@@ -10,7 +10,7 @@ namespace SchoolAutomationSystem.Areas.Home
     public class DataOperations
     {
         HomeEntities homeEntities;
-        public SelectListItem[] ClassStaticDropdownItems = new[] { new SelectListItem { Text = "Select One", Value = "0" } };
+        public SelectListItem[] StaticDropdownItems = new[] { new SelectListItem { Text = "Select One", Value = "0" } };
         
         public DataOperations()
         {
@@ -90,7 +90,7 @@ namespace SchoolAutomationSystem.Areas.Home
         {
             List<ClassDetail> lstClasses = (from classes in homeEntities.ClassDetails where classes.Active == true select classes).ToList();
 
-            IEnumerable<SelectListItem> selectListClassses = ClassStaticDropdownItems.Concat( from tempLstClasses in lstClasses
+            IEnumerable<SelectListItem> selectListClassses = StaticDropdownItems.Concat( from tempLstClasses in lstClasses
                                                              select new SelectListItem
                                                              {
                                                                  Value = tempLstClasses.Id+"",
@@ -201,6 +201,7 @@ namespace SchoolAutomationSystem.Areas.Home
 
         }
 
+
         internal void SaveFacultyDetails(FacultyDetail model)
         {
             FacultyDetail faculty;
@@ -286,13 +287,13 @@ namespace SchoolAutomationSystem.Areas.Home
             return StudetnDetails;
         }
 
-        //internal FacultyDetail getFacultyDetailFromID(int ID)
-        //{
-        //    return (from faculty in homeEntities.FacultyDetails
-        //            where faculty.FacultyId == ID
-        //            select faculty).First();
-
-        //}
+        internal StudentDetail getStudentDetailFromID(int ID)
+        {
+            return (from student in homeEntities.StudentDetails
+                    where student.Id == ID
+                    select student).First();
+            
+        }
 
         internal void SaveFacultyDetails(StudentDetail model)
         {
@@ -324,7 +325,8 @@ namespace SchoolAutomationSystem.Areas.Home
             destination.FirstName = source.FirstName;
             destination.GRNo = source.GRNo;
             destination.RollNo = source.RollNo;
-            destination.ClassId = source.DivId;
+            destination.ClassId = source.ClassId;
+            destination.DivId = source.DivId;
             destination.LastName = source.LastName;
             destination.MiddleName = source.MiddleName;
             destination.PhoneNo = source.PhoneNo;
@@ -355,19 +357,64 @@ namespace SchoolAutomationSystem.Areas.Home
                                   where students.LastName != null && students.LastName.StartsWith(searchStudentDetails.StudentLastName)
                                   select students).ToList();
             }
-            if (!string.IsNullOrEmpty(searchStudentDetails.GRNO.ToString()))
+            if (!string.IsNullOrEmpty(searchStudentDetails.GRNO.ToString()) && searchStudentDetails.GRNO >0)
             {
                 lstAllStudents = (from students in lstAllStudents
                                   where students.GRNo != null && students.GRNo== searchStudentDetails.GRNO
                                   select students).ToList();
             }
-            if (!string.IsNullOrEmpty(searchStudentDetails.RollNo.ToString()))
+            if (!string.IsNullOrEmpty(searchStudentDetails.RollNo.ToString()) && searchStudentDetails.RollNo >0)
             {
                 lstAllStudents = (from students in lstAllStudents
                                   where students.RollNo != null && students.RollNo == searchStudentDetails.RollNo
                                   select students).ToList();
             }
             return lstAllStudents;
+        }
+
+        public SelectList GetAllClassesSelectList(int selectedValues)
+        {
+           
+            List<ClassDetail> lstClasses = (from classes in homeEntities.ClassDetails where classes.Active == true select classes).ToList();
+
+            IEnumerable<SelectListItem> selectListClassses = StaticDropdownItems.Concat( from tempLstClasses in lstClasses
+                                                             select new SelectListItem
+                                                             {
+                                                                 Value = tempLstClasses.Id+"",
+                                                                 Text = tempLstClasses.ClassName
+                                                             });
+
+            SelectList ddlClasses = new SelectList(selectListClassses, "Value", "Text",selectedValues);
+            
+
+            return ddlClasses;
+        
+
+
+        }
+
+        public SelectList GetAllDivSelectList(int selectedValues)
+        {
+           // var AllDiv = from div in homeEntities.DivDetails select div;
+            //ClassStaticDropdownItems
+
+                 List<DivDetail> AllDiv = (from div in homeEntities.DivDetails
+                           select div).ToList();
+
+            IEnumerable<SelectListItem> selectListDiv = StaticDropdownItems.Concat( from tempLstClasses in AllDiv
+                                                             select new SelectListItem
+                                                             {
+                                                                 Value = tempLstClasses.Id+"",
+                                                                 Text = tempLstClasses.Div
+                                                             });
+
+            SelectList ddlDiv = new SelectList(selectListDiv, "Value", "Text", selectedValues);
+
+
+            return ddlDiv;
+
+            //return new SelectList(AllDiv, "Id", "Div", selectedValues);
+
         }
         #endregion
     }

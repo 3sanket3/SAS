@@ -1,0 +1,141 @@
+﻿@{
+    ViewBag.Title = "Student Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SchoolAutomationSystem.Areas.Home.Models.StudentDetailsViewModel
+<div class="row">
+    <div class="main-content .col-xs-18 .col-sm-12">
+        <h1 class="mrgn-left10">
+            Welcome User</h1>
+        <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                
+                <div class="fieldset-content">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Student Search</legend>
+                        <div class="forms">
+                        <div class="form-inline">
+                        <div class="form-group">
+                                @Html.Label("GR No")
+                            
+                                @Html.TextBox("Model.SearchSrudetnData.GRNO", Model.SearchSrudetnData.GRNO == null ? string.Empty : Model.SearchSrudetnData.GRNO.ToString(), new { @class = "form-control mrgn0 width-150", @style = " placeholder='GR No'" })
+                        </div>
+                        <div class="form-group">
+                                @Html.Label("Roll No")
+                            
+                                @Html.TextBox("Model.SearchSrudetnData.RollNo", Model.SearchSrudetnData.RollNo == null ? string.Empty : Model.SearchSrudetnData.RollNo.ToString(), new { @class = "form-control mrgn0 width-150", @style = " placeholder='Roll No'" })
+                        </div>
+                           <div class="form-group">
+                                @Html.Label("Class")
+                            
+                                @Html.DropDownList("Model.SearchSrudetnData.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.SearchSrudetnData.ClassId)), new { @class = "selectpicker dropup width-150", @style = " placeholder='Class'" })
+                        </div>
+
+
+                        <div class="form-group">
+                                @Html.Label("Div")
+                            
+                                @Html.DropDownList("Model.SearchSrudetnData.DivId", Model.getAllDiv(Model.SearchSrudetnData.DivId), new { @class = "selectpicker dropup width-150", @style = " placeholder='Div'" })
+                        </div>
+
+                        <div class="form-group">
+                                @Html.Label("First Name")
+                            
+                                @Html.TextBox("Model.SearchSrudetnData.StudentFirstName", Model.SearchSrudetnData.StudentFirstName == null ? string.Empty : Model.SearchSrudetnData.StudentFirstName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='First Name'" })
+                           </div>
+                          
+                            @Html.Hidden("Model.StudentId", Model.StudentId, new { id = "Model_StudentId" })
+
+                            <div class="form-group">
+                                @Html.Label("Last Name")
+                            
+                                @Html.TextBox("Model.SearchSrudetnData.StudentLastName ", Model.SearchSrudetnData.StudentLastName == null ? string.Empty : Model.SearchSrudetnData.StudentLastName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Last Name'" })
+                            </div>
+                          
+                            
+
+                            <div class="form-group double-button">
+                                <button id="Search" class="btn btn-default " >Search</button>
+                                
+                                <button id="reset" type="reset" class="btn btn-default ">
+                                    Reset</button>
+                            
+                                <button id="AddNewFaculty" class="btn btn-default" onclick='editClick(event,0);' type ="button">Add New Student</button>
+                             </div>
+
+                             @Html.Hidden("Action", null, new { id = "Action" })
+                        </div>
+                        </div>
+                        
+                    </fieldset>
+
+                    <div id = "StudentProcessing">
+                    </div>
+                    <div id="myGrid">
+                        @{
+                        if (Model.LstStudentDetails != null && Model.LstStudentDetails.Count() > 0)
+                        {
+                            var grid = new WebGrid(Model.LstStudentDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
+                            @grid.GetHtml(
+    tableStyle: "class_table mrgn-auto border",
+        headerStyle: "",
+        rowStyle: "odd",
+            alternatingRowStyle: "even",
+            selectedRowStyle: "",
+    columns: grid.Columns(
+
+grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.Id + " href='#' onclick='editClick(event," + item.Id + ");'>Edit </a>")),
+      grid.Column("FirstName", "First Name"),
+      grid.Column("LastName", "Last Name"),
+      grid.Column("RollNo", "Roll No"),
+      grid.Column("GRNo", "GR No")
+
+    )
+    )
+                        }
+            }
+                    </div>
+
+                </div>
+        
+}
+</div>
+</div></div>
+            <script type="text/javascript">
+
+                $(document).ready(function () {
+
+                    $("#AddFacultyDetails1").click(function () {
+                        $("#Action")[0].value = "AddFacultyDetails";
+                        $('form')[0].submit();
+                    });
+
+                    $("#Search").click(function () {
+                        $("#Action")[0].value = "Search";
+                        $('form')[0].submit();
+                    });
+                });
+
+                function editClick(e, studetnId) {
+
+                    var $element = e.target.id;
+                    e.preventDefault();
+
+                    var url = window.location.href;
+                    url = url.substring(0, url.lastIndexOf("/Registration"));
+                    $.ajax({
+                        url: url + "/Registration/GetStudentDetailView",
+                        type: "POST",
+                        data: { StudentId: studetnId },
+                        success: function (result) {
+                            $("#StudentProcessing").html(result);
+                        },
+                        error: function (xhr, status, error) {
+                        }
+                    });
+
+                    return false;
+
+                } 
+            </script>

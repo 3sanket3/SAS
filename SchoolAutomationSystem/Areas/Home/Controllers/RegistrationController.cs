@@ -85,6 +85,7 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
             //else
             //{
                 Model.lstClassDetails = repository.getAllClasses();
+            
                 TempData["ClassDetails1"] = Model;
            // }
             return View(Model);
@@ -228,6 +229,8 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
         {
             StudentDetailsViewModel model = new StudentDetailsViewModel();
             model.LstStudentDetails = repository.getStudentDetailsList();
+            model.SearchSrudetnData = new SearchStudentData();
+
             return View(model);
         }
 
@@ -271,19 +274,19 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
 
         //}
 
-        //public ActionResult GetFacultyDetailView(int FacultyId)
-        //{
-        //    FacultyDetailsViewModel FacultyDetailsViewModel = new FacultyDetailsViewModel();
-        //    if (FacultyId > 0)
-        //    {
-        //        FacultyDetailsViewModel.FacultyProcessingData = repository.getFacultyDetailFromID(FacultyId);
-        //    }
-        //    else
-        //    {
-        //        FacultyDetailsViewModel.FacultyProcessingData = new FacultyDetail();
-        //    }
-        //    return View("FacultyDetailsProcessing", FacultyDetailsViewModel);
-        //}
+        public ActionResult GetStudentDetailView(int StudentId)
+        {
+            StudentDetailsViewModel studentDetailsViewModel = new StudentDetailsViewModel();
+            if (StudentId > 0)
+            
+                studentDetailsViewModel.StudentProcessingData = repository.getStudentDetailFromID(StudentId);
+            
+            else
+            {
+                studentDetailsViewModel.StudentProcessingData = new StudentDetail();
+            }
+            return View("StudentDetailsProcessing", studentDetailsViewModel);
+        }
 
 
 
