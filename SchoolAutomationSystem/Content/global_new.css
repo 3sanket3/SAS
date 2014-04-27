@@ -20,11 +20,6 @@ b, strong{font-weight:bold}/* Makes browsers agree. IE + Opera = font-weight: bo
 html{-webkit-text-size-adjust: none; /* Prevent font scaling in landscape */}
 label{display:inline-block; padding:1px 10px 0 0; margin:0; vertical-align:top; min-width:10px; max-width:900px;}
 *{outline:0 !important}
-
-.middle-content .nav li a {font-size:14px}
-.middle-content .nav li .dropdown-menu a {font-size:13px}
-.middle-content .nav-pills > li.active > a,.middle-content  .nav-pills > li.active > a:hover,.middle-content  .nav-pills > li.active > a:focus {background:#6b6bb6}
-
 /********************************************************************************************************************************************/
 div,span,a{font-family:Tahoma, Geneva, sans-serif; font-size:11px}
 
@@ -42,79 +37,35 @@ a:hover,a:focus{text-decoration:none}
 .header{background:#EFEFEF;}
 .container h1{ color:#777;display:inline-block;margin:20px 10px}
 .logout{display: inline-block; float: right; padding: 20px; font-size: 18px; font-weight: 700; color: rgb(119, 119, 119);}
-.login-content {width:400px; background:url('/Content/images/login-bg.png') repeat; margin:0px auto;border: 1px solid #808080;}
-.middle-content{width:80%}
-.login-content .please-login { background:url('/Content/images/login-header-bg1.png') repeat;}
-.login-content .user { background:url('/Content/images/username.png') no-repeat; background-position:left center; padding:6px 20px;}
-.login-content .pass { background:url('/Content/images/password.png') no-repeat; background-position:left center;padding:6px 20px;} 
+.login-content {width:400px; background:url(../images/login-bg.png) repeat; margin:0px auto;border: 1px solid #808080;}
+.login-content .please-login { background:url(../images/login-header-bg1.png) repeat;}
+.login-content .user { background:url(../images/username.png) no-repeat; background-position:left center; padding:6px 20px;}
+.login-content .pass { background:url(../images/password.png) no-repeat; background-position:left center;padding:6px 20px;} 
 .login-content h3 {margin-top:0px;text-shadow: 3px 1px 1px #9D8A9C;color:#fff;}
-.button-submit {background:url(/Content/images/login-button1.png) no-repeat;}
+.button-submit {background:url(../images/login-button1.png) no-repeat;}
 .form-group label {display:inline-block; font-size: 15px;}
 .form-group input {display:inline-block;}
 .forms{background:linear-gradient(to bottom, #E3E3E3 0%, #E3E3E3 5%, #F2F2F2 15%, #FCFCFC 19%, #FFFFFF 25%, #FFFFFF 31%, #FEFEFE 100%, #F5F6F6 100%, #F9FBFA 100%, #E1E6E9 100%, #FDFDFD 100%, #FDFDFD 100%, #FDFDFD 100%, #FFFFFF 100%, #FFFFFF 100%, #FAFAFA 100%, #FAFAFA 100%, #FAFAFA 100%, #2989D8 100%, #FFFFFF 100%) repeat scroll 0 0 rgba(0, 0, 0, 0);display:block;float:left;width:100%;padding-top:20px}
-.main-content .nav{border:1px solid #ccc;border-width:1px 0;list-style:none;padding:0;text-align:center;background:#FFF;border-spacing:1px;}
-.main-content  .nav li{display:inline;}
-.main-content .nav a{display:inline-block;padding:10px;}
 .main-content .nav li a {font-size:14px;color: #4A4A7F;font-weight: 700;}
 .main-content .nav li .dropdown-menu a {font-size:13px}
 .main-content .nav-pills > li.active > a,.main-content  .nav-pills > li.active > a:hover,.main-content  .nav-pills > li.active > a:focus {background:#6b6bb6}
 .bootstrap-select:not([class*="span"]):not([class*="col-"]):not([class*="form-control"]):not(.input-group-btn){float:left}
 .bootstrap-select.btn-group .dropdown-menu  {background:#e7e7e7;}
 .forms .form-group{width:47%;height:50px;margin:0 0 0 10px}
-.fieldset-content {align:center;width:600; height:200}
-.row1 {background: #CCC url(/Content/images/border-right.png) repeat-y fixed center;}
-.row2 {background: #F5F5F5 url(/Content/images/border-right.png) repeat-y fixed center;}
-.row3 {background: #EBEBEB url(/Content/images/border-right.png) repeat-y fixed center;}
-.border {border:1px solid #1C1C1C !important;}
-fieldset.scheduler-border {
-    border: 1px groove #ddd !important;
-    padding: 0 1.4em 1.4em 1.4em !important;
-    margin: 0 0 1.5em 0 !important;
-    -webkit-box-shadow:  0px 0px 0px 0px #000;
-            box-shadow:  0px 0px 0px 0px #000;
-}
-
-legend.scheduler-border {
-    font-size: 1.7em !important;
-    font-weight: bold !important;
-	color: #6B6BB2; 
-	width:inherit; /* Or auto */
-    padding:0 4px; /* To give a bit of padding on the left and right */
-    border-bottom:none;
-	margin-bottom:5px;
-}
-.class_table th {padding:5px 40px; border-right:1px solid gray; border-bottom:1px solid; background-color:#CCCCCC;}
-.class_table th a{ font-size:15px; font-weight:bold; color : Black }
-.class_table td{padding:5px 20px; border-right:1px solid #CBCBCB; font-size:13px; text-align:center;}
-.class_table tr td:last-child,.class_table tr th:last-child{border-right:none;}
-.class_table tr.odd {background: #F9F9F9;}
-.class_table tr.even {background: #E5E5E5;}
-.class_table tbody tr td a{background:url(/Content/images/box_edit-51215.png) no-repeat; font-size:13px; padding-left:18px;}
-
-.bootstrap-select.btn-group .dropdown-menu  {background:#6b6bb6;}
-.forms .form-group{width:40%;height:40px;margin:0 0 0 10px}
 .forms .form-group label{width:45%;text-align:right;float:left;margin-top:5px}
 .forms .form-group input{width:45%;text-align:left;float:left}
 .forms .form-group .radio-group {float:left;width:45%}
 .forms .form-group .radio-group input{width:10%;margin:10px 5px 0 0}
 .forms .form-group .radio-group label{width:35%;text-align:left}
-
 .forms .form-group.double-btn {width:85%;text-align:center}
 .forms .form-group {text-align:center;float:left}
 .forms .form-group.double-btn button,.forms .form-group.single-btn button {width:20%}
-.forms .btn-success.disabled:hover,
-.forms .btn-default:hover,
-.forms .btn-default:focus,
-.forms .btn-default:active,
-.forms .btn-default.active {background-color: #b5b5da;}
-
 .bootstrap-select .btn-default {border:1px transparent #9c9c9c;width:150px}
 .bootstrap-select .dropdown-menu {line-height:20px;min-width:150px}
 /* New  CSS -------------------------------------------------------------------------------------------------------------------------------- */
 .main-content .nav{border:1px solid #ccc;border-width:1px 0;list-style:none;padding:0;text-align:center;background:#FFF;border-spacing:1px;}
 .main-content  .nav li{display:inline;}
 .main-content .nav a{display:inline-block;padding:10px;}
-
 /* End CSS -------------------------------------------------------------------------------------------------------------------------------- */
 .pos-rel{position:relative;}
 .pos-abs{position:absolute;}
@@ -139,7 +90,6 @@ legend.scheduler-border {
 .border-btm-e0{border-bottom:1px solid #e0e0e0; padding-bottom:3px}
 .border-top-e0{border-top:1px solid #e0e0e0;}
 .border-right-0{ border-right:0px !important}
-.border-right-1{border-right:1px solid #9E9E9E;}
 .border-bottom-0{ border-bottom:0px !important}
 .bdr-top-none{border-top:none !important;}
 .bdr-btm-none{border-bottom:none !important;}
@@ -147,15 +97,13 @@ legend.scheduler-border {
 .clear-both{clear:both}
 .border-top-0{border-top:0 !important;}
 .border-left-0{ border-left:0 !important;}
-.width-1{width:1px;}
 .width-20{width:20px !important;}
-.width-30{width:30px !important}
+.width-30{width:27px !important}
 .width-40{width:40px !important}
 .width-75{width:74.9% !important;}
 .width-80{width:80% !important;}
 .width-80px{width:80px !important;}
 .width-63px{width:63px !important;}
-.width-100{width:100px;}
 .border-top-0{border-top:none}
 .width-45{width:45%;}
 .width-40p{width:40% !important;}
@@ -173,9 +121,6 @@ legend.scheduler-border {
 .height-0{height:0 !important;}
 .width-200{ width:200px !important;}
 .width-100px{ width:100px !important;}
-.height-20{height: 20px;}
-.height-25{height: 25px;}
-.height-30{height: 27px;}
 .mrgn-lf15{ margin-left:15px !important}
 .float-left-imp{ float:left !important}
 .clear-both{clear:both;}
@@ -185,8 +130,8 @@ label{cursor:text;}
 .mrgn-auto{margin:auto}
 .overflow-hidden{overflow:hidden;}
 .refresh-btn{display:inline-block; height:35px;}
-ul.list-check li{background: url("/Content/images/list-style-check-red.png") no-repeat scroll 0 8px transparent !important; padding-left:15px !important;}
-.search-btn{background:url(/Content/images/search-btn-icon.png) no-repeat center center; border:none; height:20px;}
+ul.list-check li{background: url("../images/list-style-check-red.png") no-repeat scroll 0 8px transparent !important; padding-left:15px !important;}
+.search-btn{background:url(../images/search-btn-icon.png) no-repeat center center; border:none; height:20px;}
 /********************************************************************************************************************************************/
 
 .mrgn100	  {margin:100px}	.mrgn95			   {margin:95px}	.mrgn90			     {margin:90px}	.mrgn85		     {margin:85px}	

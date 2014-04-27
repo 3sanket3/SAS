@@ -292,6 +292,47 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
 
         #endregion
 
+        #region SubjectMapping Screen
+        public ActionResult GetAllFacultiesSelectList()
+        {
+            return Json( repository.GetAllFacultiesSelectList(0));
+        }
+        public ActionResult GetAllSubjectsSelectList()
+        {
+            return Json(repository.GetAllSubjectSelectList(0));
+        }
+        public ActionResult SubjectMapping()
+        {
+            SubjectMappingViewModel model = new SubjectMappingViewModel();
+            model.SubjectMapping = new SubjectMapping();
+            model.lstSubjectDetails = repository.getAllSubjectMapping(model.SubjectMapping);
 
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult SubjectMapping(SubjectMappingViewModel model,FormCollection collection)
+        {
+            //if (collection["Action"] == "GetMapping")
+            //{
+                
+            //}
+            //else 
+           if (collection["Action"] == "AddMapping")
+            {
+                repository.SaveMapping(model);
+            }
+            model.lstSubjectDetails = repository.getAllSubjectMapping(model.SubjectMapping);
+
+            return View(model);
+        }
+      
+        public ActionResult GetMapptingDtails(int MappingID)
+        {
+            JSonReturnData mapping= repository.GetSubjectMappingDetails(MappingID);
+            string JsonString = repository.JsonSerializer<JSonReturnData>(mapping);
+            return Json(JsonString,JsonRequestBehavior.AllowGet);
+        }
+        #endregion
+        
     }
 }

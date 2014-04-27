@@ -4,6 +4,9 @@ using System.Linq;
 using System.Web;
 using SchoolAutomationSystem.Areas.Home.Models;
 using System.Web.Mvc;
+using System.Runtime.Serialization.Json;
+using System.IO;
+using System.Text;
 
 namespace SchoolAutomationSystem.Areas.Home
 {
@@ -417,5 +420,140 @@ namespace SchoolAutomationSystem.Areas.Home
 
         }
         #endregion
+
+        #region SubjectMapping
+
+        public List<SubjectMappingListData> getAllSubjectMapping(SubjectMapping mapping)
+        {
+            List<SubjectMappingListData> MappingListData = (from list in homeEntities.SubjectMappings
+                                                           join faculty in homeEntities.FacultyDetails
+                                                           on list.FacultyId equals faculty.FacultyId
+                                                           join subject in homeEntities.SubjectDetails
+                                                           on list.SubjectId equals subject.Id
+                                                           where list.Active == true 
+                                                           && list.ClassId == mapping.ClassId
+                                                           && list.DivId== mapping.DivId
+                                                           select new SubjectMappingListData
+                                                           {
+                                                               MappingID = (int)list.Id,
+                                                               ClassId = (int)list.ClassId,
+                                                               DivId = (int)list.DivId,
+                                                               FacultyId = (int)list.FacultyId,
+                                                               FacultyName = faculty.FirstName + faculty.LastName,
+                                                               SubjectId = (int)list.SubjectId,
+                                                               SubjectName = subject.SubjectName,
+                                                               IsClassTeacher = list.IsClassTeacher==true? "Yes" : "No"
+                                                               
+                                                           }).ToList();
+
+            return MappingListData;
+        }
+
+        public SelectList GetAllFacultiesSelectList(int selectedValues)
+        {
+
+            List<FacultyDetail> lstFaculties = (from faculties in homeEntities.FacultyDetails where faculties.Active == true select faculties).ToList();
+
+            IEnumerable<SelectListItem> selectListFaculties = StaticDropdownItems.Concat(from tempLstFaculties in lstFaculties
+                                                                                        select new SelectListItem
+                                                                                        {
+                                                                                            Value = tempLstFaculties.FacultyId + "",
+                                                                                            Text = tempLstFaculties.FirstName + " "+tempLstFaculties.LastName
+                                                                                        });
+
+            SelectList ddlFaculties = new SelectList(selectListFaculties, "Value", "Text", selectedValues);
+
+
+            return ddlFaculties;
+
+        }
+
+        public SelectList GetAllSubjectSelectList(int selectedValues)
+        {
+
+            List<SubjectDetail> lstSubjects = (from subjects in homeEntities.SubjectDetails where subjects.Active == true select subjects).ToList();
+
+            IEnumerable<SelectListItem> selectListSubject = StaticDropdownItems.Concat(from tempLstFaculties in lstSubjects
+                                                                                         select new SelectListItem
+                                                                                         {
+                                                                                             Value = tempLstFaculties.Id + "",
+                                                                                             Text = tempLstFaculties.SubjectName
+                                                                                         });
+
+            SelectList ddlSubject = new SelectList(selectListSubject, "Value", "Text", selectedValues);
+
+
+            return ddlSubject;
+
+        }
+
+        public void SaveMapping(SubjectMappingViewModel model)
+        {
+            SubjectMapping SubMapping;
+           if (model.SubjectMapping.Id == 0)
+            {
+                ///Add New
+                SubMapping = new SubjectMapping();
+                SubMapping.ClassId = model.SubjectMapping.ClassId;
+                SubMapping.DivId = model.SubjectMapping.DivId;
+                SubMapping.FacultyId = model.SubjectMapping.FacultyId;
+                SubMapping.SubjectId = model.SubjectMapping.SubjectId;
+                SubMapping.IsClassTeacher = model.SubjectMapping.IsClassTeacher;
+                SubMapping.Active = true;
+                homeEntities.AddToSubjectMappings(SubMapping);
+
+            }
+            else
+            {
+                //update
+                SubMapping = (from mapping in homeEntities.SubjectMappings
+                              where mapping.Id == model.SubjectMapping.Id
+                              select mapping).FirstOrDefault();
+                SubMapping.ClassId = model.SubjectMapping.ClassId;
+                SubMapping.DivId = model.SubjectMapping.DivId;
+                SubMapping.FacultyId = model.SubjectMapping.FacultyId;
+                SubMapping.SubjectId = model.SubjectMapping.SubjectId;
+                SubMapping.IsClassTeacher = model.SubjectMapping.IsClassTeacher;
+                
+            }
+           homeEntities.SaveChanges();
+        }
+
+        public JSonReturnData GetSubjectMappingDetails(int MappingDetails)
+        {
+           SubjectMapping SubMapping = (from mapping in homeEntities.SubjectMappings
+                                        where mapping.Id == MappingDetails
+                          select mapping).FirstOrDefault();
+           JSonReturnData jsonData = new JSonReturnData();
+           jsonData.MappingID = (int)SubMapping.Id;
+           jsonData.SubjectId = (int)SubMapping.SubjectId;
+           jsonData.DivId = (int)SubMapping.DivId;
+           jsonData.ClassId= (int)SubMapping.ClassId;
+           jsonData.FacultyId = (int)SubMapping.FacultyId;
+           jsonData.IsClassTeacher = SubMapping.IsClassTeacher == true ? true : false;
+
+
+           //JSonReturnData jsonData = new JSonReturnData();
+           //jsonData.MappingID = (int)SubMapping.Id;
+           //jsonData.SubjectId = getSubjectNameById((int)SubMapping.SubjectId);
+           //jsonData.DivId = getDivNameById((int)SubMapping.DivId);
+           //jsonData.ClassId = getClassNameById((int)SubMapping.ClassId);
+           //jsonData.FacultyId = getFacultyDetailFromID((int)SubMapping.FacultyId).FirstName + " " + getFacultyDetailFromID((int)SubMapping.FacultyId).LastName;
+           //jsonData.IsClassTeacher = SubMapping.IsClassTeacher == true ? true : false;
+
+           return jsonData;
+        }
+
+        public string JsonSerializer<T>(T t)
+        {
+            DataContractJsonSerializer ser = new DataContractJsonSerializer(typeof(T));
+            MemoryStream ms = new MemoryStream();
+            ser.WriteObject(ms, t);
+            string jsonString = Encoding.UTF8.GetString(ms.ToArray());
+            ms.Close();
+            return jsonString;
+        }  
+        #endregion
+
     }
 }

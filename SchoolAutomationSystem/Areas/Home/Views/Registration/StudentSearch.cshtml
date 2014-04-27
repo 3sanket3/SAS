@@ -46,6 +46,8 @@
                            </div>
                           
                             @Html.Hidden("Model.StudentId", Model.StudentId, new { id = "Model_StudentId" })
+                            @Html.Hidden("Hidden_KeepViewOpen", Model.KeepViewOpen == true ? "Y" : "N", new { id = "Hidden_KeepViewOpen" })
+                            
 
                             <div class="form-group">
                                 @Html.Label("Last Name")
@@ -106,6 +108,11 @@ grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = 
 
                 $(document).ready(function () {
 
+                    if ($("#Hidden_KeepViewOpen")[0].value == "Y")
+                    {
+                        editClick(event, 0);
+                    }
+
                     $("#AddFacultyDetails1").click(function () {
                         $("#Action")[0].value = "AddFacultyDetails";
                         $('form')[0].submit();
@@ -138,4 +145,5 @@ grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = 
                     return false;
 
                 } 
+
             </script>

@@ -1,0 +1,201 @@
+﻿@{
+    ViewBag.Title = "Subject Mapping";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SchoolAutomationSystem.Areas.Home.Models.SubjectMappingViewModel
+<div class="row">
+    <div class="main-content .col-xs-18 .col-sm-12">
+        <h1 class="mrgn-left10">
+            Welcome User</h1>
+        <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+            @using (Html.BeginForm(FormMethod.Post))
+    {
+                <div class="fieldset-content">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Subject Mapping</legend>
+                        <div class="forms">
+                        <div class="form-inline">
+                        <div class="form-group">
+                                @Html.Label("Class Name")
+                            
+                                @Html.DropDownList("Model.SubjectMapping.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.SubjectMapping.ClassId)), new { @class = "selectpicker dropup" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Div Name")
+                            
+                                @Html.DropDownList("Model.SubjectMapping.DivId", Model.getAllDiv(Convert.ToInt16(Model.SubjectMapping.DivId)), new { @class = "selectpicker dropup" })
+                            </div>
+                          
+                            @Html.Hidden("Model.SubjectMapping.Id", Model.SubjectMapping.Id, new { id = "Model_SubjectMapping_Id" })
+                            <div class="form-group double-btn">
+                                <button id="GetMapping" class="btn btn-default width-100" >Get Mappings</button>
+                             
+                                <button id="reset" type="reset" class="btn btn-default width-100">
+                                    Reset</button>
+                            </div>
+
+
+
+                        </div>
+                        </div>
+                        <div class="forms">
+                        <fieldset>
+                           <div class="form-inline">
+                            <div class="form-group">
+                                @Html.Label("Faculty Name")
+                            
+                                @Html.DropDownList("Model.SubjectMapping.FacultyId", Model.GetAllFacultiesSelectList(Convert.ToInt16(Model.SubjectMapping.FacultyId)), new { @class = "selectpicker dropup" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Subject Name")
+                            
+                                @Html.DropDownList("Model.SubjectMapping.SubjectId", Model.GetAllSubjectSelectList(Convert.ToInt16(Model.SubjectMapping.SubjectId)), new { @class = "" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Is Class Teacher")
+                            
+                                @Html.CheckBox("Model.SubjectMapping.IsClassTeacher", Model.SubjectMapping.IsClassTeacher == true ? true : false, new { @class = "selectpicker dropup" })
+                            </div>
+                            <div class="form-group single-btn">
+                            
+                                <button id="AddMapping" class="btn btn-default width-100" >Add Mappings</button>
+                                
+                            </div>
+                            </div> 
+                        </fieldset>
+                        </div>
+                    </fieldset>
+                    @if (Model.lstSubjectDetails!= null && Model.lstSubjectDetails.Count() > 0)
+                    {
+                    <div id="myGrid">
+                        @{
+                        var grid = new WebGrid(Model.lstSubjectDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
+                            @grid.GetHtml(
+    tableStyle : "class_table mrgn-auto border",
+        headerStyle: "",
+        rowStyle: "odd",
+            alternatingRowStyle: "even",
+            selectedRowStyle : "",
+    columns : grid.Columns(
+
+                grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.MappingID + " href='#' onclick='editClick(event);'>Edit </a>")),
+                  grid.Column("FacultyName", "Faculty Name", format: (item) => item.FacultyName),
+                  
+                  grid.Column("SubjectName", "Subject Name", format: (item) => item.SubjectName),
+                  grid.Column("IsClassTeacher", "Is Class Teacher or not", format: (item) => item.IsClassTeacher)
+    )
+    )
+                        }
+                    </div>
+                    }
+                </div>
+                @Html.Hidden("Action",null, new { id = "Action" })
+
+   
+    
+}
+</div>
+</div></div>
+            <script type="text/javascript">
+                $("#reset").click(function () {
+                    debugger;
+                    $("#Model_SubjectMapping_ClassId")[0].value = 0;
+                    $("#Model_SubjectMapping_DivId")[0].value = 0;
+                    $("#Model_SubjectMapping_Id")[0].value = 0;
+                    Model_SubjectMapping_Id
+                    return false;
+                });
+                $(document).ready(function () {
+
+
+                    $("#GetMapping").click(function () {
+
+                        $("#Action")[0].value = "GetMapping";
+                        $('form')[0].submit();
+                        //$("#Model_id")[0].value = "";
+                    });
+
+                    $("#AddMapping").click(function () {
+
+                        $("#Action")[0].value = "AddMapping";
+                        $('form')[0].submit();
+                        //$("#Model_id")[0].value = "";
+                    });
+                });
+
+                function editClick(e) {
+
+                    var $element = e.target.id;
+                    var tempId = $element.split("_");
+
+                    e.preventDefault();
+
+                    //editClass(tempId[1]);
+
+                    var url = window.location.href;
+                    url = url.substring(0, url.lastIndexOf("/Registration"));
+                    // alert("url");
+                    $.ajax({
+                        url: url + "/Registration/GetMapptingDtails",
+                        type: "POST",
+                        dataType: "json",
+                        data: { MappingID: tempId[1] },
+
+                        success: function (result) {
+                            var ObjMaaping = JSON.parse(result);
+                            //   alert($('#Model_SubjectMapping_SubjectId .filter-option')[0].value);
+                            alert(ObjMaaping.ClassId + " " + ObjMaaping.DivId + " " + ObjMaaping.FacultyId + " " + ObjMaaping.SubjectId);
+                            alert($("select[id='Model_SubjectMapping_SubjectId'] option:selected").index());
+                            $('#Model_SubjectMapping_SubjectId').val(ObjMaaping.SubjectId);
+                            //  alert($('#Model_SubjectMapping_SubjectId'))
+                            alert($("select[id='Model_SubjectMapping_SubjectId'] option:selected").index());
+                            //                            $("#Model_SubjectMapping_ClassId")[0].value = ObjMaaping.ClassId;
+                            //                            $("#Model_SubjectMapping_DivId")[0].value = ObjMaaping.DivId;
+                            //                            $("#Model_SubjectMapping_FacultyId")[0].value = ObjMaaping.FacultyId;
+                            //                            $("#Model_SubjectMapping_SubjectId")[0].value = ObjMaaping.SubjectId;
+                            //                            $("#Model_SubjectMapping_IsClassTeacher")[0].value = ObjMaaping.IsClassTeacher;
+                            //                            $("#Model_SubjectMapping_Id")[0].value = ObjMaaping.Id;
+                            //                            
+                        },
+                        error: function (xhr, status, error) {
+                        }
+                    });
+
+//                    $(function () {
+//                        $.getJSON(url + "/Registration/GetMapptingDtails", tempId[1], function (result) {
+//                            alert(result);
+//                            alert(result.ClassId);
+//                        });
+//                    });
+                    return false;
+
+                } 
+
+//        var url = window.location.href;
+//        url = url.substring(0, url.lastIndexOf("/Registration"));
+//        alert(url);
+//        $("#Faculty").autocomplete({
+
+//            source: function (request, response) {
+//                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
+//                $.ajax({
+//                    url: url + "/Registration/GetAllFacultiesSelectList",
+//                    dataType: "json",
+//                    success: function (data) {
+//                        response($.map(data, function (v, i) {
+//                            var text = v.MainName;
+//                            if (text && (!request.term || matcher.test(text))) {
+//                                alert(text);
+//                                return {
+//                                    label: v.MainName,
+//                                    value: v.MainItemID
+//                                };
+//                            }
+//                        }));
+//                    }
+//                });
+//            }
+//        });
+
+</script>

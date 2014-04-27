@@ -25,6 +25,10 @@ using System.Runtime.Serialization;
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_DivDetails_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.ClassDetail), "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_FacultyDetails_BloodGroup", "BloodGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.BloodGroup), "FacultyDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.FacultyDetail), true)]
 [assembly: EdmRelationshipAttribute("HomeModel", "FK_StudentDetails_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), "StudentDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.StudentDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.ClassDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectMapping), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectMapping), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_FacultyDetails", "FacultyDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.FacultyDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectMapping), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_SubjectDetails", "SubjectDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectMapping), true)]
 
 #endregion
 
@@ -235,6 +239,22 @@ namespace SchoolAutomationSystem.Areas.Home.Models
             }
         }
         private ObjectSet<StudentDetail> _StudentDetails;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<SubjectMapping> SubjectMappings
+        {
+            get
+            {
+                if ((_SubjectMappings == null))
+                {
+                    _SubjectMappings = base.CreateObjectSet<SubjectMapping>("SubjectMappings");
+                }
+                return _SubjectMappings;
+            }
+        }
+        private ObjectSet<SubjectMapping> _SubjectMappings;
 
         #endregion
         #region AddTo Methods
@@ -317,6 +337,14 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         public void AddToStudentDetails(StudentDetail studentDetail)
         {
             base.AddObject("StudentDetails", studentDetail);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the SubjectMappings EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSubjectMappings(SubjectMapping subjectMapping)
+        {
+            base.AddObject("SubjectMappings", subjectMapping);
         }
 
         #endregion
@@ -659,6 +687,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_SubjectMapping_ClassDetails", "SubjectMapping")]
+        public EntityCollection<SubjectMapping> SubjectMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SubjectMapping>("HomeModel.FK_SubjectMapping_ClassDetails", "SubjectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SubjectMapping>("HomeModel.FK_SubjectMapping_ClassDetails", "SubjectMapping", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -846,6 +896,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<StudentDetail>("HomeModel.FK_StudentDetails_DivDetails", "StudentDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_SubjectMapping_DivDetails", "SubjectMapping")]
+        public EntityCollection<SubjectMapping> SubjectMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SubjectMapping>("HomeModel.FK_SubjectMapping_DivDetails", "SubjectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SubjectMapping>("HomeModel.FK_SubjectMapping_DivDetails", "SubjectMapping", value);
                 }
             }
         }
@@ -1484,6 +1556,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<BloodGroup>("HomeModel.FK_FacultyDetails_BloodGroup", "BloodGroup", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_SubjectMapping_FacultyDetails", "SubjectMapping")]
+        public EntityCollection<SubjectMapping> SubjectMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SubjectMapping>("HomeModel.FK_SubjectMapping_FacultyDetails", "SubjectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SubjectMapping>("HomeModel.FK_SubjectMapping_FacultyDetails", "SubjectMapping", value);
                 }
             }
         }
@@ -2482,6 +2576,385 @@ namespace SchoolAutomationSystem.Areas.Home.Models
 
         #endregion
     
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_SubjectMapping_SubjectDetails", "SubjectMapping")]
+        public EntityCollection<SubjectMapping> SubjectMappings
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<SubjectMapping>("HomeModel.FK_SubjectMapping_SubjectDetails", "SubjectMapping");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<SubjectMapping>("HomeModel.FK_SubjectMapping_SubjectDetails", "SubjectMapping", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="HomeModel", Name="SubjectMapping")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class SubjectMapping : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new SubjectMapping object.
+        /// </summary>
+        /// <param name="id">Initial value of the Id property.</param>
+        public static SubjectMapping CreateSubjectMapping(global::System.Decimal id)
+        {
+            SubjectMapping subjectMapping = new SubjectMapping();
+            subjectMapping.Id = id;
+            return subjectMapping;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal Id
+        {
+            get
+            {
+                return _Id;
+            }
+            set
+            {
+                if (_Id != value)
+                {
+                    OnIdChanging(value);
+                    ReportPropertyChanging("Id");
+                    _Id = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("Id");
+                    OnIdChanged();
+                }
+            }
+        }
+        private global::System.Decimal _Id;
+        partial void OnIdChanging(global::System.Decimal value);
+        partial void OnIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> ClassId
+        {
+            get
+            {
+                return _ClassId;
+            }
+            set
+            {
+                OnClassIdChanging(value);
+                ReportPropertyChanging("ClassId");
+                _ClassId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClassId");
+                OnClassIdChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _ClassId;
+        partial void OnClassIdChanging(Nullable<global::System.Decimal> value);
+        partial void OnClassIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> DivId
+        {
+            get
+            {
+                return _DivId;
+            }
+            set
+            {
+                OnDivIdChanging(value);
+                ReportPropertyChanging("DivId");
+                _DivId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivId");
+                OnDivIdChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _DivId;
+        partial void OnDivIdChanging(Nullable<global::System.Decimal> value);
+        partial void OnDivIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> SubjectId
+        {
+            get
+            {
+                return _SubjectId;
+            }
+            set
+            {
+                OnSubjectIdChanging(value);
+                ReportPropertyChanging("SubjectId");
+                _SubjectId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SubjectId");
+                OnSubjectIdChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _SubjectId;
+        partial void OnSubjectIdChanging(Nullable<global::System.Decimal> value);
+        partial void OnSubjectIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> FacultyId
+        {
+            get
+            {
+                return _FacultyId;
+            }
+            set
+            {
+                OnFacultyIdChanging(value);
+                ReportPropertyChanging("FacultyId");
+                _FacultyId = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("FacultyId");
+                OnFacultyIdChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _FacultyId;
+        partial void OnFacultyIdChanging(Nullable<global::System.Decimal> value);
+        partial void OnFacultyIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> IsClassTeacher
+        {
+            get
+            {
+                return _IsClassTeacher;
+            }
+            set
+            {
+                OnIsClassTeacherChanging(value);
+                ReportPropertyChanging("IsClassTeacher");
+                _IsClassTeacher = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("IsClassTeacher");
+                OnIsClassTeacherChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _IsClassTeacher;
+        partial void OnIsClassTeacherChanging(Nullable<global::System.Boolean> value);
+        partial void OnIsClassTeacherChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Boolean> Active
+        {
+            get
+            {
+                return _Active;
+            }
+            set
+            {
+                OnActiveChanging(value);
+                ReportPropertyChanging("Active");
+                _Active = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Active");
+                OnActiveChanged();
+            }
+        }
+        private Nullable<global::System.Boolean> _Active;
+        partial void OnActiveChanging(Nullable<global::System.Boolean> value);
+        partial void OnActiveChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_SubjectMapping_ClassDetails", "ClassDetail")]
+        public ClassDetail ClassDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ClassDetail>("HomeModel.FK_SubjectMapping_ClassDetails", "ClassDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ClassDetail>("HomeModel.FK_SubjectMapping_ClassDetails", "ClassDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ClassDetail> ClassDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ClassDetail>("HomeModel.FK_SubjectMapping_ClassDetails", "ClassDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ClassDetail>("HomeModel.FK_SubjectMapping_ClassDetails", "ClassDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_SubjectMapping_DivDetails", "DivDetail")]
+        public DivDetail DivDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DivDetail>("HomeModel.FK_SubjectMapping_DivDetails", "DivDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DivDetail>("HomeModel.FK_SubjectMapping_DivDetails", "DivDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DivDetail> DivDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DivDetail>("HomeModel.FK_SubjectMapping_DivDetails", "DivDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DivDetail>("HomeModel.FK_SubjectMapping_DivDetails", "DivDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_SubjectMapping_FacultyDetails", "FacultyDetail")]
+        public FacultyDetail FacultyDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<FacultyDetail>("HomeModel.FK_SubjectMapping_FacultyDetails", "FacultyDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<FacultyDetail>("HomeModel.FK_SubjectMapping_FacultyDetails", "FacultyDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<FacultyDetail> FacultyDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<FacultyDetail>("HomeModel.FK_SubjectMapping_FacultyDetails", "FacultyDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<FacultyDetail>("HomeModel.FK_SubjectMapping_FacultyDetails", "FacultyDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_SubjectMapping_SubjectDetails", "SubjectDetail")]
+        public SubjectDetail SubjectDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SubjectDetail>("HomeModel.FK_SubjectMapping_SubjectDetails", "SubjectDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SubjectDetail>("HomeModel.FK_SubjectMapping_SubjectDetails", "SubjectDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SubjectDetail> SubjectDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SubjectDetail>("HomeModel.FK_SubjectMapping_SubjectDetails", "SubjectDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SubjectDetail>("HomeModel.FK_SubjectMapping_SubjectDetails", "SubjectDetail", value);
+                }
+            }
+        }
+
+        #endregion
     }
 
     #endregion

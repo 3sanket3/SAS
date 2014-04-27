@@ -13,6 +13,7 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         public SearchStudentData SearchSrudetnData { get; set; }
         public List<StudentDetail> LstStudentDetails { get; set; }
         public StudentDetail StudentProcessingData { get; set; }
+        public bool KeepViewOpen { get; set; }
 
         public SelectList GetAllClassesSelectList(int selectedValue)
         {
