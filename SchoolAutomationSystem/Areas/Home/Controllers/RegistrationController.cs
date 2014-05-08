@@ -333,6 +333,42 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
             return Json(JsonString,JsonRequestBehavior.AllowGet);
         }
         #endregion
-        
+
+        #region ActivityScreen
+       
+        public ActionResult ActivityRegistration()
+        {
+            ActivityDetailsViewModel model = new ActivityDetailsViewModel();
+            model.ActivityDetail = new ActivityDetail();
+            model.lstActivityDetails = repository.getAllActivity(model.ActivityDetail);
+
+            return View(model);
+        }
+        [HttpPost]
+        public ActionResult ActivityRegistration(ActivityDetailsViewModel model, FormCollection collection)
+        {
+            //if (collection["Action"] == "GetMapping")
+            //{
+
+            //}
+            //else 
+            if (collection["Action"] == "AddActivity")
+            {
+                repository.SaveActivity(model);
+            }
+            model.lstActivityDetails = repository.getAllActivity(model.ActivityDetail);
+            model.ActivityDetail.ActivityName = string.Empty;
+            model.ActivityDetail.Date = null;
+            model.ActivityDetail.TotalMarks = 0;
+            return View(model);
+        }
+
+        public ActionResult GetActivityDtails(int ActivityID)
+        {
+            JSonReturnActivityData Activities = repository.GetActivityDetails(ActivityID);
+            string JsonString = repository.JsonSerializer<JSonReturnActivityData>(Activities);
+            return Json(JsonString, JsonRequestBehavior.AllowGet);
+        }
+        #endregion
     }
 }

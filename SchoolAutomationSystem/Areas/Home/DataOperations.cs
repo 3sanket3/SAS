@@ -554,6 +554,95 @@ namespace SchoolAutomationSystem.Areas.Home
             return jsonString;
         }  
         #endregion
+        #region Activity
 
+        public SelectList getFExamList(int selectedValues)
+        {
+            // var AllDiv = from div in homeEntities.DivDetails select div;
+            //ClassStaticDropdownItems
+
+            List<Exam> AllExam = (from exam  in homeEntities.Exams
+                                  where exam.Type == "F"
+                                  select exam).ToList();
+
+            IEnumerable<SelectListItem> selectListExam = StaticDropdownItems.Concat(from tempLstExam in AllExam
+                                                                                   select new SelectListItem
+                                                                                   {
+                                                                                       Value = tempLstExam.ID + "",
+                                                                                       Text = tempLstExam.ExamName
+                                                                                   });
+
+            SelectList ddlExam = new SelectList(selectListExam, "Value", "Text", selectedValues);
+
+
+            return ddlExam;
+
+            //return new SelectList(AllDiv, "Id", "Div", selectedValues);
+
+        }
+
+
+        public List<ActivityDetail> getAllActivity(ActivityDetail activityDetails)
+        {
+            return (from activity in homeEntities.ActivityDetails
+                    where activity.ClassID == activityDetails.ClassID
+                    && activity.DivID == activityDetails.DivID
+                    && activity.ExamID == activityDetails.ExamID
+                    && activity.SubjectID == activityDetails.SubjectID
+                    select activity).ToList();
+
+        }
+
+        public void SaveActivity(ActivityDetailsViewModel model)
+        {
+            ActivityDetail ActivityDetails;
+            if (model.ActivityDetail.ID == 0)
+            {
+                ActivityDetails = new ActivityDetail();
+                ActivityDetails.ClassID = model.ActivityDetail.ClassID;
+                ActivityDetails.DivID = model.ActivityDetail.DivID;
+                ActivityDetails.ExamID = model.ActivityDetail.ExamID;
+                ActivityDetails.SubjectID = model.ActivityDetail.SubjectID;
+                ActivityDetails.Date = model.ActivityDetail.Date;
+                ActivityDetails.TotalMarks = model.ActivityDetail.TotalMarks;
+                ActivityDetails.ActivityName = model.ActivityDetail.ActivityName;
+                homeEntities.AddToActivityDetails(ActivityDetails);
+            }
+            else
+            {
+                ActivityDetails = (from activity in homeEntities.ActivityDetails
+                                   where activity.ID == model.ActivityDetail.ID
+                                   select activity).FirstOrDefault();
+                ActivityDetails.ClassID = model.ActivityDetail.ClassID;
+                ActivityDetails.DivID = model.ActivityDetail.DivID;
+                ActivityDetails.ExamID = model.ActivityDetail.ExamID;
+                ActivityDetails.SubjectID = model.ActivityDetail.SubjectID;
+                ActivityDetails.Date = model.ActivityDetail.Date;
+                ActivityDetails.TotalMarks = model.ActivityDetail.TotalMarks;
+                ActivityDetails.ActivityName = model.ActivityDetail.ActivityName;
+
+            }
+            homeEntities.SaveChanges();
+        }
+
+        public JSonReturnActivityData GetActivityDetails(int ActivityID)
+        {
+            ActivityDetail ActivityDetails = (from activity in homeEntities.ActivityDetails
+                                              where activity.ID == ActivityID
+                                              select activity).FirstOrDefault();
+
+            JSonReturnActivityData jsonData = new JSonReturnActivityData();
+            jsonData.ActivityID = (int)ActivityDetails.ID;
+            jsonData.ClassID = (int)ActivityDetails.ClassID;
+            jsonData.DivID = (int)ActivityDetails.DivID;
+            jsonData.ExamID = (int)ActivityDetails.ExamID;
+            jsonData.SubjectID = (int)ActivityDetails.SubjectID;
+            jsonData.TotalMarks = ActivityDetails.TotalMarks == null ? 0 : (int)ActivityDetails.TotalMarks;
+            jsonData.ActivityName = ActivityDetails.ActivityName == null ? string.Empty : ActivityDetails.ActivityName;
+            jsonData.date = ActivityDetails.Date == null ? string.Empty : ActivityDetails.Date.Value.Date.ToShortDateString();
+            
+            return jsonData;
+        }
+        #endregion
     }
 }

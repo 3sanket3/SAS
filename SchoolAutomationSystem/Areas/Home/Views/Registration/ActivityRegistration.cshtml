@@ -1,0 +1,179 @@
+﻿@{
+    ViewBag.Title = "Activity Registration";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SchoolAutomationSystem.Areas.Home.Models.ActivityDetailsViewModel
+<div class="row">
+    <div class="main-content .col-xs-18 .col-sm-12">
+        <h1 class="mrgn-left10">
+            Welcome User</h1>
+        <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+            @using (Html.BeginForm(FormMethod.Post))
+    {
+                <div class="fieldset-content">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border">Activity Registration</legend>
+                        <div class="forms">
+                        <div class="form-inline">
+                        <div class="form-group">
+                                @Html.Label("Class Name")
+                            
+                                @Html.DropDownList("Model.ActivityDetail.ClassID", Model.GetAllClassesSelectList(Convert.ToInt16(Model.ActivityDetail.ClassID)), new { @class = "" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Div Name")
+                            
+                                @Html.DropDownList("Model.ActivityDetail.DivID", Model.getAllDiv(Convert.ToInt16(Model.ActivityDetail.DivID)), new { @class = "" })
+                            </div>
+
+                            <div class="form-group">
+                                @Html.Label("Exam Name")
+                            
+                                @Html.DropDownList("Model.ActivityDetail.ExamID", Model.getFExamList(Convert.ToInt16(Model.ActivityDetail.ExamID)), new { @class = "" })
+                            </div>
+                          <div class="form-group">
+                                @Html.Label("Subject Name")
+                            
+                                @Html.DropDownList("Model.ActivityDetail.SubjectID", Model.GetAllSubjectSelectList(Convert.ToInt16(Model.ActivityDetail.SubjectID)), new { @class = "" })
+                            </div>
+                            @Html.Hidden("Model.ActivityDetail.ID", Model.ActivityDetail.ID, new { id = "Model_ActivityDetail_ID" })
+                            <div class="form-group double-btn">
+                                <button id="GetActivity" class="btn btn-default width-100" >Get Activity</button>
+                             
+                                <button id="reset" type="reset" class="btn btn-default width-100">
+                                    Reset</button>
+                            </div>
+
+
+
+                        </div>
+                        </div>
+                        <div class="forms">
+                        <fieldset>
+                           <div class="form-inline">
+                            <div class="form-group">
+                                @Html.Label("Activity Name")
+                            
+                                @Html.TextBox("Model.ActivityDetail.ActivityName", Model.ActivityDetail.ActivityName == null ? string.Empty : Model.ActivityDetail.ActivityName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Class'" })
+                            </div>
+                            <div class="form-group">
+                                @Html.Label("Total Marks")
+                            
+                                @Html.TextBox("Model.ActivityDetail.TotalMarks", Model.ActivityDetail.TotalMarks == null ? 0 : Model.ActivityDetail.TotalMarks, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Class'" })
+                            </div>
+
+                             <div class="form-group">
+                                @Html.Label("Date")
+                            
+                                @Html.TextBox("Model.ActivityDetail.Date", Model.ActivityDetail.Date, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Class'" })
+                            </div>
+                            <div class="form-group single-btn">
+                            
+                                <button id="AddActivity" class="btn btn-default width-100" >Add Activity</button>
+                                
+                            </div>
+                            </div> 
+                        </fieldset>
+                        </div>
+                    </fieldset>
+                    @if (Model.lstActivityDetails != null && Model.lstActivityDetails.Count() > 0)
+                    {
+                    <div id="myGrid">
+                        @{
+                        var grid = new WebGrid(Model.lstActivityDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
+                            @grid.GetHtml(
+    tableStyle : "class_table mrgn-auto border",
+        headerStyle: "",
+        rowStyle: "odd",
+            alternatingRowStyle: "even",
+            selectedRowStyle : "",
+    columns : grid.Columns(
+
+                grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.ID + " href='#' onclick='editClick(event);'>Edit </a>")),
+                   grid.Column("ActivityName", "Activity Name", format: (item) => item.ActivityName),
+
+                   grid.Column("TotalMarks", "Total Marks", format: (item) => item.TotalMarks),
+                    grid.Column("Date", "Date", format: (item) => item.Date)
+    )
+    )
+                        }
+                    </div>
+                    }
+                </div>
+                @Html.Hidden("Action",null, new { id = "Action" })
+
+   
+    
+}
+</div>
+</div></div>
+            <script type="text/javascript">
+                $("#reset").click(function () {
+                    $("#Model_ActivityDetail_ClassID").SelectedIndex = 0;
+                    $("#Model_ActivityDetail_DivID").SelectedIndex = 0;
+                    $("#Model_ActivityDetail_ExamID").SelectedIndex = 0;
+                    $("#Model_ActivityDetail_SubjectID").SelectedIndex = 0;
+                    $("#Model_ActivityDetail_ID")[0].value = 0;
+                    return false;
+                });
+                $(document).ready(function () {
+
+                    $(function () {
+                        $("#Model_ActivityDetail_Date").datepicker();
+                    });
+
+                    $("#GetActivity").click(function () {
+
+                        $("#Action")[0].value = "GetActivity";
+                        $('form')[0].submit();
+                        //$("#Model_id")[0].value = "";
+                    });
+
+                    $("#AddActivity").click(function () {
+
+                        $("#Action")[0].value = "AddActivity";
+                        $('form')[0].submit();
+                        //$("#Model_id")[0].value = "";
+                    });
+
+                });
+
+                function editClick(e) {
+
+                    var $element = e.target.id;
+                    var tempId = $element.split("_");
+
+                    e.preventDefault();
+
+                    var url = window.location.href;
+                    url = url.substring(0, url.lastIndexOf("/Registration"));
+                    // alert("url");
+                    $.ajax({
+                        url: url + "/Registration/GetActivityDtails",
+                        type: "POST",
+                        dataType: "json",
+                        data: { ActivityID: tempId[1] },
+
+                        success: function (result) {
+                            var ObjMaaping = JSON.parse(result);
+                            $("#Model_ActivityDetail_ClassID")[0].value = ObjMaaping.ClassID;
+                            $("#Model_ActivityDetail_DivID")[0].value = ObjMaaping.DivID;
+                            $("#Model_ActivityDetail_ExamID")[0].value = ObjMaaping.ExamID;
+                            $("#Model_ActivityDetail_SubjectID")[0].value = ObjMaaping.SubjectID;
+                            $("#Model_ActivityDetail_ID")[0].value = ObjMaaping.ActivityID;
+                            $("#Model_ActivityDetail_ActivityName")[0].value = ObjMaaping.ActivityName;
+                            $("#Model_ActivityDetail_TotalMarks")[0].value = ObjMaaping.TotalMarks;
+                            $("#Model_ActivityDetail_Date")[0].value = ObjMaaping.date;
+
+                            
+                        },
+                        error: function (xhr, status, error) {
+                        }
+                    });
+
+
+                    return false;
+
+                }
+</script>
+

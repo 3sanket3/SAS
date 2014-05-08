@@ -6,17 +6,35 @@
     <edmx:StorageModels>
     <Schema Namespace="HomeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
         <EntityContainer Name="HomeModelStoreContainer">
+          <EntitySet Name="ActivityDetails" EntityType="HomeModel.Store.ActivityDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Application" EntityType="HomeModel.Store.Application" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="BloodGroup" EntityType="HomeModel.Store.BloodGroup" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ClassDetails" EntityType="HomeModel.Store.ClassDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="DivDetails" EntityType="HomeModel.Store.DivDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="ErrorLog" EntityType="HomeModel.Store.ErrorLog" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Exams" EntityType="HomeModel.Store.Exams" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="FacultyDetails" EntityType="HomeModel.Store.FacultyDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="Login" EntityType="HomeModel.Store.Login" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SecurityQuestion" EntityType="HomeModel.Store.SecurityQuestion" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="StudentDetails" EntityType="HomeModel.Store.StudentDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SubjectDetails" EntityType="HomeModel.Store.SubjectDetails" store:Type="Tables" Schema="dbo" />
           <EntitySet Name="SubjectMapping" EntityType="HomeModel.Store.SubjectMapping" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ActivityDetails_ActivityDetails" Association="HomeModel.Store.FK_ActivityDetails_ActivityDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_DivDetails" Association="HomeModel.Store.FK_ActivityDetails_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_Exams" Association="HomeModel.Store.FK_ActivityDetails_Exams">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_SubjectDetails" Association="HomeModel.Store.FK_ActivityDetails_SubjectDetails">
+            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
           <AssociationSet Name="FK_DivDetails_ClassDetails" Association="HomeModel.Store.FK_DivDetails_ClassDetails">
             <End Role="ClassDetails" EntitySet="ClassDetails" />
             <End Role="DivDetails" EntitySet="DivDetails" />
@@ -62,6 +80,19 @@
             <End Role="SubjectMapping" EntitySet="SubjectMapping" />
           </AssociationSet>
         </EntityContainer>
+        <EntityType Name="ActivityDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="numeric" Nullable="false" />
+          <Property Name="DivID" Type="numeric" Nullable="false" />
+          <Property Name="ActivityName" Type="varchar" MaxLength="50" />
+          <Property Name="ExamID" Type="numeric" />
+          <Property Name="Date" Type="date" />
+          <Property Name="TotalMarks" Type="numeric" />
+          <Property Name="SubjectID" Type="numeric" />
+        </EntityType>
         <EntityType Name="Application">
           <Key>
             <PropertyRef Name="Id" />
@@ -104,6 +135,14 @@
           <Property Name="ModifiedOn" Type="datetime" />
           <Property Name="UserInfo" Type="numeric" />
           <Property Name="AppId" Type="numeric" />
+        </EntityType>
+        <EntityType Name="Exams">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="ExamName" Type="varchar" MaxLength="50" />
         </EntityType>
         <EntityType Name="FacultyDetails">
           <Key>
@@ -181,6 +220,54 @@
           <Property Name="IsClassTeacher" Type="bit" />
           <Property Name="Active" Type="bit" />
         </EntityType>
+        <Association Name="FK_ActivityDetails_ActivityDetails">
+          <End Role="ClassDetails" Type="HomeModel.Store.ClassDetails" Multiplicity="1" />
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.Store.DivDetails" Multiplicity="1" />
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="DivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_Exams">
+          <End Role="Exams" Type="HomeModel.Store.Exams" Multiplicity="0..1" />
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_SubjectDetails">
+          <End Role="SubjectDetails" Type="HomeModel.Store.SubjectDetails" Multiplicity="0..1" />
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK_DivDetails_ClassDetails">
           <End Role="ClassDetails" Type="HomeModel.Store.ClassDetails" Multiplicity="0..1" />
           <End Role="DivDetails" Type="HomeModel.Store.DivDetails" Multiplicity="*" />
@@ -373,6 +460,24 @@
             <End Role="SubjectDetail" EntitySet="SubjectDetails" />
             <End Role="SubjectMapping" EntitySet="SubjectMappings" />
           </AssociationSet>
+          <EntitySet Name="ActivityDetails" EntityType="HomeModel.ActivityDetail" />
+          <AssociationSet Name="FK_ActivityDetails_ActivityDetails" Association="HomeModel.FK_ActivityDetails_ActivityDetails">
+            <End Role="ClassDetail" EntitySet="ClassDetails" />
+            <End Role="ActivityDetail" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_DivDetails" Association="HomeModel.FK_ActivityDetails_DivDetails">
+            <End Role="DivDetail" EntitySet="DivDetails" />
+            <End Role="ActivityDetail" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <EntitySet Name="Exams" EntityType="HomeModel.Exam" />
+          <AssociationSet Name="FK_ActivityDetails_Exams" Association="HomeModel.FK_ActivityDetails_Exams">
+            <End Role="Exam" EntitySet="Exams" />
+            <End Role="ActivityDetail" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_SubjectDetails" Association="HomeModel.FK_ActivityDetails_SubjectDetails">
+            <End Role="SubjectDetail" EntitySet="SubjectDetails" />
+            <End Role="ActivityDetail" EntitySet="ActivityDetails" />
+          </AssociationSet>
           </EntityContainer>
         <EntityType Name="Login">
           <Key>
@@ -477,6 +582,7 @@
           <NavigationProperty Name="ClassDetail" Relationship="HomeModel.FK_DivDetails_ClassDetails" FromRole="DivDetail" ToRole="ClassDetail" />
           <NavigationProperty Name="StudentDetails" Relationship="HomeModel.FK_StudentDetails_DivDetails" FromRole="DivDetail" ToRole="StudentDetail" />
           <NavigationProperty Name="SubjectMappings" Relationship="HomeModel.FK_SubjectMapping_DivDetails" FromRole="DivDetail" ToRole="SubjectMapping" />
+          <NavigationProperty Name="ActivityDetails" Relationship="HomeModel.FK_ActivityDetails_DivDetails" FromRole="DivDetail" ToRole="ActivityDetail" />
         </EntityType>
         <EntityType Name="ClassDetail">
           <Key>
@@ -487,6 +593,7 @@
           <Property Type="Boolean" Name="Active" />
           <NavigationProperty Name="DivDetails" Relationship="HomeModel.FK_DivDetails_ClassDetails" FromRole="ClassDetail" ToRole="DivDetail" />
           <NavigationProperty Name="SubjectMappings" Relationship="HomeModel.FK_SubjectMapping_ClassDetails" FromRole="ClassDetail" ToRole="SubjectMapping" />
+          <NavigationProperty Name="ActivityDetails" Relationship="HomeModel.FK_ActivityDetails_ActivityDetails" FromRole="ClassDetail" ToRole="ActivityDetail" />
         </EntityType>
         <Association Name="FK_DivDetails_ClassDetails">
           <End Type="HomeModel.ClassDetail" Role="ClassDetail" Multiplicity="0..1" />
@@ -508,6 +615,7 @@
           <Property Type="String" Name="SubjectName" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Type="Boolean" Name="Active" />
           <NavigationProperty Name="SubjectMappings" Relationship="HomeModel.FK_SubjectMapping_SubjectDetails" FromRole="SubjectDetail" ToRole="SubjectMapping" />
+          <NavigationProperty Name="ActivityDetails" Relationship="HomeModel.FK_ActivityDetails_SubjectDetails" FromRole="SubjectDetail" ToRole="ActivityDetail" />
         </EntityType>
         <EntityType Name="BloodGroup">
           <Key>
@@ -647,6 +755,80 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="ActivityDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Type="Decimal" Name="ClassID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="DivID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="ActivityName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ClassDetail" Relationship="HomeModel.FK_ActivityDetails_ActivityDetails" FromRole="ActivityDetail" ToRole="ClassDetail" />
+          <NavigationProperty Name="DivDetail" Relationship="HomeModel.FK_ActivityDetails_DivDetails" FromRole="ActivityDetail" ToRole="DivDetail" />
+          <Property Type="Decimal" Name="ExamID" Precision="18" Scale="0" />
+          <NavigationProperty Name="Exam" Relationship="HomeModel.FK_ActivityDetails_Exams" FromRole="ActivityDetail" ToRole="Exam" />
+          <Property Type="DateTime" Name="Date" />
+          <Property Type="Decimal" Name="TotalMarks" Precision="18" Scale="0" />
+          <Property Type="Decimal" Name="SubjectID" Precision="18" Scale="0" />
+          <NavigationProperty Name="SubjectDetail" Relationship="HomeModel.FK_ActivityDetails_SubjectDetails" FromRole="ActivityDetail" ToRole="SubjectDetail" />
+        </EntityType>
+        <Association Name="FK_ActivityDetails_ActivityDetails">
+          <End Type="HomeModel.ClassDetail" Role="ClassDetail" Multiplicity="1" />
+          <End Type="HomeModel.ActivityDetail" Role="ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetail">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_DivDetails">
+          <End Type="HomeModel.DivDetail" Role="DivDetail" Multiplicity="1" />
+          <End Type="HomeModel.ActivityDetail" Role="ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetail">
+              <PropertyRef Name="DivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Type="Decimal" Name="ID" Nullable="false" Precision="18" Scale="0" />
+          <Property Type="String" Name="Type" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Type="String" Name="ExamName" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="ActivityDetails" Relationship="HomeModel.FK_ActivityDetails_Exams" FromRole="Exam" ToRole="ActivityDetail" />
+        </EntityType>
+        <Association Name="FK_ActivityDetails_Exams">
+          <End Type="HomeModel.Exam" Role="Exam" Multiplicity="0..1" />
+          <End Type="HomeModel.ActivityDetail" Role="ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exam">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivityDetail">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_SubjectDetails">
+          <End Type="HomeModel.SubjectDetail" Role="SubjectDetail" Multiplicity="0..1" />
+          <End Type="HomeModel.ActivityDetail" Role="ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectDetail">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetail">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -775,6 +957,29 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <EntitySetMapping Name="ActivityDetails">
+            <EntityTypeMapping TypeName="HomeModel.ActivityDetail">
+              <MappingFragment StoreEntitySet="ActivityDetails">
+                <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+                <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+                <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+                <ScalarProperty Name="DivID" ColumnName="DivID" />
+                <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Exams">
+            <EntityTypeMapping TypeName="HomeModel.Exam">
+              <MappingFragment StoreEntitySet="Exams">
+                <ScalarProperty Name="ExamName" ColumnName="ExamName" />
+                <ScalarProperty Name="Type" ColumnName="Type" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
@@ -815,24 +1020,25 @@
         <AssociationConnector Association="HomeModel.FK_Exceptions_AppId1" >
           <ConnectorPoint PointX="1.0159615384615384" PointY="5.5" />
           <ConnectorPoint PointX="1.0159615384615384" PointY="4.2473453776041667" />
-          <ConnectorPoint PointX="6.1464009830729172" PointY="4.2473453776041659" />
-          <ConnectorPoint PointX="6.3130676497395832" PointY="4.2473453776041667" />
-          <ConnectorPoint PointX="6.4386402994791672" PointY="4.2473453776041659" />
-          <ConnectorPoint PointX="6.6053069661458332" PointY="4.2473453776041667" />
-          <ConnectorPoint PointX="6.958905983072917" PointY="4.2473453776041659" />
-          <ConnectorPoint PointX="7.125572649739583" PointY="4.2473453776041667" />
+          <ConnectorPoint PointX="3.1354166666666665" PointY="4.2473453776041659" />
+          <ConnectorPoint PointX="3.3020833333333335" PointY="4.2473453776041667" />
+          <ConnectorPoint PointX="6.072916666666667" PointY="4.2473453776041659" />
+          <ConnectorPoint PointX="6.3489608333333338" PointY="4.2473453776041667" />
           <ConnectorPoint PointX="8" PointY="4.2473453776041667" />
         </AssociationConnector>
         <AssociationConnector Association="HomeModel.FK_Exceptions_UserId1" >
-          <ConnectorPoint PointX="4.25" PointY="3.1942171809895838" />
-          <ConnectorPoint PointX="8" PointY="3.1942171809895838" />
+          <ConnectorPoint PointX="3.21875" PointY="3.3071907552083331" />
+          <ConnectorPoint PointX="3.21875" PointY="4.6236751888020837" />
+          <ConnectorPoint PointX="6.072916666666667" PointY="4.6236751888020828" />
+          <ConnectorPoint PointX="6.3489608333333338" PointY="4.6236751888020837" />
+          <ConnectorPoint PointX="8" PointY="4.6236751888020837" />
         </AssociationConnector>
         <EntityTypeShape EntityType="HomeModel.DivDetail" Width="1.5" PointX="6" PointY="0.75" Height="2.1725878906249996" />
         <EntityTypeShape EntityType="HomeModel.ClassDetail" Width="1.5" PointX="3.75" PointY="5" Height="1.7879850260416674" />
         <AssociationConnector Association="HomeModel.FK_DivDetails_ClassDetails" >
-          <ConnectorPoint PointX="5.25" PointY="5.9901432291666659" />
-          <ConnectorPoint PointX="6.5219736328125" PointY="5.9901432291666659" />
-          <ConnectorPoint PointX="6.5219736328125" PointY="3.114889322916667" />
+          <ConnectorPoint PointX="5.25" PointY="6.4483203532583495" />
+          <ConnectorPoint PointX="6.10156125" PointY="6.4483203532583495" />
+          <ConnectorPoint PointX="6.10156125" PointY="3.3071907552083331" />
         </AssociationConnector>
         <EntityTypeShape EntityType="HomeModel.SubjectDetail" Width="1.5" PointX="3.375" PointY="7.75" Height="1.5956835937499996" />
         <EntityTypeShape EntityType="HomeModel.BloodGroup" Width="1.5" PointX="9.375" PointY="7.75" Height="1.5956835937499996" />
@@ -843,27 +1049,25 @@
         </AssociationConnector>
         <EntityTypeShape EntityType="HomeModel.StudentDetail" Width="1.5" PointX="8.25" PointY="11.125" Height="4.4802050781250031" />
         <AssociationConnector Association="HomeModel.FK_StudentDetails_DivDetails" >
-          <ConnectorPoint PointX="7.04223931640625" PointY="3.114889322916667" />
-          <ConnectorPoint PointX="7.04223931640625" PointY="13.365102539062502" />
+          <ConnectorPoint PointX="6.238283125" PointY="3.3071907552083331" />
+          <ConnectorPoint PointX="6.238283125" PointY="13.365102539062502" />
           <ConnectorPoint PointX="8.25" PointY="13.365102539062502" />
         </AssociationConnector>
         <EntityTypeShape EntityType="HomeModel.SubjectMapping" Width="1.5" PointX="13.875" PointY="4" Height="3.1340950520833317" />
         <AssociationConnector Association="HomeModel.FK_SubjectMapping_ClassDetails" >
-          <ConnectorPoint PointX="5.25" PointY="6.4013216145833329" />
-          <ConnectorPoint PointX="6.958905983072917" PointY="6.401321614583332" />
-          <ConnectorPoint PointX="7.125572649739583" PointY="6.4013216145833329" />
-          <ConnectorPoint PointX="7.666666666666667" PointY="6.401321614583332" />
-          <ConnectorPoint PointX="7.833333333333333" PointY="6.4013216145833329" />
-          <ConnectorPoint PointX="13.875" PointY="6.4013216145833329" />
+          <ConnectorPoint PointX="5.25" PointY="6.1693938959447578" />
+          <ConnectorPoint PointX="6.0182279166666666" PointY="6.169393895944757" />
+          <ConnectorPoint PointX="6.3216164583333319" PointY="6.1693938959447578" />
+          <ConnectorPoint PointX="7.635416666666667" PointY="6.169393895944757" />
+          <ConnectorPoint PointX="7.802083333333333" PointY="6.1693938959447578" />
+          <ConnectorPoint PointX="13.416666666666666" PointY="6.169393895944757" />
+          <ConnectorPoint PointX="13.583333333333334" PointY="6.1693938959447578" />
+          <ConnectorPoint PointX="13.875" PointY="6.1693938959447578" />
         </AssociationConnector>
         <AssociationConnector Association="HomeModel.FK_SubjectMapping_DivDetails" >
-          <ConnectorPoint PointX="6.22973431640625" PointY="3.114889322916667" />
-          <ConnectorPoint PointX="6.22973431640625" PointY="5.7135677083333327" />
-          <ConnectorPoint PointX="6.4386402994791672" PointY="5.7135677083333318" />
-          <ConnectorPoint PointX="6.6053069661458332" PointY="5.7135677083333327" />
-          <ConnectorPoint PointX="6.958905983072917" PointY="5.7135677083333318" />
-          <ConnectorPoint PointX="7.125572649739583" PointY="5.7135677083333327" />
-          <ConnectorPoint PointX="13.875" PointY="5.7135677083333327" />
+          <ConnectorPoint PointX="7.5" PointY="1.65625" />
+          <ConnectorPoint PointX="14.625" PointY="1.65625" />
+          <ConnectorPoint PointX="14.625" PointY="4" />
         </AssociationConnector>
         <AssociationConnector Association="HomeModel.FK_SubjectMapping_FacultyDetails" >
           <ConnectorPoint PointX="13.125" PointY="6.9420475260416659" />
@@ -871,12 +1075,47 @@
         </AssociationConnector>
         <AssociationConnector Association="HomeModel.FK_SubjectMapping_SubjectDetails" >
           <ConnectorPoint PointX="4.125" PointY="7.75" />
-          <ConnectorPoint PointX="4.125" PointY="7.2302864583333317" />
-          <ConnectorPoint PointX="6.958905983072917" PointY="7.2302864583333308" />
-          <ConnectorPoint PointX="7.125572649739583" PointY="7.2302864583333317" />
-          <ConnectorPoint PointX="7.75" PointY="7.2302864583333317" />
-          <ConnectorPoint PointX="7.75" PointY="6.0574446614583328" />
-          <ConnectorPoint PointX="13.875" PointY="6.0574446614583328" />
+          <ConnectorPoint PointX="4.125" PointY="7.422587890625" />
+          <ConnectorPoint PointX="5.5" PointY="7.422587890625" />
+          <ConnectorPoint PointX="5.5" PointY="6.467021484375" />
+          <ConnectorPoint PointX="6.1549497916666667" PointY="6.4670214843749987" />
+          <ConnectorPoint PointX="6.3216164583333327" PointY="6.467021484375" />
+          <ConnectorPoint PointX="7.635416666666667" PointY="6.4670214843749987" />
+          <ConnectorPoint PointX="7.802083333333333" PointY="6.467021484375" />
+          <ConnectorPoint PointX="10.916666666666666" PointY="6.4670214843749987" />
+          <ConnectorPoint PointX="11.083333333333334" PointY="6.467021484375" />
+          <ConnectorPoint PointX="13.5" PointY="6.467021484375" />
+          <ConnectorPoint PointX="13.5" PointY="5.0534449479723786" />
+          <ConnectorPoint PointX="13.875" PointY="5.0534449479723786" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="HomeModel.ActivityDetail" Width="1.5" PointX="10.25" PointY="2.875" Height="2.1725878906250031" />
+        <AssociationConnector Association="HomeModel.FK_ActivityDetails_ActivityDetails" >
+          <ConnectorPoint PointX="5.25" PointY="5.532543974609375" />
+          <ConnectorPoint PointX="6.0182279166666666" PointY="5.5325439746093741" />
+          <ConnectorPoint PointX="6.3216164583333319" PointY="5.532543974609375" />
+          <ConnectorPoint PointX="10.25" PointY="5.532543974609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_ActivityDetails_DivDetails" >
+          <ConnectorPoint PointX="7.5" PointY="2.008792343750001" />
+          <ConnectorPoint PointX="11" PointY="2.008792343750001" />
+          <ConnectorPoint PointX="11" PointY="2.875" />
+        </AssociationConnector>
+        <EntityTypeShape EntityType="HomeModel.Exam" Width="1.5" PointX="6.375" PointY="6.875" Height="1.7879850260416665" />
+        <AssociationConnector Association="HomeModel.FK_ActivityDetails_Exams" >
+          <ConnectorPoint PointX="7.71875" PointY="6.875" />
+          <ConnectorPoint PointX="7.71875" PointY="5.8822214352770672" />
+          <ConnectorPoint PointX="10.25" PointY="5.8822214352770672" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_ActivityDetails_SubjectDetails" >
+          <ConnectorPoint PointX="4.875" PointY="8.7401432291666659" />
+          <ConnectorPoint PointX="5.875" PointY="8.7401432291666659" />
+          <ConnectorPoint PointX="5.875" PointY="6.625" />
+          <ConnectorPoint PointX="6.1549497916666667" PointY="6.6249999999999991" />
+          <ConnectorPoint PointX="6.3216164583333327" PointY="6.625" />
+          <ConnectorPoint PointX="7.635416666666667" PointY="6.6249999999999991" />
+          <ConnectorPoint PointX="7.802083333333333" PointY="6.625" />
+          <ConnectorPoint PointX="11" PointY="6.625" />
+          <ConnectorPoint PointX="11" PointY="6.201396484375" />
         </AssociationConnector>
         </Diagram>
     </Diagrams>
