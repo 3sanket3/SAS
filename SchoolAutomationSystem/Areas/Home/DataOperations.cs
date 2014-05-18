@@ -7,6 +7,7 @@ using System.Web.Mvc;
 using System.Runtime.Serialization.Json;
 using System.IO;
 using System.Text;
+using SchoolAutomationSystem.Models;
 
 namespace SchoolAutomationSystem.Areas.Home
 {

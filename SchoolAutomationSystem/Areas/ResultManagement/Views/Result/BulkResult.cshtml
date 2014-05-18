@@ -1,0 +1,159 @@
+﻿@{
+    ViewBag.Title = "Bulk Result";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+@model SchoolAutomationSystem.Areas.ResultManagement.Models.BulkResultViewModel
+<div class="row">
+    <div class="main-content .col-xs-18 .col-sm-12">
+        <h1 class="mrgn-left10">
+            Welcome User</h1>
+        <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+            @using (Html.BeginForm(FormMethod.Post))
+            {
+                
+                <div class="fieldset-content">
+                    <fieldset class="scheduler-border">
+                        <legend class="scheduler-border"></legend>
+                        <div class="forms">
+                        <div class="form-inline">
+                        <div class="form-group">
+                                @Html.Label("Class")
+                            
+                                @Html.DropDownList("Model.ClassID", Model.GetAllClassesSelectList(Convert.ToInt16(Model.ClassID)), new { @class = "" })
+                        </div>
+                        <div class="form-group">
+                                @Html.Label("Div")
+                            
+                                @Html.DropDownList("Model.DivID", Model.GetAllDivSelectList(Convert.ToInt16(Model.DivID)), new { @class = ""})
+                        </div>
+                           <div class="form-group">
+                                @Html.Label("Exam")
+                            
+                                @Html.DropDownList("Model.ExamID", Model.getExamList(Convert.ToInt16(Model.ExamID)), new { @class = "" })
+                        </div>
+
+
+                        <div class="form-group">
+                                @Html.Label("Subject")
+                            
+                                @Html.DropDownList("Model.SubjectID", Model.GetSubjectsSelectList(Model.SubjectID), new { @class = "" })
+                        </div>
+                        @Html.Hidden("SeachedClassID", string.Empty, new { @id = "SeachedClassID" })
+                        @Html.Hidden("SeachedDivID", string.Empty, new { @id = "SeachedDivID" })
+                        @Html.Hidden("SeachedExamID", string.Empty, new { @id = "SeachedExamID" })
+                        @Html.Hidden("SeachedSubjectID", string.Empty, new { @id = "SeachedSubjectID" })
+                        @Html.Hidden("SeachedActivityID", string.Empty, new { @id = "SeachedActivityID" })
+                        
+                            <div class="form-group double-button">
+                                <button id="Search" class="btn btn-default " >Search</button>
+                                
+                                <button id="reset" type="reset" class="btn btn-default ">
+                                    Reset</button>
+                                    </div>
+                             @Html.Hidden("Action", null, new { id = "Action" })
+                        </div>
+                        </div>
+                        
+                    </fieldset>
+
+                    <div id = "StudentProcessing">
+                    </div>
+                    <div id="myGrid">
+                              
+                        @if (Model.bulkResultData!=null && Model.bulkResultData.Count > 0)
+                        {
+                            var grid = new WebGrid(Model.bulkResultData, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
+                            @grid.GetHtml(
+    tableStyle: "class_table mrgn-auto border",
+        headerStyle: "",
+        rowStyle: "odd",
+            alternatingRowStyle: "even",
+            selectedRowStyle: "",
+    columns: grid.Columns(
+
+          grid.Column("RollNo", "Roll No"),
+      grid.Column("Name", "Student Name"),
+     
+      grid.Column("Marks", "Marks", format: (item) => MvcHtmlString.Create("<input type='text' id = marks_" + item.StudentID+" value = "+item.Marks+" />"))
+      @*grid.Column("Marks", "Marks", format:(item) => @<span> Html.TextBox("Marks",@item.Marks.ToString())</span>)*@
+
+    )
+    )
+                        }
+           
+                    </div>
+                     <div class="form-group double-button">
+                                <button id="SaveMarks" class="btn btn-default " >Save Marks</button>
+
+                               <div id= "Markssaved">Marks Saved</div>
+                                
+                     </div>
+                </div>
+        
+}
+</div>
+</div></div>
+            <script type="text/javascript">
+
+
+
+
+                $(document).ready(function () {
+                    $("#Markssaved").hide();
+
+                    $("#SaveMarks").click(function (e) {
+
+                        var ArrayID = $("input[id^='marks']");
+                        var marksString = "";
+                        var marks = "";
+                        for (var i = 0; i < ArrayID.length; i++) {
+                            marks = $("#" + ArrayID[i].id)[0].value == "" ? "0" : $("#" + ArrayID[i].id)[0].value;
+                            var tempID = ArrayID[i].id.split("_");
+                            marksString = marksString + marks + "_" + tempID[1] + ",";
+                        }
+
+                        var url = window.location.href;
+                        url = url.substring(0, url.lastIndexOf("/Result"));
+                        url = url + "/Result/SaveBulkMarks";
+
+                        e.preventDefault();
+                        $.ajax({
+                            url: url,
+                            type: "POST",
+                            data: { MarksString: marksString, ClassID: $("#Model_ClassID")[0].value, DivID: $("#Model_DivID")[0].value, ExamID: $("#Model_ExamID")[0].value, SubjectID: $("#Model_SubjectID")[0].value },
+                            success: function () {
+                                $('#Markssaved').fadeIn(1000).delay(3000).fadeOut(1000);
+                            },
+                            error: function (xhr, status, error) {
+                            }
+                        });
+
+                        return false;
+                    });
+
+
+                    if ($("#Hidden_KeepViewOpen")[0].value == "Y") {
+                        editClick(event, 0);
+                    }
+
+                    $("#AddFacultyDetails1").click(function () {
+                        $("#Action")[0].value = "AddFacultyDetails";
+                        $('form')[0].submit();
+                    });
+
+                    $("#Search").click(function () {
+                        $("#Action")[0].value = "Search";
+                        debugger;
+                        $("#SeachedClassID")[0].value = $("#Model_ClassID")[0].value;
+                        $("#SeachedDivID")[0].value = $("#Model_DivID")[0].value;
+                        $("#SeachedExamID")[0].value = $("#Model_ExamID")[0].value;
+                        $("#SeachedSubjectID")[0].value = $("#Model_SubjectID")[0].value;
+                        $("#SeachedActivityID")[0].value = $("#Model_ActivityID")[0].value;
+                        $('form')[0].submit();
+                    });
+
+
+                });
+
+
+            </script>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using SchoolAutomationSystem.Models;
 namespace SchoolAutomationSystem.Areas.Home.Models
 {
     public class LoginDetails

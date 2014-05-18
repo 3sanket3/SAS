@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Collections;
-
+using SchoolAutomationSystem.Models;
 namespace SchoolAutomationSystem.Areas.Home.Models
 {
     public class ClassDetailViewModel

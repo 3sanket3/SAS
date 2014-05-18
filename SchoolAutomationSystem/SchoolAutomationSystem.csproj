@@ -72,7 +72,7 @@
     <Compile Include="Areas\Home\Models\ClassDetailViewModel.cs" />
     <Compile Include="Areas\Home\Models\DivDetailViewModel.cs" />
     <Compile Include="Areas\Home\Models\FacultyDetailsViewModel.cs" />
-    <Compile Include="Areas\Home\Models\Home.Designer.cs">
+    <Compile Include="Models\Home.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Home.edmx</DependentUpon>
@@ -81,6 +81,10 @@
     <Compile Include="Areas\Home\Models\StudentDetailsViewModel.cs" />
     <Compile Include="Areas\Home\Models\SubjectDetailViewModel.cs" />
     <Compile Include="Areas\Home\Models\SubjectMappingViewModel.cs" />
+    <Compile Include="Areas\ResultManagement\Controllers\ResultController.cs" />
+    <Compile Include="Areas\ResultManagement\DataOperations.cs" />
+    <Compile Include="Areas\ResultManagement\Models\BulkResultViewModel.cs" />
+    <Compile Include="Areas\ResultManagement\ResultManagementAreaRegistration.cs" />
     <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\IndexController.cs" />
     <Compile Include="ErrorOperations.cs" />
@@ -192,6 +196,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Areas\Home\Views\Shared\" />
+    <Folder Include="Areas\ResultManagement\Views\Shared\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
@@ -206,7 +211,7 @@
     <Content Include="Areas\Home\Views\Home\Login.cshtml" />
   </ItemGroup>
   <ItemGroup>
-    <EntityDeploy Include="Areas\Home\Models\Home.edmx">
+    <EntityDeploy Include="Models\Home.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>Home.Designer.cs</LastGenOutput>
     </EntityDeploy>
@@ -243,6 +248,12 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Areas\Home\Views\Registration\ActivityRegistration.cshtml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\ResultManagement\Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Areas\ResultManagement\Views\Result\BulkResult.cshtml" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />

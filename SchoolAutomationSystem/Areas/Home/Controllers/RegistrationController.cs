@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using SchoolAutomationSystem.Areas.Home.Models;
+using SchoolAutomationSystem.Models;
 namespace SchoolAutomationSystem.Areas.Home.Controllers
 {
     public class RegistrationController : Controller

@@ -18,25 +18,31 @@ using System.Runtime.Serialization;
 [assembly: EdmSchemaAttribute()]
 #region EDM Relationship Metadata
 
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_Login_Login", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Areas.Home.Models.Login), "Login1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Login), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_SecurityQuestion_Id", "SecurityQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Areas.Home.Models.SecurityQuestion), "SecurityQuestion1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.SecurityQuestion), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_AppId1", "Application", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Application), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ErrorLog), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_UserId1", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Login), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ErrorLog), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_DivDetails_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.ClassDetail), "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_FacultyDetails_BloodGroup", "BloodGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.BloodGroup), "FacultyDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.FacultyDetail), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_StudentDetails_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), "StudentDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.StudentDetail), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.ClassDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectMapping), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectMapping), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_FacultyDetails", "FacultyDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.FacultyDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectMapping), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_SubjectDetails", "SubjectDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectMapping), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_ActivityDetails_ActivityDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Areas.Home.Models.ClassDetail), "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ActivityDetail), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_ActivityDetails_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Areas.Home.Models.DivDetail), "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ActivityDetail), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_ActivityDetails_Exams", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.Exam), "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ActivityDetail), true)]
-[assembly: EdmRelationshipAttribute("HomeModel", "FK_ActivityDetails_SubjectDetails", "SubjectDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Areas.Home.Models.SubjectDetail), "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Areas.Home.Models.ActivityDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Login_Login", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.Login), "Login1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.Login), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SecurityQuestion_Id", "SecurityQuestion", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.SecurityQuestion), "SecurityQuestion1", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.SecurityQuestion), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_AppId1", "Application", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.Application), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.ErrorLog), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Exceptions_UserId1", "Login", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.Login), "ErrorLog", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.ErrorLog), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_DivDetails_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.ClassDetail), "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.DivDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_FacultyDetails_BloodGroup", "BloodGroup", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.BloodGroup), "FacultyDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.FacultyDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_StudentDetails_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.DivDetail), "StudentDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.StudentDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.ClassDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.SubjectMapping), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.DivDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.SubjectMapping), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_FacultyDetails", "FacultyDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.FacultyDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.SubjectMapping), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_SubjectMapping_SubjectDetails", "SubjectDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.SubjectDetail), "SubjectMapping", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.SubjectMapping), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_ActivityDetails_ActivityDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.ClassDetail), "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.ActivityDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_ActivityDetails_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.DivDetail), "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.ActivityDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_ActivityDetails_Exams", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.Exam), "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.ActivityDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_ActivityDetails_SubjectDetails", "SubjectDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.SubjectDetail), "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.ActivityDetail), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Result_ActivityDetails", "ActivityDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.ZeroOrOne, typeof(SchoolAutomationSystem.Models.ActivityDetail), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.Result), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Result_ClassDetails", "ClassDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.ClassDetail), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.Result), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Result_DivDetails", "DivDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.DivDetail), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.Result), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Result_Exams", "Exam", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.Exam), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.Result), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Result_SubjectDetails", "SubjectDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.SubjectDetail), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.Result), true)]
+[assembly: EdmRelationshipAttribute("HomeModel", "FK_Result_SubjectDetails1", "StudentDetail", System.Data.Metadata.Edm.RelationshipMultiplicity.One, typeof(SchoolAutomationSystem.Models.StudentDetail), "Result", System.Data.Metadata.Edm.RelationshipMultiplicity.Many, typeof(SchoolAutomationSystem.Models.Result), true)]
 
 #endregion
 
-namespace SchoolAutomationSystem.Areas.Home.Models
+namespace SchoolAutomationSystem.Models
 {
     #region Contexts
     
@@ -291,6 +297,22 @@ namespace SchoolAutomationSystem.Areas.Home.Models
             }
         }
         private ObjectSet<Exam> _Exams;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Result> Results
+        {
+            get
+            {
+                if ((_Results == null))
+                {
+                    _Results = base.CreateObjectSet<Result>("Results");
+                }
+                return _Results;
+            }
+        }
+        private ObjectSet<Result> _Results;
 
         #endregion
         #region AddTo Methods
@@ -397,6 +419,14 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         public void AddToExams(Exam exam)
         {
             base.AddObject("Exams", exam);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Results EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToResults(Result result)
+        {
+            base.AddObject("Results", result);
         }
 
         #endregion
@@ -785,6 +815,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_ActivityDetails", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("HomeModel.FK_Result_ActivityDetails", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("HomeModel.FK_Result_ActivityDetails", "Result", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1165,6 +1217,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_ClassDetails", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("HomeModel.FK_Result_ClassDetails", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("HomeModel.FK_Result_ClassDetails", "Result", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -1396,6 +1470,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ActivityDetail>("HomeModel.FK_ActivityDetails_DivDetails", "ActivityDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_DivDetails", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("HomeModel.FK_Result_DivDetails", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("HomeModel.FK_Result_DivDetails", "Result", value);
                 }
             }
         }
@@ -1802,6 +1898,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ActivityDetail>("HomeModel.FK_ActivityDetails_Exams", "ActivityDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_Exams", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("HomeModel.FK_Result_Exams", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("HomeModel.FK_Result_Exams", "Result", value);
                 }
             }
         }
@@ -2446,6 +2564,470 @@ namespace SchoolAutomationSystem.Areas.Home.Models
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="HomeModel", Name="Result")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Result : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Result object.
+        /// </summary>
+        /// <param name="id">Initial value of the ID property.</param>
+        /// <param name="classID">Initial value of the ClassID property.</param>
+        /// <param name="divID">Initial value of the DivID property.</param>
+        /// <param name="subjectID">Initial value of the SubjectID property.</param>
+        /// <param name="examID">Initial value of the ExamID property.</param>
+        /// <param name="studentID">Initial value of the StudentID property.</param>
+        public static Result CreateResult(global::System.Decimal id, global::System.Decimal classID, global::System.Decimal divID, global::System.Decimal subjectID, global::System.Decimal examID, global::System.Decimal studentID)
+        {
+            Result result = new Result();
+            result.ID = id;
+            result.ClassID = classID;
+            result.DivID = divID;
+            result.SubjectID = subjectID;
+            result.ExamID = examID;
+            result.StudentID = studentID;
+            return result;
+        }
+
+        #endregion
+        #region Primitive Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ID
+        {
+            get
+            {
+                return _ID;
+            }
+            set
+            {
+                if (_ID != value)
+                {
+                    OnIDChanging(value);
+                    ReportPropertyChanging("ID");
+                    _ID = StructuralObject.SetValidValue(value);
+                    ReportPropertyChanged("ID");
+                    OnIDChanged();
+                }
+            }
+        }
+        private global::System.Decimal _ID;
+        partial void OnIDChanging(global::System.Decimal value);
+        partial void OnIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ClassID
+        {
+            get
+            {
+                return _ClassID;
+            }
+            set
+            {
+                OnClassIDChanging(value);
+                ReportPropertyChanging("ClassID");
+                _ClassID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ClassID");
+                OnClassIDChanged();
+            }
+        }
+        private global::System.Decimal _ClassID;
+        partial void OnClassIDChanging(global::System.Decimal value);
+        partial void OnClassIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal DivID
+        {
+            get
+            {
+                return _DivID;
+            }
+            set
+            {
+                OnDivIDChanging(value);
+                ReportPropertyChanging("DivID");
+                _DivID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("DivID");
+                OnDivIDChanged();
+            }
+        }
+        private global::System.Decimal _DivID;
+        partial void OnDivIDChanging(global::System.Decimal value);
+        partial void OnDivIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal SubjectID
+        {
+            get
+            {
+                return _SubjectID;
+            }
+            set
+            {
+                OnSubjectIDChanging(value);
+                ReportPropertyChanging("SubjectID");
+                _SubjectID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("SubjectID");
+                OnSubjectIDChanged();
+            }
+        }
+        private global::System.Decimal _SubjectID;
+        partial void OnSubjectIDChanging(global::System.Decimal value);
+        partial void OnSubjectIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal ExamID
+        {
+            get
+            {
+                return _ExamID;
+            }
+            set
+            {
+                OnExamIDChanging(value);
+                ReportPropertyChanging("ExamID");
+                _ExamID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ExamID");
+                OnExamIDChanged();
+            }
+        }
+        private global::System.Decimal _ExamID;
+        partial void OnExamIDChanging(global::System.Decimal value);
+        partial void OnExamIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> ActivityID
+        {
+            get
+            {
+                return _ActivityID;
+            }
+            set
+            {
+                OnActivityIDChanging(value);
+                ReportPropertyChanging("ActivityID");
+                _ActivityID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("ActivityID");
+                OnActivityIDChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _ActivityID;
+        partial void OnActivityIDChanging(Nullable<global::System.Decimal> value);
+        partial void OnActivityIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Decimal StudentID
+        {
+            get
+            {
+                return _StudentID;
+            }
+            set
+            {
+                OnStudentIDChanging(value);
+                ReportPropertyChanging("StudentID");
+                _StudentID = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("StudentID");
+                OnStudentIDChanged();
+            }
+        }
+        private global::System.Decimal _StudentID;
+        partial void OnStudentIDChanging(global::System.Decimal value);
+        partial void OnStudentIDChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public Nullable<global::System.Decimal> Marks
+        {
+            get
+            {
+                return _Marks;
+            }
+            set
+            {
+                OnMarksChanging(value);
+                ReportPropertyChanging("Marks");
+                _Marks = StructuralObject.SetValidValue(value);
+                ReportPropertyChanged("Marks");
+                OnMarksChanged();
+            }
+        }
+        private Nullable<global::System.Decimal> _Marks;
+        partial void OnMarksChanging(Nullable<global::System.Decimal> value);
+        partial void OnMarksChanged();
+
+        #endregion
+    
+        #region Navigation Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_ActivityDetails", "ActivityDetail")]
+        public ActivityDetail ActivityDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ActivityDetail>("HomeModel.FK_Result_ActivityDetails", "ActivityDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ActivityDetail>("HomeModel.FK_Result_ActivityDetails", "ActivityDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ActivityDetail> ActivityDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ActivityDetail>("HomeModel.FK_Result_ActivityDetails", "ActivityDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ActivityDetail>("HomeModel.FK_Result_ActivityDetails", "ActivityDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_ClassDetails", "ClassDetail")]
+        public ClassDetail ClassDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ClassDetail>("HomeModel.FK_Result_ClassDetails", "ClassDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ClassDetail>("HomeModel.FK_Result_ClassDetails", "ClassDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<ClassDetail> ClassDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<ClassDetail>("HomeModel.FK_Result_ClassDetails", "ClassDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<ClassDetail>("HomeModel.FK_Result_ClassDetails", "ClassDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_DivDetails", "DivDetail")]
+        public DivDetail DivDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DivDetail>("HomeModel.FK_Result_DivDetails", "DivDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DivDetail>("HomeModel.FK_Result_DivDetails", "DivDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<DivDetail> DivDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<DivDetail>("HomeModel.FK_Result_DivDetails", "DivDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<DivDetail>("HomeModel.FK_Result_DivDetails", "DivDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_Exams", "Exam")]
+        public Exam Exam
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("HomeModel.FK_Result_Exams", "Exam").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("HomeModel.FK_Result_Exams", "Exam").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<Exam> ExamReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<Exam>("HomeModel.FK_Result_Exams", "Exam");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<Exam>("HomeModel.FK_Result_Exams", "Exam", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_SubjectDetails", "SubjectDetail")]
+        public SubjectDetail SubjectDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SubjectDetail>("HomeModel.FK_Result_SubjectDetails", "SubjectDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SubjectDetail>("HomeModel.FK_Result_SubjectDetails", "SubjectDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<SubjectDetail> SubjectDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<SubjectDetail>("HomeModel.FK_Result_SubjectDetails", "SubjectDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<SubjectDetail>("HomeModel.FK_Result_SubjectDetails", "SubjectDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_SubjectDetails1", "StudentDetail")]
+        public StudentDetail StudentDetail
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StudentDetail>("HomeModel.FK_Result_SubjectDetails1", "StudentDetail").Value;
+            }
+            set
+            {
+                ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StudentDetail>("HomeModel.FK_Result_SubjectDetails1", "StudentDetail").Value = value;
+            }
+        }
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [BrowsableAttribute(false)]
+        [DataMemberAttribute()]
+        public EntityReference<StudentDetail> StudentDetailReference
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedReference<StudentDetail>("HomeModel.FK_Result_SubjectDetails1", "StudentDetail");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedReference<StudentDetail>("HomeModel.FK_Result_SubjectDetails1", "StudentDetail", value);
+                }
+            }
+        }
+
+        #endregion
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
     [EdmEntityTypeAttribute(NamespaceName="HomeModel", Name="SecurityQuestion")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
@@ -3077,6 +3659,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 }
             }
         }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_SubjectDetails1", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("HomeModel.FK_Result_SubjectDetails1", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("HomeModel.FK_Result_SubjectDetails1", "Result", value);
+                }
+            }
+        }
 
         #endregion
     }
@@ -3224,6 +3828,28 @@ namespace SchoolAutomationSystem.Areas.Home.Models
                 if ((value != null))
                 {
                     ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<ActivityDetail>("HomeModel.FK_ActivityDetails_SubjectDetails", "ActivityDetail", value);
+                }
+            }
+        }
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [XmlIgnoreAttribute()]
+        [SoapIgnoreAttribute()]
+        [DataMemberAttribute()]
+        [EdmRelationshipNavigationPropertyAttribute("HomeModel", "FK_Result_SubjectDetails", "Result")]
+        public EntityCollection<Result> Results
+        {
+            get
+            {
+                return ((IEntityWithRelationships)this).RelationshipManager.GetRelatedCollection<Result>("HomeModel.FK_Result_SubjectDetails", "Result");
+            }
+            set
+            {
+                if ((value != null))
+                {
+                    ((IEntityWithRelationships)this).RelationshipManager.InitializeRelatedCollection<Result>("HomeModel.FK_Result_SubjectDetails", "Result", value);
                 }
             }
         }

@@ -18,7 +18,7 @@
                         <div class="form-group">
                                 @Html.Label("Subject Name")
                             
-                                @Html.TextBox("Model.SubjectName", Model.SubjectName == null ? string.Empty : Model.SubjectName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Subject'" })
+                                @Html.TextBox("Model.SubjectName", Model.SubjectName == null ? string.Empty : Model.SubjectName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Subject'" , id="abcd"})
                         </div>
                           
                             @Html.Hidden("Model.ID", Model.ID, new { id = "Model_ID" })
