@@ -34,7 +34,12 @@ namespace SchoolAutomationSystem.Areas.ResultManagement.Models
         {
             return repository.GetSubjectsSelectList(selectedValues);
         }
-        
+
+
+        public SelectList GetActivitySelectList(int selectedValues)
+        {
+            return repository.GetActivitySelectList(selectedValues);
+        }
     }
 
     public class ListBulkResultData

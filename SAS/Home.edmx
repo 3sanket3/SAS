@@ -1,0 +1,1437 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="HomeModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="HomeModelStoreContainer">
+          <EntitySet Name="ActivityDetails" EntityType="HomeModel.Store.ActivityDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Application" EntityType="HomeModel.Store.Application" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="BloodGroup" EntityType="HomeModel.Store.BloodGroup" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ClassDetails" EntityType="HomeModel.Store.ClassDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="DivDetails" EntityType="HomeModel.Store.DivDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="ErrorLog" EntityType="HomeModel.Store.ErrorLog" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Exams" EntityType="HomeModel.Store.Exams" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="FacultyDetails" EntityType="HomeModel.Store.FacultyDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Login" EntityType="HomeModel.Store.Login" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="Result" EntityType="HomeModel.Store.Result" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SecurityQuestion" EntityType="HomeModel.Store.SecurityQuestion" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="StudentDetails" EntityType="HomeModel.Store.StudentDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SubjectDetails" EntityType="HomeModel.Store.SubjectDetails" store:Type="Tables" Schema="dbo" />
+          <EntitySet Name="SubjectMapping" EntityType="HomeModel.Store.SubjectMapping" store:Type="Tables" Schema="dbo" />
+          <AssociationSet Name="FK_ActivityDetails_ActivityDetails" Association="HomeModel.Store.FK_ActivityDetails_ActivityDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_DivDetails" Association="HomeModel.Store.FK_ActivityDetails_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_Exams" Association="HomeModel.Store.FK_ActivityDetails_Exams">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_SubjectDetails" Association="HomeModel.Store.FK_ActivityDetails_SubjectDetails">
+            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DivDetails_ClassDetails" Association="HomeModel.Store.FK_DivDetails_ClassDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="DivDetails" EntitySet="DivDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exceptions_AppId" Association="HomeModel.Store.FK_Exceptions_AppId">
+            <End Role="Application" EntitySet="Application" />
+            <End Role="ErrorLog" EntitySet="ErrorLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exceptions_UserId" Association="HomeModel.Store.FK_Exceptions_UserId">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="ErrorLog" EntitySet="ErrorLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacultyDetails_BloodGroup" Association="HomeModel.Store.FK_FacultyDetails_BloodGroup">
+            <End Role="BloodGroup" EntitySet="BloodGroup" />
+            <End Role="FacultyDetails" EntitySet="FacultyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Login" Association="HomeModel.Store.FK_Login_Login">
+            <End Role="Login" EntitySet="Login" />
+            <End Role="Login1" EntitySet="Login" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_ActivityDetails" Association="HomeModel.Store.FK_Result_ActivityDetails">
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_ClassDetails" Association="HomeModel.Store.FK_Result_ClassDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_DivDetails" Association="HomeModel.Store.FK_Result_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_Exams" Association="HomeModel.Store.FK_Result_Exams">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_SubjectDetails" Association="HomeModel.Store.FK_Result_SubjectDetails">
+            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_SubjectDetails1" Association="HomeModel.Store.FK_Result_SubjectDetails1">
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+            <End Role="Result" EntitySet="Result" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecurityQuestion_Id" Association="HomeModel.Store.FK_SecurityQuestion_Id">
+            <End Role="SecurityQuestion" EntitySet="SecurityQuestion" />
+            <End Role="SecurityQuestion1" EntitySet="SecurityQuestion" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_DivDetails" Association="HomeModel.Store.FK_StudentDetails_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectMapping_ClassDetails" Association="HomeModel.Store.FK_SubjectMapping_ClassDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="SubjectMapping" EntitySet="SubjectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectMapping_DivDetails" Association="HomeModel.Store.FK_SubjectMapping_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="SubjectMapping" EntitySet="SubjectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectMapping_FacultyDetails" Association="HomeModel.Store.FK_SubjectMapping_FacultyDetails">
+            <End Role="FacultyDetails" EntitySet="FacultyDetails" />
+            <End Role="SubjectMapping" EntitySet="SubjectMapping" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectMapping_SubjectDetails" Association="HomeModel.Store.FK_SubjectMapping_SubjectDetails">
+            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+            <End Role="SubjectMapping" EntitySet="SubjectMapping" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ActivityDetails">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="numeric" Nullable="false" />
+          <Property Name="DivID" Type="numeric" Nullable="false" />
+          <Property Name="ActivityName" Type="varchar" MaxLength="50" />
+          <Property Name="ExamID" Type="numeric" />
+          <Property Name="Date" Type="date" />
+          <Property Name="TotalMarks" Type="numeric" />
+          <Property Name="SubjectID" Type="numeric" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="ApplicationName" Type="varchar" MaxLength="50" />
+          <Property Name="Id" Type="numeric" Nullable="false" />
+        </EntityType>
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="ClassDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="DivDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Div" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+          <Property Name="ClassId" Type="numeric" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ExceptionMessage" Type="varchar" MaxLength="200" />
+          <Property Name="AdditionMessage" Type="varchar" MaxLength="2000" />
+          <Property Name="CreatedOn" Type="datetime" />
+          <Property Name="ModifiedOn" Type="datetime" />
+          <Property Name="UserInfo" Type="numeric" />
+          <Property Name="AppId" Type="numeric" />
+        </EntityType>
+        <EntityType Name="Exams">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" />
+          <Property Name="Type" Type="varchar" MaxLength="50" />
+          <Property Name="ExamName" Type="varchar" MaxLength="50" />
+        </EntityType>
+        <EntityType Name="FacultyDetails">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="Password" Type="varchar" MaxLength="50" />
+          <Property Name="EmailId" Type="varchar" MaxLength="50" />
+          <Property Name="BirthDate" Type="varchar" MaxLength="10" />
+          <Property Name="PhoneNo" Type="numeric" Precision="10" />
+          <Property Name="BloodGroupId" Type="numeric" />
+          <Property Name="Address" Type="varchar" MaxLength="500" />
+          <Property Name="FacultyUniqueName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Login_Id" />
+          </Key>
+          <Property Name="Login_Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="nvarchar" MaxLength="15" />
+          <Property Name="Password" Type="nvarchar" MaxLength="20" />
+          <Property Name="Security_Question_Id" Type="numeric" />
+          <Property Name="Security_Ans" Type="nvarchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="numeric" Nullable="false" />
+          <Property Name="DivID" Type="numeric" Nullable="false" />
+          <Property Name="SubjectID" Type="numeric" Nullable="false" />
+          <Property Name="ExamID" Type="numeric" Nullable="false" />
+          <Property Name="ActivityID" Type="numeric" />
+          <Property Name="StudentID" Type="numeric" Nullable="false" />
+          <Property Name="Marks" Type="numeric" />
+        </EntityType>
+        <EntityType Name="SecurityQuestion">
+          <Key>
+            <PropertyRef Name="Security_Question_Id" />
+          </Key>
+          <Property Name="Security_Question_Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="Security_Question" Type="nvarchar" MaxLength="200" />
+        </EntityType>
+        <EntityType Name="StudentDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="GRNo" Type="numeric" Precision="10" />
+          <Property Name="RollNo" Type="numeric" Precision="4" />
+          <Property Name="FirstName" Type="varchar" MaxLength="50" />
+          <Property Name="LastName" Type="varchar" MaxLength="50" />
+          <Property Name="MiddleName" Type="varchar" MaxLength="50" />
+          <Property Name="ClassId" Type="numeric" />
+          <Property Name="DivId" Type="numeric" />
+          <Property Name="Gender" Type="varchar" MaxLength="50" />
+          <Property Name="BloodGroup" Type="varchar" MaxLength="50" />
+          <Property Name="Address" Type="varchar" MaxLength="200" />
+          <Property Name="PhoneNo" Type="numeric" />
+          <Property Name="BirthDate" Type="date" />
+          <Property Name="PFName" Type="varchar" MaxLength="50" />
+          <Property Name="PMName" Type="varchar" MaxLength="50" />
+          <Property Name="PLName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="SubjectDetails">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="varchar" MaxLength="50" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <EntityType Name="SubjectMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="numeric" Nullable="false" StoreGeneratedPattern="Identity" />
+          <Property Name="ClassId" Type="numeric" />
+          <Property Name="DivId" Type="numeric" />
+          <Property Name="SubjectId" Type="numeric" />
+          <Property Name="FacultyId" Type="numeric" />
+          <Property Name="IsClassTeacher" Type="bit" />
+          <Property Name="Active" Type="bit" />
+        </EntityType>
+        <Association Name="FK_ActivityDetails_ActivityDetails">
+          <End Role="ClassDetails" Type="HomeModel.Store.ClassDetails" Multiplicity="1" />
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.Store.DivDetails" Multiplicity="1" />
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="DivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_Exams">
+          <End Role="Exams" Type="HomeModel.Store.Exams" Multiplicity="0..1" />
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_SubjectDetails">
+          <End Role="SubjectDetails" Type="HomeModel.Store.SubjectDetails" Multiplicity="0..1" />
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DivDetails_ClassDetails">
+          <End Role="ClassDetails" Type="HomeModel.Store.ClassDetails" Multiplicity="0..1" />
+          <End Role="DivDetails" Type="HomeModel.Store.DivDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DivDetails">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exceptions_AppId">
+          <End Role="Application" Type="HomeModel.Store.Application" Multiplicity="0..1" />
+          <End Role="ErrorLog" Type="HomeModel.Store.ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exceptions_UserId">
+          <End Role="Login" Type="HomeModel.Store.Login" Multiplicity="0..1" />
+          <End Role="ErrorLog" Type="HomeModel.Store.ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Login_Id" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacultyDetails_BloodGroup">
+          <End Role="BloodGroup" Type="HomeModel.Store.BloodGroup" Multiplicity="0..1" />
+          <End Role="FacultyDetails" Type="HomeModel.Store.FacultyDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FacultyDetails">
+              <PropertyRef Name="BloodGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Login">
+          <End Role="Login" Type="HomeModel.Store.Login" Multiplicity="1" />
+          <End Role="Login1" Type="HomeModel.Store.Login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Login_Id" />
+            </Principal>
+            <Dependent Role="Login1">
+              <PropertyRef Name="Login_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_ActivityDetails">
+          <End Role="ActivityDetails" Type="HomeModel.Store.ActivityDetails" Multiplicity="0..1" />
+          <End Role="Result" Type="HomeModel.Store.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_ClassDetails">
+          <End Role="ClassDetails" Type="HomeModel.Store.ClassDetails" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Store.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.Store.DivDetails" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Store.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="DivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_Exams">
+          <End Role="Exams" Type="HomeModel.Store.Exams" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Store.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_SubjectDetails">
+          <End Role="SubjectDetails" Type="HomeModel.Store.SubjectDetails" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Store.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_SubjectDetails1">
+          <End Role="StudentDetails" Type="HomeModel.Store.StudentDetails" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Store.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecurityQuestion_Id">
+          <End Role="SecurityQuestion" Type="HomeModel.Store.SecurityQuestion" Multiplicity="1" />
+          <End Role="SecurityQuestion1" Type="HomeModel.Store.SecurityQuestion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityQuestion">
+              <PropertyRef Name="Security_Question_Id" />
+            </Principal>
+            <Dependent Role="SecurityQuestion1">
+              <PropertyRef Name="Security_Question_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.Store.DivDetails" Multiplicity="0..1" />
+          <End Role="StudentDetails" Type="HomeModel.Store.StudentDetails" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="DivId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectMapping_ClassDetails">
+          <End Role="ClassDetails" Type="HomeModel.Store.ClassDetails" Multiplicity="0..1" />
+          <End Role="SubjectMapping" Type="HomeModel.Store.SubjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectMapping">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectMapping_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.Store.DivDetails" Multiplicity="0..1" />
+          <End Role="SubjectMapping" Type="HomeModel.Store.SubjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectMapping">
+              <PropertyRef Name="DivId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectMapping_FacultyDetails">
+          <End Role="FacultyDetails" Type="HomeModel.Store.FacultyDetails" Multiplicity="0..1" />
+          <End Role="SubjectMapping" Type="HomeModel.Store.SubjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacultyDetails">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="SubjectMapping">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectMapping_SubjectDetails">
+          <End Role="SubjectDetails" Type="HomeModel.Store.SubjectDetails" Multiplicity="0..1" />
+          <End Role="SubjectMapping" Type="HomeModel.Store.SubjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectMapping">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="HomeModel" Alias="Self" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="HomeEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="ActivityDetails" EntityType="HomeModel.ActivityDetail" />
+          <EntitySet Name="Applications" EntityType="HomeModel.Application" />
+          <EntitySet Name="BloodGroups" EntityType="HomeModel.BloodGroup" />
+          <EntitySet Name="ClassDetails" EntityType="HomeModel.ClassDetail" />
+          <EntitySet Name="DivDetails" EntityType="HomeModel.DivDetail" />
+          <EntitySet Name="ErrorLogs" EntityType="HomeModel.ErrorLog" />
+          <EntitySet Name="Exams" EntityType="HomeModel.Exam" />
+          <EntitySet Name="FacultyDetails" EntityType="HomeModel.FacultyDetail" />
+          <EntitySet Name="Logins" EntityType="HomeModel.Login" />
+          <EntitySet Name="Results" EntityType="HomeModel.Result" />
+          <EntitySet Name="SecurityQuestions" EntityType="HomeModel.SecurityQuestion" />
+          <EntitySet Name="StudentDetails" EntityType="HomeModel.StudentDetail" />
+          <EntitySet Name="SubjectDetails" EntityType="HomeModel.SubjectDetail" />
+          <EntitySet Name="SubjectMappings" EntityType="HomeModel.SubjectMapping" />
+          <AssociationSet Name="FK_ActivityDetails_ActivityDetails" Association="HomeModel.FK_ActivityDetails_ActivityDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_DivDetails" Association="HomeModel.FK_ActivityDetails_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_Exams" Association="HomeModel.FK_ActivityDetails_Exams">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ActivityDetails_SubjectDetails" Association="HomeModel.FK_ActivityDetails_SubjectDetails">
+            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_ActivityDetails" Association="HomeModel.FK_Result_ActivityDetails">
+            <End Role="ActivityDetails" EntitySet="ActivityDetails" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exceptions_AppId" Association="HomeModel.FK_Exceptions_AppId">
+            <End Role="Application" EntitySet="Applications" />
+            <End Role="ErrorLog" EntitySet="ErrorLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_FacultyDetails_BloodGroup" Association="HomeModel.FK_FacultyDetails_BloodGroup">
+            <End Role="BloodGroup" EntitySet="BloodGroups" />
+            <End Role="FacultyDetails" EntitySet="FacultyDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DivDetails_ClassDetails" Association="HomeModel.FK_DivDetails_ClassDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="DivDetails" EntitySet="DivDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_ClassDetails" Association="HomeModel.FK_Result_ClassDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectMapping_ClassDetails" Association="HomeModel.FK_SubjectMapping_ClassDetails">
+            <End Role="ClassDetails" EntitySet="ClassDetails" />
+            <End Role="SubjectMapping" EntitySet="SubjectMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_DivDetails" Association="HomeModel.FK_Result_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_StudentDetails_DivDetails" Association="HomeModel.FK_StudentDetails_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectMapping_DivDetails" Association="HomeModel.FK_SubjectMapping_DivDetails">
+            <End Role="DivDetails" EntitySet="DivDetails" />
+            <End Role="SubjectMapping" EntitySet="SubjectMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Exceptions_UserId" Association="HomeModel.FK_Exceptions_UserId">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="ErrorLog" EntitySet="ErrorLogs" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_Exams" Association="HomeModel.FK_Result_Exams">
+            <End Role="Exams" EntitySet="Exams" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectMapping_FacultyDetails" Association="HomeModel.FK_SubjectMapping_FacultyDetails">
+            <End Role="FacultyDetails" EntitySet="FacultyDetails" />
+            <End Role="SubjectMapping" EntitySet="SubjectMappings" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Login_Login" Association="HomeModel.FK_Login_Login">
+            <End Role="Login" EntitySet="Logins" />
+            <End Role="Login1" EntitySet="Logins" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_SubjectDetails" Association="HomeModel.FK_Result_SubjectDetails">
+            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Result_SubjectDetails1" Association="HomeModel.FK_Result_SubjectDetails1">
+            <End Role="StudentDetails" EntitySet="StudentDetails" />
+            <End Role="Result" EntitySet="Results" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SecurityQuestion_Id" Association="HomeModel.FK_SecurityQuestion_Id">
+            <End Role="SecurityQuestion" EntitySet="SecurityQuestions" />
+            <End Role="SecurityQuestion1" EntitySet="SecurityQuestions" />
+          </AssociationSet>
+          <AssociationSet Name="FK_SubjectMapping_SubjectDetails" Association="HomeModel.FK_SubjectMapping_SubjectDetails">
+            <End Role="SubjectDetails" EntitySet="SubjectDetails" />
+            <End Role="SubjectMapping" EntitySet="SubjectMappings" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="ActivityDetail">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DivID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ActivityName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ExamID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Date" Type="DateTime" />
+          <Property Name="TotalMarks" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SubjectID" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ClassDetail" Relationship="HomeModel.FK_ActivityDetails_ActivityDetails" FromRole="ActivityDetails" ToRole="ClassDetails" />
+          <NavigationProperty Name="DivDetail" Relationship="HomeModel.FK_ActivityDetails_DivDetails" FromRole="ActivityDetails" ToRole="DivDetails" />
+          <NavigationProperty Name="Exam" Relationship="HomeModel.FK_ActivityDetails_Exams" FromRole="ActivityDetails" ToRole="Exams" />
+          <NavigationProperty Name="SubjectDetail" Relationship="HomeModel.FK_ActivityDetails_SubjectDetails" FromRole="ActivityDetails" ToRole="SubjectDetails" />
+          <NavigationProperty Name="Results" Relationship="HomeModel.FK_Result_ActivityDetails" FromRole="ActivityDetails" ToRole="Result" />
+        </EntityType>
+        <EntityType Name="Application">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="ApplicationName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <NavigationProperty Name="ErrorLogs" Relationship="HomeModel.FK_Exceptions_AppId" FromRole="Application" ToRole="ErrorLog" />
+        </EntityType>
+        <EntityType Name="BloodGroup">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="BloodGroup1" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="FacultyDetails" Relationship="HomeModel.FK_FacultyDetails_BloodGroup" FromRole="BloodGroup" ToRole="FacultyDetails" />
+        </EntityType>
+        <EntityType Name="ClassDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="ActivityDetails" Relationship="HomeModel.FK_ActivityDetails_ActivityDetails" FromRole="ClassDetails" ToRole="ActivityDetails" />
+          <NavigationProperty Name="DivDetails" Relationship="HomeModel.FK_DivDetails_ClassDetails" FromRole="ClassDetails" ToRole="DivDetails" />
+          <NavigationProperty Name="Results" Relationship="HomeModel.FK_Result_ClassDetails" FromRole="ClassDetails" ToRole="Result" />
+          <NavigationProperty Name="SubjectMappings" Relationship="HomeModel.FK_SubjectMapping_ClassDetails" FromRole="ClassDetails" ToRole="SubjectMapping" />
+        </EntityType>
+        <EntityType Name="DivDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Div" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" />
+          <Property Name="ClassId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ActivityDetails" Relationship="HomeModel.FK_ActivityDetails_DivDetails" FromRole="DivDetails" ToRole="ActivityDetails" />
+          <NavigationProperty Name="ClassDetail" Relationship="HomeModel.FK_DivDetails_ClassDetails" FromRole="DivDetails" ToRole="ClassDetails" />
+          <NavigationProperty Name="Results" Relationship="HomeModel.FK_Result_DivDetails" FromRole="DivDetails" ToRole="Result" />
+          <NavigationProperty Name="StudentDetails" Relationship="HomeModel.FK_StudentDetails_DivDetails" FromRole="DivDetails" ToRole="StudentDetails" />
+          <NavigationProperty Name="SubjectMappings" Relationship="HomeModel.FK_SubjectMapping_DivDetails" FromRole="DivDetails" ToRole="SubjectMapping" />
+        </EntityType>
+        <EntityType Name="ErrorLog">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ExceptionMessage" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="AdditionMessage" Type="String" MaxLength="2000" Unicode="false" FixedLength="false" />
+          <Property Name="CreatedOn" Type="DateTime" />
+          <Property Name="ModifiedOn" Type="DateTime" />
+          <Property Name="UserInfo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="AppId" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="Application" Relationship="HomeModel.FK_Exceptions_AppId" FromRole="ErrorLog" ToRole="Application" />
+          <NavigationProperty Name="Login" Relationship="HomeModel.FK_Exceptions_UserId" FromRole="ErrorLog" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Exam">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Type" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ExamName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <NavigationProperty Name="ActivityDetails" Relationship="HomeModel.FK_ActivityDetails_Exams" FromRole="Exams" ToRole="ActivityDetails" />
+          <NavigationProperty Name="Results" Relationship="HomeModel.FK_Result_Exams" FromRole="Exams" ToRole="Result" />
+        </EntityType>
+        <EntityType Name="FacultyDetail">
+          <Key>
+            <PropertyRef Name="FacultyId" />
+          </Key>
+          <Property Name="FacultyId" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="EmailId" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="BirthDate" Type="String" MaxLength="10" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNo" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="BloodGroupId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Address" Type="String" MaxLength="500" Unicode="false" FixedLength="false" />
+          <Property Name="FacultyUniqueName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="BloodGroup" Relationship="HomeModel.FK_FacultyDetails_BloodGroup" FromRole="FacultyDetails" ToRole="BloodGroup" />
+          <NavigationProperty Name="SubjectMappings" Relationship="HomeModel.FK_SubjectMapping_FacultyDetails" FromRole="FacultyDetails" ToRole="SubjectMapping" />
+        </EntityType>
+        <EntityType Name="Login">
+          <Key>
+            <PropertyRef Name="Login_Id" />
+          </Key>
+          <Property Name="Login_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Username" Type="String" MaxLength="15" Unicode="true" FixedLength="false" />
+          <Property Name="Password" Type="String" MaxLength="20" Unicode="true" FixedLength="false" />
+          <Property Name="Security_Question_Id" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Security_Ans" Type="String" MaxLength="100" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="ErrorLogs" Relationship="HomeModel.FK_Exceptions_UserId" FromRole="Login" ToRole="ErrorLog" />
+          <NavigationProperty Name="Login1" Relationship="HomeModel.FK_Login_Login" FromRole="Login" ToRole="Login1" />
+          <NavigationProperty Name="Login2" Relationship="HomeModel.FK_Login_Login" FromRole="Login1" ToRole="Login" />
+        </EntityType>
+        <EntityType Name="Result">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="DivID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="SubjectID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ExamID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="ActivityID" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="StudentID" Type="Decimal" Nullable="false" Precision="18" Scale="0" />
+          <Property Name="Marks" Type="Decimal" Precision="18" Scale="0" />
+          <NavigationProperty Name="ActivityDetail" Relationship="HomeModel.FK_Result_ActivityDetails" FromRole="Result" ToRole="ActivityDetails" />
+          <NavigationProperty Name="ClassDetail" Relationship="HomeModel.FK_Result_ClassDetails" FromRole="Result" ToRole="ClassDetails" />
+          <NavigationProperty Name="DivDetail" Relationship="HomeModel.FK_Result_DivDetails" FromRole="Result" ToRole="DivDetails" />
+          <NavigationProperty Name="Exam" Relationship="HomeModel.FK_Result_Exams" FromRole="Result" ToRole="Exams" />
+          <NavigationProperty Name="SubjectDetail" Relationship="HomeModel.FK_Result_SubjectDetails" FromRole="Result" ToRole="SubjectDetails" />
+          <NavigationProperty Name="StudentDetail" Relationship="HomeModel.FK_Result_SubjectDetails1" FromRole="Result" ToRole="StudentDetails" />
+        </EntityType>
+        <EntityType Name="SecurityQuestion">
+          <Key>
+            <PropertyRef Name="Security_Question_Id" />
+          </Key>
+          <Property Name="Security_Question_Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Security_Question" Type="String" MaxLength="200" Unicode="true" FixedLength="false" />
+          <NavigationProperty Name="SecurityQuestion1" Relationship="HomeModel.FK_SecurityQuestion_Id" FromRole="SecurityQuestion" ToRole="SecurityQuestion1" />
+          <NavigationProperty Name="SecurityQuestion2" Relationship="HomeModel.FK_SecurityQuestion_Id" FromRole="SecurityQuestion1" ToRole="SecurityQuestion" />
+        </EntityType>
+        <EntityType Name="StudentDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="GRNo" Type="Decimal" Precision="10" Scale="0" />
+          <Property Name="RollNo" Type="Decimal" Precision="4" Scale="0" />
+          <Property Name="FirstName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="LastName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="MiddleName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="ClassId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DivId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="Gender" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="BloodGroup" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Address" Type="String" MaxLength="200" Unicode="false" FixedLength="false" />
+          <Property Name="PhoneNo" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="BirthDate" Type="DateTime" />
+          <Property Name="PFName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PMName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="PLName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="DivDetail" Relationship="HomeModel.FK_StudentDetails_DivDetails" FromRole="StudentDetails" ToRole="DivDetails" />
+          <NavigationProperty Name="Results" Relationship="HomeModel.FK_Result_SubjectDetails1" FromRole="StudentDetails" ToRole="Result" />
+        </EntityType>
+        <EntityType Name="SubjectDetail">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubjectName" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="ActivityDetails" Relationship="HomeModel.FK_ActivityDetails_SubjectDetails" FromRole="SubjectDetails" ToRole="ActivityDetails" />
+          <NavigationProperty Name="Results" Relationship="HomeModel.FK_Result_SubjectDetails" FromRole="SubjectDetails" ToRole="Result" />
+          <NavigationProperty Name="SubjectMappings" Relationship="HomeModel.FK_SubjectMapping_SubjectDetails" FromRole="SubjectDetails" ToRole="SubjectMapping" />
+        </EntityType>
+        <EntityType Name="SubjectMapping">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Decimal" Nullable="false" Precision="18" Scale="0" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ClassId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="DivId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="SubjectId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="FacultyId" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="IsClassTeacher" Type="Boolean" />
+          <Property Name="Active" Type="Boolean" />
+          <NavigationProperty Name="ClassDetail" Relationship="HomeModel.FK_SubjectMapping_ClassDetails" FromRole="SubjectMapping" ToRole="ClassDetails" />
+          <NavigationProperty Name="DivDetail" Relationship="HomeModel.FK_SubjectMapping_DivDetails" FromRole="SubjectMapping" ToRole="DivDetails" />
+          <NavigationProperty Name="FacultyDetail" Relationship="HomeModel.FK_SubjectMapping_FacultyDetails" FromRole="SubjectMapping" ToRole="FacultyDetails" />
+          <NavigationProperty Name="SubjectDetail" Relationship="HomeModel.FK_SubjectMapping_SubjectDetails" FromRole="SubjectMapping" ToRole="SubjectDetails" />
+        </EntityType>
+        <Association Name="FK_ActivityDetails_ActivityDetails">
+          <End Role="ClassDetails" Type="HomeModel.ClassDetail" Multiplicity="1" />
+          <End Role="ActivityDetails" Type="HomeModel.ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.DivDetail" Multiplicity="1" />
+          <End Role="ActivityDetails" Type="HomeModel.ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="DivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_Exams">
+          <End Role="Exams" Type="HomeModel.Exam" Multiplicity="0..1" />
+          <End Role="ActivityDetails" Type="HomeModel.ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ActivityDetails_SubjectDetails">
+          <End Role="SubjectDetails" Type="HomeModel.SubjectDetail" Multiplicity="0..1" />
+          <End Role="ActivityDetails" Type="HomeModel.ActivityDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ActivityDetails">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_ActivityDetails">
+          <End Role="ActivityDetails" Type="HomeModel.ActivityDetail" Multiplicity="0..1" />
+          <End Role="Result" Type="HomeModel.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ActivityDetails">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="ActivityID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exceptions_AppId">
+          <End Role="Application" Type="HomeModel.Application" Multiplicity="0..1" />
+          <End Role="ErrorLog" Type="HomeModel.ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Application">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="AppId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_FacultyDetails_BloodGroup">
+          <End Role="BloodGroup" Type="HomeModel.BloodGroup" Multiplicity="0..1" />
+          <End Role="FacultyDetails" Type="HomeModel.FacultyDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="BloodGroup">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="FacultyDetails">
+              <PropertyRef Name="BloodGroupId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DivDetails_ClassDetails">
+          <End Role="ClassDetails" Type="HomeModel.ClassDetail" Multiplicity="0..1" />
+          <End Role="DivDetails" Type="HomeModel.DivDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="DivDetails">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_ClassDetails">
+          <End Role="ClassDetails" Type="HomeModel.ClassDetail" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="ClassID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectMapping_ClassDetails">
+          <End Role="ClassDetails" Type="HomeModel.ClassDetail" Multiplicity="0..1" />
+          <End Role="SubjectMapping" Type="HomeModel.SubjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="ClassDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectMapping">
+              <PropertyRef Name="ClassId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.DivDetail" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="DivID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_StudentDetails_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.DivDetail" Multiplicity="0..1" />
+          <End Role="StudentDetails" Type="HomeModel.StudentDetail" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="StudentDetails">
+              <PropertyRef Name="DivId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectMapping_DivDetails">
+          <End Role="DivDetails" Type="HomeModel.DivDetail" Multiplicity="0..1" />
+          <End Role="SubjectMapping" Type="HomeModel.SubjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DivDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectMapping">
+              <PropertyRef Name="DivId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Exceptions_UserId">
+          <End Role="Login" Type="HomeModel.Login" Multiplicity="0..1" />
+          <End Role="ErrorLog" Type="HomeModel.ErrorLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Login_Id" />
+            </Principal>
+            <Dependent Role="ErrorLog">
+              <PropertyRef Name="UserInfo" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_Exams">
+          <End Role="Exams" Type="HomeModel.Exam" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Exams">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="ExamID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectMapping_FacultyDetails">
+          <End Role="FacultyDetails" Type="HomeModel.FacultyDetail" Multiplicity="0..1" />
+          <End Role="SubjectMapping" Type="HomeModel.SubjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="FacultyDetails">
+              <PropertyRef Name="FacultyId" />
+            </Principal>
+            <Dependent Role="SubjectMapping">
+              <PropertyRef Name="FacultyId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Login_Login">
+          <End Role="Login" Type="HomeModel.Login" Multiplicity="1" />
+          <End Role="Login1" Type="HomeModel.Login" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="Login">
+              <PropertyRef Name="Login_Id" />
+            </Principal>
+            <Dependent Role="Login1">
+              <PropertyRef Name="Login_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_SubjectDetails">
+          <End Role="SubjectDetails" Type="HomeModel.SubjectDetail" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="SubjectID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Result_SubjectDetails1">
+          <End Role="StudentDetails" Type="HomeModel.StudentDetail" Multiplicity="1" />
+          <End Role="Result" Type="HomeModel.Result" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="StudentDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Result">
+              <PropertyRef Name="StudentID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SecurityQuestion_Id">
+          <End Role="SecurityQuestion" Type="HomeModel.SecurityQuestion" Multiplicity="1" />
+          <End Role="SecurityQuestion1" Type="HomeModel.SecurityQuestion" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="SecurityQuestion">
+              <PropertyRef Name="Security_Question_Id" />
+            </Principal>
+            <Dependent Role="SecurityQuestion1">
+              <PropertyRef Name="Security_Question_Id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_SubjectMapping_SubjectDetails">
+          <End Role="SubjectDetails" Type="HomeModel.SubjectDetail" Multiplicity="0..1" />
+          <End Role="SubjectMapping" Type="HomeModel.SubjectMapping" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="SubjectDetails">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="SubjectMapping">
+              <PropertyRef Name="SubjectId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="HomeModelStoreContainer" CdmEntityContainer="HomeEntities">
+          <EntitySetMapping Name="ActivityDetails"><EntityTypeMapping TypeName="HomeModel.ActivityDetail"><MappingFragment StoreEntitySet="ActivityDetails">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            <ScalarProperty Name="DivID" ColumnName="DivID" />
+            <ScalarProperty Name="ActivityName" ColumnName="ActivityName" />
+            <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+            <ScalarProperty Name="Date" ColumnName="Date" />
+            <ScalarProperty Name="TotalMarks" ColumnName="TotalMarks" />
+            <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Applications"><EntityTypeMapping TypeName="HomeModel.Application"><MappingFragment StoreEntitySet="Application">
+            <ScalarProperty Name="ApplicationName" ColumnName="ApplicationName" />
+            <ScalarProperty Name="Id" ColumnName="Id" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="BloodGroups"><EntityTypeMapping TypeName="HomeModel.BloodGroup"><MappingFragment StoreEntitySet="BloodGroup">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="BloodGroup1" ColumnName="BloodGroup" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ClassDetails"><EntityTypeMapping TypeName="HomeModel.ClassDetail"><MappingFragment StoreEntitySet="ClassDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="ClassName" ColumnName="ClassName" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="DivDetails"><EntityTypeMapping TypeName="HomeModel.DivDetail"><MappingFragment StoreEntitySet="DivDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="Div" ColumnName="Div" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+            <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="ErrorLogs"><EntityTypeMapping TypeName="HomeModel.ErrorLog"><MappingFragment StoreEntitySet="ErrorLog">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="ExceptionMessage" ColumnName="ExceptionMessage" />
+            <ScalarProperty Name="AdditionMessage" ColumnName="AdditionMessage" />
+            <ScalarProperty Name="CreatedOn" ColumnName="CreatedOn" />
+            <ScalarProperty Name="ModifiedOn" ColumnName="ModifiedOn" />
+            <ScalarProperty Name="UserInfo" ColumnName="UserInfo" />
+            <ScalarProperty Name="AppId" ColumnName="AppId" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Exams"><EntityTypeMapping TypeName="HomeModel.Exam"><MappingFragment StoreEntitySet="Exams">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="Type" ColumnName="Type" />
+            <ScalarProperty Name="ExamName" ColumnName="ExamName" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="FacultyDetails"><EntityTypeMapping TypeName="HomeModel.FacultyDetail"><MappingFragment StoreEntitySet="FacultyDetails">
+            <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="EmailId" ColumnName="EmailId" />
+            <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+            <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+            <ScalarProperty Name="BloodGroupId" ColumnName="BloodGroupId" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="FacultyUniqueName" ColumnName="FacultyUniqueName" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Logins"><EntityTypeMapping TypeName="HomeModel.Login"><MappingFragment StoreEntitySet="Login">
+            <ScalarProperty Name="Login_Id" ColumnName="Login_Id" />
+            <ScalarProperty Name="Username" ColumnName="Username" />
+            <ScalarProperty Name="Password" ColumnName="Password" />
+            <ScalarProperty Name="Security_Question_Id" ColumnName="Security_Question_Id" />
+            <ScalarProperty Name="Security_Ans" ColumnName="Security_Ans" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="Results"><EntityTypeMapping TypeName="HomeModel.Result"><MappingFragment StoreEntitySet="Result">
+            <ScalarProperty Name="ID" ColumnName="ID" />
+            <ScalarProperty Name="ClassID" ColumnName="ClassID" />
+            <ScalarProperty Name="DivID" ColumnName="DivID" />
+            <ScalarProperty Name="SubjectID" ColumnName="SubjectID" />
+            <ScalarProperty Name="ExamID" ColumnName="ExamID" />
+            <ScalarProperty Name="ActivityID" ColumnName="ActivityID" />
+            <ScalarProperty Name="StudentID" ColumnName="StudentID" />
+            <ScalarProperty Name="Marks" ColumnName="Marks" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SecurityQuestions"><EntityTypeMapping TypeName="HomeModel.SecurityQuestion"><MappingFragment StoreEntitySet="SecurityQuestion">
+            <ScalarProperty Name="Security_Question_Id" ColumnName="Security_Question_Id" />
+            <ScalarProperty Name="Security_Question" ColumnName="Security_Question" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="StudentDetails"><EntityTypeMapping TypeName="HomeModel.StudentDetail"><MappingFragment StoreEntitySet="StudentDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="GRNo" ColumnName="GRNo" />
+            <ScalarProperty Name="RollNo" ColumnName="RollNo" />
+            <ScalarProperty Name="FirstName" ColumnName="FirstName" />
+            <ScalarProperty Name="LastName" ColumnName="LastName" />
+            <ScalarProperty Name="MiddleName" ColumnName="MiddleName" />
+            <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+            <ScalarProperty Name="DivId" ColumnName="DivId" />
+            <ScalarProperty Name="Gender" ColumnName="Gender" />
+            <ScalarProperty Name="BloodGroup" ColumnName="BloodGroup" />
+            <ScalarProperty Name="Address" ColumnName="Address" />
+            <ScalarProperty Name="PhoneNo" ColumnName="PhoneNo" />
+            <ScalarProperty Name="BirthDate" ColumnName="BirthDate" />
+            <ScalarProperty Name="PFName" ColumnName="PFName" />
+            <ScalarProperty Name="PMName" ColumnName="PMName" />
+            <ScalarProperty Name="PLName" ColumnName="PLName" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SubjectDetails"><EntityTypeMapping TypeName="HomeModel.SubjectDetail"><MappingFragment StoreEntitySet="SubjectDetails">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="SubjectName" ColumnName="SubjectName" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+          <EntitySetMapping Name="SubjectMappings"><EntityTypeMapping TypeName="HomeModel.SubjectMapping"><MappingFragment StoreEntitySet="SubjectMapping">
+            <ScalarProperty Name="Id" ColumnName="Id" />
+            <ScalarProperty Name="ClassId" ColumnName="ClassId" />
+            <ScalarProperty Name="DivId" ColumnName="DivId" />
+            <ScalarProperty Name="SubjectId" ColumnName="SubjectId" />
+            <ScalarProperty Name="FacultyId" ColumnName="FacultyId" />
+            <ScalarProperty Name="IsClassTeacher" ColumnName="IsClassTeacher" />
+            <ScalarProperty Name="Active" ColumnName="Active" />
+          </MappingFragment></EntityTypeMapping></EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="True" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="True" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams>
+      <Diagram Name="Home" ZoomLevel="55">
+        <EntityTypeShape EntityType="HomeModel.ActivityDetail" Width="1.5" PointX="5.25" PointY="5.5" Height="3.5186979166666665" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.Application" Width="1.5" PointX="0.75" PointY="10.5" Height="1.5956835937499996" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.BloodGroup" Width="1.5" PointX="3.75" PointY="16.375" Height="1.595683593749996" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.ClassDetail" Width="1.5" PointX="0.75" PointY="6.75" Height="2.3648893229166648" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.DivDetail" Width="1.5" PointX="3" PointY="10.875" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.ErrorLog" Width="1.5" PointX="3" PointY="1" Height="2.7494921874999996" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.Exam" Width="1.5" PointX="3" PointY="4.75" Height="1.9802864583333317" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.FacultyDetail" Width="1.5" PointX="6" PointY="15.375" Height="3.7109993489583317" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.Login" Width="1.5" PointX="0.75" PointY="1" Height="2.5571907552083317" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.Result" Width="1.5" PointX="10.5" PointY="8.125" Height="3.7109993489583353" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.SecurityQuestion" Width="1.5" PointX="5.75" PointY="0.75" Height="1.7879850260416674" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.StudentDetail" Width="1.5" PointX="5.25" PointY="9.875" Height="4.6725065104166674" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.SubjectDetail" Width="1.5" PointX="3" PointY="7.5" Height="2.1725878906250031" IsExpanded="true" />
+        <EntityTypeShape EntityType="HomeModel.SubjectMapping" Width="1.5" PointX="8.25" PointY="8.625" Height="3.1340950520833388" IsExpanded="true" />
+        <AssociationConnector Association="HomeModel.FK_ActivityDetails_ActivityDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="7.09375" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="7.0937499999999991" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="7.09375" />
+          <ConnectorPoint PointX="5.25" PointY="7.09375" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_ActivityDetails_DivDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="10.876152846153847" />
+          <ConnectorPoint PointX="4.875" PointY="10.501152846153847" />
+          <ConnectorPoint PointX="4.875" PointY="8.087475958333334" />
+          <ConnectorPoint PointX="5.25" PointY="8.087475958333334" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_ActivityDetails_Exams" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="6.1151432291666659" />
+          <ConnectorPoint PointX="5.25" PointY="6.1151432291666659" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_ActivityDetails_SubjectDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="8.6155869375000016" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="8.6155869375000016" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="8.6155869375000016" />
+          <ConnectorPoint PointX="5.25" PointY="8.6155869375000016" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Result_ActivityDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="8.34375" />
+          <ConnectorPoint PointX="7.791666666666667" PointY="8.34375" />
+          <ConnectorPoint PointX="7.958333333333333" PointY="8.34375" />
+          <ConnectorPoint PointX="8.0416666666666661" PointY="8.34375" />
+          <ConnectorPoint PointX="8.2083333333333339" PointY="8.34375" />
+          <ConnectorPoint PointX="10.166666666666666" PointY="8.34375" />
+          <ConnectorPoint PointX="10.333333333333334" PointY="8.34375" />
+          <ConnectorPoint PointX="10.5" PointY="8.34375" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Exceptions_AppId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="10.501152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="10.126152846153847" />
+          <ConnectorPoint PointX="2.625" PointY="2.37474609375" />
+          <ConnectorPoint PointX="3" PointY="2.37474609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_FacultyDetails_BloodGroup" ManuallyRouted="false">
+          <ConnectorPoint PointX="5.25" PointY="17.172841796874998" />
+          <ConnectorPoint PointX="6" PointY="17.172841796874998" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_DivDetails_ClassDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="9.052580630608972" />
+          <ConnectorPoint PointX="2.5660744349011213" PointY="9.368655065510092" />
+          <ConnectorPoint PointX="2.6839255650988791" PointY="9.48650619570785" />
+          <ConnectorPoint PointX="2.8125" PointY="9.615080630608972" />
+          <ConnectorPoint PointX="2.8125" PointY="12.24974609375" />
+          <ConnectorPoint PointX="3" PointY="12.24974609375" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Result_ClassDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="9.1148893229166639" />
+          <ConnectorPoint PointX="1.5" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="1.8229186666666666" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="1.9895853333333331" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="2.5416666666666665" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="2.7083333333333335" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="2.7291666666666665" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="2.8958333333333335" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="4.0416661666666664" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="4.2083328333333325" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="4.708333333333333" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="5" PointY="9.9804996744791676" />
+          <ConnectorPoint PointX="5" PointY="9.625" />
+          <ConnectorPoint PointX="5.041666666666667" PointY="9.625" />
+          <ConnectorPoint PointX="5.208333333333333" PointY="9.625" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="9.625" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="9.625" />
+          <ConnectorPoint PointX="7.541666666666667" PointY="9.6249999999999982" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="9.625" />
+          <ConnectorPoint PointX="8" PointY="9.625" />
+          <ConnectorPoint PointX="8" PointY="8.5" />
+          <ConnectorPoint PointX="8.0416666666666661" PointY="8.5" />
+          <ConnectorPoint PointX="8.2083333333333339" PointY="8.5" />
+          <ConnectorPoint PointX="10.125" PointY="8.5" />
+          <ConnectorPoint PointX="10.125" PointY="10.121126674479168" />
+          <ConnectorPoint PointX="10.166666666666666" PointY="10.121126674479168" />
+          <ConnectorPoint PointX="10.333333333333334" PointY="10.121126674479168" />
+          <ConnectorPoint PointX="10.5" PointY="10.121126674479168" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_SubjectMapping_ClassDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.9062519999999998" PointY="9.1148893229166639" />
+          <ConnectorPoint PointX="1.9062519999999998" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="2.4757719867788439" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="2.6424386534455109" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="2.7291666666666665" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="2.8958333333333335" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="3.6666666666666665" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="3.8333333333333335" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="4.0416661666666664" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="4.2083328333333325" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="4.708333333333333" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="5.125" PointY="10.192047526041669" />
+          <ConnectorPoint PointX="5.125" PointY="9.375" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="9.375" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="9.375" />
+          <ConnectorPoint PointX="7.625" PointY="9.375" />
+          <ConnectorPoint PointX="7.625" PointY="10.692047026041671" />
+          <ConnectorPoint PointX="7.791666666666667" PointY="10.692047026041671" />
+          <ConnectorPoint PointX="7.958333333333333" PointY="10.692047026041671" />
+          <ConnectorPoint PointX="8.25" PointY="10.692047026041671" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Result_DivDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="3.75" PointY="10.875" />
+          <ConnectorPoint PointX="3.75" PointY="9.8554996744791676" />
+          <ConnectorPoint PointX="4.0416661666666664" PointY="9.8554996744791676" />
+          <ConnectorPoint PointX="4.2083328333333325" PointY="9.8554996744791676" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="9.8554996744791676" />
+          <ConnectorPoint PointX="4.708333333333333" PointY="9.8554996744791676" />
+          <ConnectorPoint PointX="4.75" PointY="9.8554996744791676" />
+          <ConnectorPoint PointX="4.75" PointY="9.75" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="9.7499999999999982" />
+          <ConnectorPoint PointX="5.208333333333333" PointY="9.75" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="9.75" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="9.75" />
+          <ConnectorPoint PointX="7.541666666666667" PointY="9.7499999999999982" />
+          <ConnectorPoint PointX="7.958333333333333" PointY="9.75" />
+          <ConnectorPoint PointX="8.125" PointY="9.75" />
+          <ConnectorPoint PointX="8.125" PointY="8.125" />
+          <ConnectorPoint PointX="10.25" PointY="8.125" />
+          <ConnectorPoint PointX="10.25" PointY="11.009815011718754" />
+          <ConnectorPoint PointX="10.5" PointY="11.009815011718754" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_StudentDetails_DivDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="12.281575016826924" />
+          <ConnectorPoint PointX="5.25" PointY="12.281575016826924" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_SubjectMapping_DivDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.156252" PointY="10.875" />
+          <ConnectorPoint PointX="4.156252" PointY="10.442047526041669" />
+          <ConnectorPoint PointX="4.625" PointY="10.442047526041669" />
+          <ConnectorPoint PointX="4.625" PointY="9.625" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="9.625" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="9.625" />
+          <ConnectorPoint PointX="4.979166666666667" PointY="9.625" />
+          <ConnectorPoint PointX="5.208333333333333" PointY="9.625" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="9.625" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="9.625" />
+          <ConnectorPoint PointX="7.541666666666667" PointY="9.6249999999999982" />
+          <ConnectorPoint PointX="7.833333333333333" PointY="9.625" />
+          <ConnectorPoint PointX="7.875" PointY="9.625" />
+          <ConnectorPoint PointX="7.875" PointY="11.2568230390625" />
+          <ConnectorPoint PointX="8.25" PointY="11.2568230390625" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Exceptions_UserId" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="1.624873046875" />
+          <ConnectorPoint PointX="3" PointY="1.624873046875" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Result_Exams" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="5.09375" />
+          <ConnectorPoint PointX="11.25" PointY="5.09375" />
+          <ConnectorPoint PointX="11.25" PointY="8.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_SubjectMapping_FacultyDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="7.15625" PointY="15.375" />
+          <ConnectorPoint PointX="7.15625" PointY="9.2280989583333337" />
+          <ConnectorPoint PointX="7.916666666666667" PointY="9.2280989583333319" />
+          <ConnectorPoint PointX="8.2083333333333339" PointY="9.2280989583333337" />
+          <ConnectorPoint PointX="8.25" PointY="9.2280989583333337" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Login_Login" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.2819230769230767" PointY="3.5571907552083317" />
+          <ConnectorPoint PointX="1.2819230769230767" PointY="3.8071907552083317" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="3.8071907552083317" />
+          <ConnectorPoint PointX="1.7284615384615383" PointY="3.5571907552083317" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Result_SubjectDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="9.1515459687500016" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="9.1515459687500016" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="9.1515459687500016" />
+          <ConnectorPoint PointX="5" PointY="9.1515459687500016" />
+          <ConnectorPoint PointX="5" PointY="9.1436979166666674" />
+          <ConnectorPoint PointX="7.875" PointY="9.1436979166666674" />
+          <ConnectorPoint PointX="7.875" PointY="7.875" />
+          <ConnectorPoint PointX="10.843748" PointY="7.875" />
+          <ConnectorPoint PointX="10.843748" PointY="8.125" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_Result_SubjectDetails1" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.75" PointY="13.191753429687502" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="13.191753429687502" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="13.191753429687502" />
+          <ConnectorPoint PointX="11.25" PointY="13.191753429687502" />
+          <ConnectorPoint PointX="11.25" PointY="11.835999348958335" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_SecurityQuestion_Id" ManuallyRouted="false">
+          <ConnectorPoint PointX="6.2819230769230767" PointY="2.5379850260416674" />
+          <ConnectorPoint PointX="6.2819230769230767" PointY="2.7879850260416674" />
+          <ConnectorPoint PointX="6.7284615384615378" PointY="2.7879850260416674" />
+          <ConnectorPoint PointX="6.7284615384615378" PointY="2.5379850260416674" />
+        </AssociationConnector>
+        <AssociationConnector Association="HomeModel.FK_SubjectMapping_SubjectDetails" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.1249994999999995" PointY="9.6725878906250031" />
+          <ConnectorPoint PointX="4.1249994999999995" PointY="10.317047526041669" />
+          <ConnectorPoint PointX="4.541666666666667" PointY="10.317047526041669" />
+          <ConnectorPoint PointX="4.708333333333333" PointY="10.317047526041669" />
+          <ConnectorPoint PointX="4.791666666666667" PointY="10.317047526041669" />
+          <ConnectorPoint PointX="4.958333333333333" PointY="10.317047526041669" />
+          <ConnectorPoint PointX="5.0625" PointY="10.317047526041669" />
+          <ConnectorPoint PointX="5.0625" PointY="9.5" />
+          <ConnectorPoint PointX="7.072916666666667" PointY="9.5" />
+          <ConnectorPoint PointX="7.239583333333333" PointY="9.5" />
+          <ConnectorPoint PointX="7.541666666666667" PointY="9.5" />
+          <ConnectorPoint PointX="7.708333333333333" PointY="9.5" />
+          <ConnectorPoint PointX="7.75" PointY="9.5" />
+          <ConnectorPoint PointX="7.75" PointY="10.189771013020842" />
+          <ConnectorPoint PointX="7.791666666666667" PointY="10.189771013020842" />
+          <ConnectorPoint PointX="7.958333333333333" PointY="10.189771013020842" />
+          <ConnectorPoint PointX="8.25" PointY="10.189771013020842" />
+        </AssociationConnector>
+      </Diagram>
+    </Diagrams>
+  </Designer>
+</edmx:Edmx>

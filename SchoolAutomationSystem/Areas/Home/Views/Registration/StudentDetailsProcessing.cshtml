@@ -5,12 +5,12 @@
                 <div class="fieldset-content">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border">Student Details</legend>
-                        <div class="forms">
+                       
                         <div class="form-inline">
                         <div class="form-group">
                                 @Html.Label("Student ID")
                             
-                                @Html.TextBox("Model.StudentProcessingData.Id", Model.StudentProcessingData.Id == null ? 0 : Model.StudentProcessingData.Id, new { @class = "form-control mrgn0 width-150" })
+                                @Html.TextBox("Model.StudentProcessingData.Id", Model.StudentProcessingData.Id == null ? 0 : Model.StudentProcessingData.Id, new { @class = "form-control mrgn0 width-150", @disabled = "disabled" })
                         </div>
 
                         <div class="form-group">
@@ -98,7 +98,7 @@
                             </div>
 
                         </div>
-                        </div>
+                       
                     </fieldset>
                     
                 </div>

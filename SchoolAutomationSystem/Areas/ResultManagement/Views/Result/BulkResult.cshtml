@@ -5,8 +5,7 @@
 @model SchoolAutomationSystem.Areas.ResultManagement.Models.BulkResultViewModel
 <div class="row">
     <div class="main-content .col-xs-18 .col-sm-12">
-        <h1 class="mrgn-left10">
-            Welcome User</h1>
+
         <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
             @using (Html.BeginForm(FormMethod.Post))
             {
@@ -32,11 +31,17 @@
                                 @Html.DropDownList("Model.ExamID", Model.getExamList(Convert.ToInt16(Model.ExamID)), new { @class = "" })
                         </div>
 
-
                         <div class="form-group">
                                 @Html.Label("Subject")
                             
                                 @Html.DropDownList("Model.SubjectID", Model.GetSubjectsSelectList(Model.SubjectID), new { @class = "" })
+                        </div>
+                        <div id = "ActivityDropdown">
+                        <div class="form-group">
+                                @Html.Label("Activity")
+                            
+                                @Html.DropDownList("Model.ActivityID", Model.GetActivitySelectList(Model.ActivityID), new { @class = "" })
+                        </div>
                         </div>
                         @Html.Hidden("SeachedClassID", string.Empty, new { @id = "SeachedClassID" })
                         @Html.Hidden("SeachedDivID", string.Empty, new { @id = "SeachedDivID" })
@@ -100,6 +105,23 @@
 
                 $(document).ready(function () {
                     $("#Markssaved").hide();
+                    
+                    if ($("#Model_ExamID")[0].selectedIndex == 1 || $("#Model_ExamID")[0].selectedIndex == 2 || $("#Model_ExamID")[0].selectedIndex == 3 || $("#Model_ExamID")[0].selectedIndex == 4) {
+                        $("#ActivityDropdown").show();
+                    }
+                    else {
+                        $("#ActivityDropdown").hide();
+                    }
+
+                    $("#Model_ExamID").change(function () {
+                        
+                        if ($(this)[0].selectedIndex == 1 || $(this)[0].selectedIndex == 2 || $(this)[0].selectedIndex == 3 || $(this)[0].selectedIndex == 4) {
+                            $("#ActivityDropdown").show();
+                        }
+                        else {
+                            $("#ActivityDropdown").hide();
+                        }
+                    });
 
                     $("#SaveMarks").click(function (e) {
 
@@ -120,7 +142,7 @@
                         $.ajax({
                             url: url,
                             type: "POST",
-                            data: { MarksString: marksString, ClassID: $("#Model_ClassID")[0].value, DivID: $("#Model_DivID")[0].value, ExamID: $("#Model_ExamID")[0].value, SubjectID: $("#Model_SubjectID")[0].value },
+                            data: { MarksString: marksString, ClassID: $("#Model_ClassID")[0].value, DivID: $("#Model_DivID")[0].value, ExamID: $("#Model_ExamID")[0].value, SubjectID: $("#Model_SubjectID")[0].value, SubjectID: $("#Model_SubjectID")[0].value, ActivityID: $("#Model_ActivityID")[0].value },
                             success: function () {
                                 $('#Markssaved').fadeIn(1000).delay(3000).fadeOut(1000);
                             },

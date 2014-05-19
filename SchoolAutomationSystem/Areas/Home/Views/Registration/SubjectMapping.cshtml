@@ -5,15 +5,14 @@
 @model SchoolAutomationSystem.Areas.Home.Models.SubjectMappingViewModel
 <div class="row">
     <div class="main-content .col-xs-18 .col-sm-12">
-        <h1 class="mrgn-left10">
-            Welcome User</h1>
+
         <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
             @using (Html.BeginForm(FormMethod.Post))
     {
                 <div class="fieldset-content">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border">Subject Mapping</legend>
-                        <div class="forms">
+                        
                         <div class="form-inline">
                         <div class="form-group">
                                 @Html.Label("Class Name")
@@ -28,17 +27,17 @@
                           
                             @Html.Hidden("Model.SubjectMapping.Id", Model.SubjectMapping.Id, new { id = "Model_SubjectMapping_Id" })
                             <div class="form-group double-btn">
-                                <button id="GetMapping" class="btn btn-default width-100" >Get Mappings</button>
+                                <button id="GetMapping" class="btn btn-default" >Get Mappings</button>
                              
-                                <button id="reset" type="reset" class="btn btn-default width-100">
+                                <button id="reset" type="reset" class="btn btn-default">
                                     Reset</button>
                             </div>
 
 
 
                         </div>
-                        </div>
-                        <div class="forms">
+                        
+                      
                         <fieldset>
                            <div class="form-inline">
                             <div class="form-group">
@@ -65,7 +64,7 @@
                             </div>
                             </div> 
                         </fieldset>
-                        </div>
+                      
                     </fieldset>
                     @if (Model.lstSubjectDetails!= null && Model.lstSubjectDetails.Count() > 0)
                     {

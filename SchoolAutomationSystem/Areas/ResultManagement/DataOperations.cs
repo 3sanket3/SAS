@@ -157,10 +157,23 @@ namespace SchoolAutomationSystem.Areas.ResultManagement
         }
         public decimal? GetStudentMarks(BulkResultViewModel model, decimal studentID)
         {
-            decimal? marks = (from result in homeEntities.Results
-                        where result.ClassID == model.ClassID && result.DivID == model.DivID &&
-                        result.ExamID == model.ExamID && result.SubjectID == model.SubjectID
-                        && result.StudentID == studentID select result.Marks).FirstOrDefault();
+            decimal? marks = 0;
+            if (model.ExamID != 5 && model.ExamID != 6)
+            {
+                marks = (from result in homeEntities.Results
+                         where result.ClassID == model.ClassID && result.DivID == model.DivID &&
+                         result.ExamID == model.ExamID && result.SubjectID == model.SubjectID
+                         && result.StudentID == studentID && result.ActivityID == model.ActivityID
+                         select result.Marks).FirstOrDefault();
+            }
+            else
+            {
+                marks = (from result in homeEntities.Results
+                         where result.ClassID == model.ClassID && result.DivID == model.DivID &&
+                         result.ExamID == model.ExamID && result.SubjectID == model.SubjectID
+                         && result.StudentID == studentID
+                         select result.Marks).FirstOrDefault();
+            }
             return marks== null ? 0 : marks;
         }
         public void InsertMarks(string MarksString, string ClassID, string DivID, string ExamID, string SubjectID, string ActivityID)
@@ -171,16 +184,26 @@ namespace SchoolAutomationSystem.Areas.ResultManagement
             int intDivID = Convert.ToInt16(DivID);
             int intExamID = Convert.ToInt16(ExamID);
             int intSubjectID = Convert.ToInt16(SubjectID);
-           // int intActivityID = Convert.ToInt16(ActivityID);
+            Result result;
+           int intActivityID = ActivityID != string.Empty ? Convert.ToInt16(ActivityID) : 0;
             foreach (string StudIDMarks in StudentIDMarks)
             {
                 string[] IDMarks = StudIDMarks.Split('_');
                 int studentID =Convert.ToInt16( IDMarks[1]);
-                Result result = (from res in homeEntities.Results
-                                 where res.ClassID == intClassID && res.DivID == intDivID && res.ExamID == intExamID && res.SubjectID == intSubjectID
-                                 && res.StudentID == studentID
-                                 select res).ToList().FirstOrDefault();
-
+                if (intExamID != 5 && intExamID != 6)
+                {
+                     result = (from res in homeEntities.Results
+                                     where res.ClassID == intClassID && res.DivID == intDivID && res.ExamID == intExamID && res.SubjectID == intSubjectID
+                                     && res.StudentID == studentID && intActivityID == res.ActivityID
+                                     select res).ToList().FirstOrDefault();
+                }
+                else
+                {
+                     result = (from res in homeEntities.Results
+                                     where res.ClassID == intClassID && res.DivID == intDivID && res.ExamID == intExamID && res.SubjectID == intSubjectID
+                                     && res.StudentID == studentID
+                                     select res).ToList().FirstOrDefault();
+                }
                 if (result != null)
                 {
                     result.Marks = Convert.ToInt16(IDMarks[0]);
@@ -194,12 +217,30 @@ namespace SchoolAutomationSystem.Areas.ResultManagement
                     NewResult.ExamID = intExamID;
                     NewResult.SubjectID = intSubjectID;
                     NewResult.StudentID = studentID;
+                    NewResult.ActivityID = intActivityID;
                     NewResult.Marks = Convert.ToInt16(IDMarks[0]);
                     homeEntities.AddToResults(NewResult);
                     homeEntities.SaveChanges();
                 }
                 
             }
+        }
+
+        internal SelectList GetActivitySelectList(int selectedValues)
+        {
+            List<ActivityDetail> lstActivity = (from activity in homeEntities.ActivityDetails select activity).ToList();
+
+            IEnumerable<SelectListItem> selectListActivity = StaticDropdownItems.Concat(from tempLstFaculties in lstActivity
+                                                                                       select new SelectListItem
+                                                                                       {
+                                                                                           Value = tempLstFaculties.ID + "",
+                                                                                           Text = tempLstFaculties.ActivityName
+                                                                                       });
+
+            SelectList ddlActivity = new SelectList(selectListActivity, "Value", "Text", selectedValues);
+
+
+            return ddlActivity;
         }
     }
 }

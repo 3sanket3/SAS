@@ -1246,7 +1246,7 @@
     </Options>
     <!-- Diagram content (shape and connector positions) -->
     <Diagrams>
-      <Diagram Name="Home" ZoomLevel="61">
+      <Diagram Name="Home" ZoomLevel="46">
         <EntityTypeShape EntityType="HomeModel.Login" Width="1.5" PointX="2.75" PointY="0.75" Height="2.3648893229166661" IsExpanded="true" />
         <EntityTypeShape EntityType="HomeModel.SecurityQuestion" Width="1.5" PointX="0.75" PointY="0.75" Height="1.7879850260416657" IsExpanded="true" />
         <AssociationConnector Association="HomeModel.FK_Login_Login" ManuallyRouted="false">

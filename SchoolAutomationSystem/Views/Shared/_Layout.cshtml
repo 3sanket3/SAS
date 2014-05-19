@@ -31,11 +31,18 @@
 <div class="bodywrapper">
 
     <div class="container middle-content">
+    	<div class="row">
+        	<div class="main-content .col-xs-18 .col-sm-12">
+ 				<div class="header">
+    			<h1>School Automation System</h1>
+                <a class="logout">Logout</a></div>
     
-    School Automation System
     @{ Html.RenderPartial("Navigation");}
+    <div class="forms">
     @RenderBody()
-
+    </div>
+    </div>
+    </div>
     </div>
 
 </div>
