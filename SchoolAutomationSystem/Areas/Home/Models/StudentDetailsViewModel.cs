@@ -10,6 +10,7 @@ namespace SchoolAutomationSystem.Areas.Home.Models
     {
         DataOperations repository = new DataOperations();
         public int StudentId { get; set; }
+        public string SuccessErrorMsg { get; set; }
         public SearchStudentData SearchSrudetnData { get; set; }
         public List<StudentDetail> LstStudentDetails { get; set; }
         public StudentDetail StudentProcessingData { get; set; }

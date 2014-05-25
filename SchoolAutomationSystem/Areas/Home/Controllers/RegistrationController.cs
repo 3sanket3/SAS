@@ -22,7 +22,7 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
         public ActionResult DivRegistration()
         {
             DivDetailViewModel Model = new DivDetailViewModel();
-
+            Model.SuccessErrorMsg = "";
             //if (TempData["DivDetails1"] != null)
             //{
             //    Model = (DivDetailViewModel)TempData["DivDetails1"];
@@ -44,9 +44,18 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
         [HttpPost]
         public ActionResult DivRegistration(DivDetailViewModel model, FormCollection collaction)
         {
+            
             if (collaction["Action"] == "Submit")
             {
-                repository.SaveDivDetails(model);
+                if (repository.IsDivExist(model.classID, model.divName))
+                {
+                    model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Red'> Div Already Exist </div>";
+                }
+                else
+                {
+                    repository.SaveDivDetails(model);
+                    model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Green'>  Div Successfully Added  </div>";
+                }
             }
 
             model.lstDivDetails = repository.getAllDiv(model.classID);
@@ -86,7 +95,7 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
             //else
             //{
                 Model.lstClassDetails = repository.getAllClasses();
-            
+                Model.SuccessErrorMsg = "";
                 TempData["ClassDetails1"] = Model;
            // }
             return View(Model);
@@ -95,7 +104,15 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
         [HttpPost]
         public ActionResult ClassRegistration(ClassDetailViewModel model)
         {
-            repository.saveNewClass(model);
+            if (repository.IsClassExist(model.className))
+            {
+                model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Red'> Class Already Exist </div>";
+            }
+            else
+            {
+               repository.saveNewClass(model);
+               model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Green'>  Class Successfully Added  </div>";
+            }
             model.lstClassDetails = repository.getAllClasses();
             TempData["ClassDetails1"] = model;
             return View(model);
@@ -117,19 +134,7 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
         public ActionResult SubjectRegistration()
         {
             SubjectDetailViewModel Model = new SubjectDetailViewModel();
-            // Model.classes = new ClassDetail();
-            //if (TempData["ClassDetails1"] != null)
-            //{
-            //    Model = (ClassDetailViewModel)TempData["ClassDetails1"];
-            //    TempData["ClassDetails2"] = TempData["ClassDetails1"];
-            //}
-            //else if (TempData["ClassDetails2"] != null)
-            //{
-            //    Model = (ClassDetailViewModel)TempData["ClassDetails2"];
-            //    TempData["ClassDetails1"] = TempData["ClassDetails2"];
-            //}
-            //else
-            //{
+            Model.SuccessErrorMsg = "";
             Model.lstSubjectDetails = repository.getAllSubjects();
             TempData["ClassDetails1"] = Model;
             // }
@@ -139,7 +144,14 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
         [HttpPost]
         public ActionResult SubjectRegistration(SubjectDetailViewModel model)
         {
-            repository.saveNewSubject(model);
+            if(repository.IsSubjectExist(model.SubjectName.Trim()))
+            {
+                model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Red'> Subject Already Exist </div>";    
+            }
+            else{
+                   repository.saveNewSubject(model);
+                   model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Green'>  Subject Successfully Added  </div>";
+            }
             model.lstSubjectDetails = repository.getAllSubjects();
             TempData["ClassDetails1"] = model;
             return View(model);
@@ -172,7 +184,15 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
 
             if (collection["Action"] != "Search")
             {
-                repository.SaveFacultyDetails(model.FacultyProcessingData);
+                if (repository.IsFacultyExist((int)model.FacultyProcessingData.FacultyId ,model.FacultyProcessingData.FacultyUniqueName.Trim()))
+                {
+                    model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Red'> Faculty already exist with  Unique name '" + model.FacultyProcessingData.FacultyUniqueName.Trim() + "' </div>"; 
+                }
+                else
+                {
+                    repository.SaveFacultyDetails(model.FacultyProcessingData);
+                    model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Green'>  Faculty Successfully Added  </div>";
+                }
                 model.LstFacultyDetails = repository.getFacultyDetailsList();
             }
             else
@@ -238,16 +258,25 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
         [HttpPost]
         public ActionResult StudentSearch(StudentDetailsViewModel model, FormCollection collection)
         {
-
+            string SuccessErrorMsg = "";
             if (collection["Action"] != "Search")
             {
-                repository.SaveFacultyDetails(model.StudentProcessingData);
+                if (repository.IsStudentExist(model.StudentProcessingData, out SuccessErrorMsg))
+                {
+                    model.SuccessErrorMsg = SuccessErrorMsg;
+                    model.KeepViewOpen = true;
+                }
+                else
+                {
+                    repository.SaveFacultyDetails(model.StudentProcessingData);
+                    model.SuccessErrorMsg = "<div id='SuccessErrorMessage' style = 'color : Green'>  Student Successfully Added  </div>";
+                }
                 model.LstStudentDetails = repository.getStudentDetailsList();
             }
             else
             {
-                SearchStudentData searchStudentData = new SearchStudentData();
-                model.LstStudentDetails = repository.SearchStudents(searchStudentData);
+                //SearchStudentData searchStudentData = new SearchStudentData();
+                model.LstStudentDetails = repository.SearchStudents(model.SearchSrudetnData);
 
             }
 
@@ -289,7 +318,7 @@ namespace SchoolAutomationSystem.Areas.Home.Controllers
             return View("StudentDetailsProcessing", studentDetailsViewModel);
         }
 
-
+        
 
         #endregion
 

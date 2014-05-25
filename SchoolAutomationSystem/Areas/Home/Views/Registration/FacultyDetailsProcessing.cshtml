@@ -10,7 +10,7 @@
                         <div class="form-group">
                                 @Html.Label("Faculty ID")
                             
-                                @Html.TextBox("Model.FacultyProcessingData.FacultyId", Model.FacultyProcessingData.FacultyId == null ? 0 : Model.FacultyProcessingData.FacultyId, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Short Name'" , @disabled = "disabled"})
+                                @Html.TextBox("Model.FacultyProcessingData.FacultyId", Model.FacultyProcessingData.FacultyId == null ? 0 : Model.FacultyProcessingData.FacultyId, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Short Name'", @readonly = "readonly" })
                         </div>
 
                             <div class="form-group">
@@ -60,22 +60,25 @@
                             <div class="form-group">
                                 @Html.Label("Blood Group")
                             
-                                @Html.TextBox("Model.FacultyProcessingData.BloodGroupId", Model.FacultyProcessingData.BloodGroupId == null ? 0 : Model.FacultyProcessingData.BloodGroupId, new { @class = "form-control mrgn0 width-150"})
+                                @*@Html.TextBox("Model.FacultyProcessingData.BloodGroupId", Model.FacultyProcessingData.BloodGroupId == null ? 0 : Model.FacultyProcessingData.BloodGroupId, new { @class = "form-control mrgn0 width-150"})*@
+                                @Html.DropDownList("Model.FacultyProcessingData.BloodGroupId", Model.GetAllBloodGroupSelectList(Model.FacultyProcessingData.BloodGroupId == null ? 0 : (int)Model.FacultyProcessingData.BloodGroupId))
                             </div>
 
                             <div class="form-group">
                                 @Html.Label("Address")
                             
-                                @Html.TextArea("Model.FacultyProcessingData.Address", Model.FacultyProcessingData.Address == null ? string.Empty : Model.FacultyProcessingData.Address, new { @class = "form-control mrgn0 width-150" })
+                                @Html.TextBox("Model.FacultyProcessingData.Address", Model.FacultyProcessingData.Address == null ? string.Empty : Model.FacultyProcessingData.Address, new { @class = "form-control mrgn0 width-150" })
                             </div>
+                            <div class= "mrgn-top10"></div>
                             <div class="form-group double-btn">
-                                <button id="AddFacultyDetails1" class="btn btn-default ">Add Faculty</button>
+                                <button id="AddFacultyDetails1" class="btn btn-default " type = 'button' onclick = "AddFacultyDetails()">Add Faculty</button>
                                 
                             
                                 <button id="reset" type="reset" class="btn btn-default">
                                     Reset</button>
                             </div>
 
+                             
                         </div>
                         
                     </fieldset>
@@ -83,3 +86,17 @@
                 </div>
 
 
+  @* <script type="text/javascript">
+
+                $(document).ready(function () {
+
+                    $("#AddFacultyDetails1").click(function () {
+
+                        $("#Action")[0].value = "AddFacultyDetails";
+                        var a = ValidateSubmit();
+                        alert(a);
+                        return false;
+
+                    });
+
+    </script>*@

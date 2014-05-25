@@ -17,6 +17,7 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         public DateTime date { get; set; }
         public int TotalMarks { get; set; }
         public ActivityDetail ActivityDetail { get; set; }
+        public string SuccessErrorMsg { get; set; }
         public List<ActivityDetail> lstActivityDetails { get; set; }
 
         

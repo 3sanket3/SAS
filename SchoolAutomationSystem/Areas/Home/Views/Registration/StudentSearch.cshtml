@@ -28,14 +28,14 @@
                            <div class="form-group">
                                 @Html.Label("Class")
                             
-                                @Html.DropDownList("Model.SearchSrudetnData.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.SearchSrudetnData.ClassId)), new { @class = "selectpicker dropup width-150", @style = " placeholder='Class'" })
+                                @Html.DropDownList("Model.SearchSrudetnData.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.SearchSrudetnData.ClassId)), new { @class = " width-150", @style = " placeholder='Class'" })
                         </div>
 
 
                         <div class="form-group">
                                 @Html.Label("Div")
                             
-                                @Html.DropDownList("Model.SearchSrudetnData.DivId", Model.getAllDiv(Model.SearchSrudetnData.DivId), new { @class = "selectpicker dropup width-150", @style = " placeholder='Div'" })
+                                @Html.DropDownList("Model.SearchSrudetnData.DivId", Model.getAllDiv(Model.SearchSrudetnData.DivId), new { @class = "width-150", @style = " placeholder='Div'" })
                         </div>
 
                         <div class="form-group">
@@ -67,6 +67,12 @@
 
                              @Html.Hidden("Action", null, new { id = "Action" })
                         </div>
+
+                         <div class="form-group single-btn">
+                            
+                             @MvcHtmlString.Create(Model.SuccessErrorMsg)
+                            
+                              </div>
                         </div>
                         
                     </fieldset>
@@ -75,9 +81,9 @@
                     </div>
                     <div id="myGrid">
                         @{
-                        if (Model.LstStudentDetails != null && Model.LstStudentDetails.Count() > 0)
-                        {
-                            var grid = new WebGrid(Model.LstStudentDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
+                if (Model.LstStudentDetails != null && Model.LstStudentDetails.Count() > 0)
+                {
+                    var grid = new WebGrid(Model.LstStudentDetails, rowsPerPage: 4, canSort: true, canPage: true, ajaxUpdateContainerId: "myGrid");
                             @grid.GetHtml(
     tableStyle: "class_table mrgn-auto border",
         headerStyle: "",
@@ -94,7 +100,11 @@ grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = 
 
     )
     )
-                        }
+                }
+                else
+                {
+                    @MvcHtmlString.Create("<div style = 'color : Red'> No Data found with this Search Criteria </div>")
+                }
             }
                     </div>
 
@@ -112,10 +122,10 @@ grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = 
                         editClick(event, 0);
                     }
 
-                    $("#AddFacultyDetails1").click(function () {
-                        $("#Action")[0].value = "AddFacultyDetails";
-                        $('form')[0].submit();
-                    });
+//                    $("#AddFacultyDetails1").click(function () {
+//                        $("#Action")[0].value = "AddFacultyDetails";
+//                        $('form')[0].submit();
+//                    });
 
                     $("#Search").click(function () {
                         $("#Action")[0].value = "Search";
@@ -123,6 +133,20 @@ grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = 
                     });
                 });
 
+                function AddStudentDetails() {
+
+                    $("#Action")[0].value = "AddFacultyDetails";
+                    var success = ValidateSubmit();
+                    if (success) {
+                        
+                        $('form')[0].submit();
+                    }
+                    else {
+                        return false;
+                    }
+                }
+
+               
                 function editClick(e, studetnId) {
 
                     var $element = e.target.id;
@@ -142,6 +166,45 @@ grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = 
                     });
 
                     return false;
+
+                }
+
+
+                function ValidateSubmit() {
+                    var success = true;
+
+                    if ($("#Model_StudentProcessingData_GRNo") != undefined) {
+
+                        success = success & ValidateTextBoxRequired($("#Model_StudentProcessingData_GRNo"), "Please enter GR No");
+                    }
+                    if ($("#Model_StudentProcessingData_RollNo") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_StudentProcessingData_RollNo"), "Please enter Roll No");
+                    }
+                    if ($("#Model_StudentProcessingData_FirstName") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_StudentProcessingData_FirstName"), "Please enter First Name");
+                    }
+
+                    if ($("#Model_StudentProcessingData_MiddleName") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_StudentProcessingData_MiddleName"), "Please enter Middle Name");
+                    }
+
+                    if ($("#Model_StudentProcessingData_LastName") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_StudentProcessingData_LastName"), "Please enter Last Name");
+                    }
+
+                    if ($("#Model_StudentProcessingData_Address") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_StudentProcessingData_Address"), "Please enter Address");
+                    }
+                    if ($("#Model_StudentProcessingData_ClassId") != undefined) {
+
+                        success = success & ValidateDropDownBoxRequired($("#Model_StudentProcessingData_ClassId"), "Please select Class Name");
+                    }
+
+                    if ($("#Model_StudentProcessingData_DivId") != undefined) {
+
+                        success = success & ValidateDropDownBoxRequired($("#Model_StudentProcessingData_DivId"), "Please select Div Name");
+                    }
+                    return success;
 
                 } 
 

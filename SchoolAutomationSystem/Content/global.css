@@ -89,6 +89,7 @@ legend.scheduler-border {
 .class_table tr td:last-child,.class_table tr th:last-child{border-right:none;}
 .class_table tr.odd {background: #F9F9F9;}
 .class_table tr.even {background: #E5E5E5;}
+.class_table tr:hover{ background-color: #B7C7E0; } 
 .class_table tbody tr td a{background:url(/Content/images/box_edit-51215.png) no-repeat; font-size:13px; padding-left:18px;}
 
 .bootstrap-select.btn-group .dropdown-menu  {background:#6b6bb6;}
@@ -278,4 +279,14 @@ select {
     width : 150px !important;
     margin-top : 6px !important;
 }
-
+.ValidationError
+{
+      border-color: Red !important;
+  outline: 0;
+  -webkit-box-shadow: inset 0 1px 1px rgba(255, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6 !important);
+          box-shadow: inset 0 1px 1px rgba(255, 0, 0, 0.075), 0 0 8px rgba(255, 0, 0, 0.6) !important;
+}
+#SuccessErrorMessage
+{
+    font-size : medium;
+}

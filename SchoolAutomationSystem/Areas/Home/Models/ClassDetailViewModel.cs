@@ -12,6 +12,7 @@ namespace SchoolAutomationSystem.Areas.Home.Models
 //        public ClassDetail classes = new ClassDetail();
         public string className { get; set; }
         public int id { get; set; }
+        public string SuccessErrorMsg { get; set; }
 
     }
 }

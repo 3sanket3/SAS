@@ -10,7 +10,7 @@
                         <div class="form-group">
                                 @Html.Label("Student ID")
                             
-                                @Html.TextBox("Model.StudentProcessingData.Id", Model.StudentProcessingData.Id == null ? 0 : Model.StudentProcessingData.Id, new { @class = "form-control mrgn0 width-150", @disabled = "disabled" })
+                                @Html.TextBox("Model.StudentProcessingData.Id", Model.StudentProcessingData.Id == null ? 0 : Model.StudentProcessingData.Id, new { @class = "form-control mrgn0 width-150", @readonly = "readonly" })
                         </div>
 
                         <div class="form-group">
@@ -49,13 +49,13 @@
                            <div class="form-group">
                                 @Html.Label("Class")
                             
-                                @Html.DropDownList("Model.StudentProcessingData.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.StudentProcessingData.ClassId)), new { @class = "selectpicker dropup width-150", @style = " placeholder='Class'" })
+                                @Html.DropDownList("Model.StudentProcessingData.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.StudentProcessingData.ClassId)), new { @class = "width-150", @style = " placeholder='Class'" })
                         </div>
 
                         <div class="form-group">
                                 @Html.Label("Div")
                             
-                                @Html.DropDownList("Model.StudentProcessingData.DivId", Model.getAllDiv(Convert.ToInt16( Model.StudentProcessingData.DivId)), new { @class = "selectpicker dropup width-150", @style = " placeholder='Div'" })
+                                @Html.DropDownList("Model.StudentProcessingData.DivId", Model.getAllDiv(Convert.ToInt16( Model.StudentProcessingData.DivId)), new { @class = "width-150", @style = " placeholder='Div'" })
                         </div>
     
 
@@ -90,7 +90,7 @@
                             </div>
 
                             <div class="form-group double-btn">
-                                <button id="AddStudentDetails1" class="btn btn-default ">Add Student</button>
+                                <button id="AddStudentDetails1" type = 'button' onclick = "AddStudentDetails()" class="btn btn-default ">Add Student</button>
                                 
                             
                                 <button id="reset" type="reset" class="btn btn-default">

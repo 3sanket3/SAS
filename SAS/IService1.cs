@@ -22,6 +22,32 @@ namespace SAS
         [OperationContract]
         string getSubjectNameById(int SubjectID);
 
+
+        [OperationContract]
+        string GetClassDdetails(int ClasID);
+
+        [OperationContract]
+        string getFacultyDetailsList();
+
+        [OperationContract]
+        string getAllActivity(ActivityDetail activityDetails);
+
+        [OperationContract]
+        string getStudentDetailFromID(int ID);
+
+        [OperationContract]
+        string getStudentDetailsList();
+
+        [OperationContract]
+        string getSubjectDetailsFromID(int id);
+
+
+        [OperationContract]
+       string GetDivDetails(int DivID);
+
+
+
+
         // TODO: Add your service operations here
     }
 

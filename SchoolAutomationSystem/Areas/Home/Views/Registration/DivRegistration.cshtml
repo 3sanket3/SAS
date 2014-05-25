@@ -17,7 +17,7 @@
                         <div class="form-group">
                                 @Html.Label("Class Name")
                             
-                                @Html.DropDownList("Model.classID", Model.getAllClassNames(), new { @class = "selectpicker dropup" })
+                                @Html.DropDownList("Model.classID", Model.getAllClassNames(), new { @class = "" })
                             </div>
                             <div class="form-group">
                                 @Html.Label("Div Name")
@@ -27,16 +27,23 @@
                           
                             @Html.Hidden("Model.divId", Model.divId, new { id = "Model_divId" })
                             <div class="form-group">
-                                <button id="addDiv" class="btn btn-default width-100" >Add</button>
+                                <button id="addDiv" type= "button" class="btn btn-default width-100" >Add</button>
                                 
                             </div>
                             <div class="form-group">
                                 <button id="reset" type="reset" class="btn btn-default width-100">
                                     Reset</button>
                             </div>
+                             <div class="form-group single-btn">
+                            
+                             @MvcHtmlString.Create(Model.SuccessErrorMsg)
+                            
+                              </div>
                         </div>
                         </div>
+                       
                     </fieldset>
+                     
                     @if (Model.lstDivDetails.Count() > 0)
                     {
                     <div id="myGrid">
@@ -57,6 +64,10 @@
                         }
                     </div>
                     }
+                     else
+                {
+                    @MvcHtmlString.Create("<div style = 'color : Red'> No Data found with this Search Criteria </div>")
+                }
                 </div>
                 @Html.Hidden("Action",null, new { id = "Action" })
 
@@ -80,8 +91,13 @@
                     $("#addDiv").click(function () {
                   
                         $("#Action")[0].value = "Submit";
-                        $('form')[0].submit();
-                        //$("#Model_id")[0].value = "";
+                        var success = ValidateSubmit();
+                        if (success) {
+                            $('form')[0].submit();
+                        }
+                        else {
+                            return false;
+                        }
                     });
 
 
@@ -120,5 +136,19 @@
 
                     return false;
 
-                } 
+                }
+
+                function ValidateSubmit() {
+
+                    var success = true;
+                    if ($("#Model_divName") != undefined) {
+
+                        success = success & ValidateTextBoxRequired($("#Model_divName"), "Please enter Div Name");
+                    }
+                    if ($("#Model_classID") != undefined) {
+
+                        success = success & ValidateDropDownBoxRequired($("#Model_classID"), "Please select Class Name");
+                    }
+                    return success;
+                }
             </script>

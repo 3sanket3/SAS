@@ -6,28 +6,38 @@
 <div class="row">
     <div class="main-content .col-xs-18 .col-sm-12">
        
-        <div class="login-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
+        <div class="login-content middle-content .col-xs-6 .col-sm-4 mrgn-top10 pad5">
             @using (Html.BeginForm(FormMethod.Post))
             {
                 <div class="fieldset-content">
                     <fieldset class="scheduler-border">
                         <legend class="scheduler-border">Class Registration</legend>
+                        <div class="forms">
+                        <div class="form-inline">
                         <div class="form-group">
-                            <div class="pad5 float-left">
-                                @Html.Label("Class Name")</div>
-                            <div class="float-left">
-                                @Html.TextBox("Model.className", Model.className == null ? string.Empty : Model.className, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Class'" })
-                            </div>
+                                @Html.Label("Class Name")
+
+                            
+                                @Html.TextBox("Model.className", Model.className == null ? string.Empty : Model.className, new { @class = "form-control mrgn0 width-150 ", @style = " placeholder='Class'" })
+                          </div>
                           
                             @Html.Hidden("Model.id", Model.id, new { id = "Model_id" })
-                            <div class="float-left pad-left15">
-                                <button id="addClass" class="btn btn-default width-100" >Add</button>
+                            <div class="form-group single-btn">
+                                <button type ='button' id="addClass" class="btn btn-default width-50" >Add</button>
                                 
-                            </div>
-                            <div class="float-left pad-left15">
-                                <button id="reset" type="reset" class="btn btn-default width-100">
+                                <button id="reset" type="reset" class="btn btn-default width-50">
                                     Reset</button>
                             </div>
+
+                             <div class="form-group single-btn">
+                            
+                             @MvcHtmlString.Create(Model.SuccessErrorMsg)
+            
+                            
+                            
+                              </div>
+
+                        </div>
                         </div>
                     </fieldset>
                     <div id="myGrid">
@@ -48,6 +58,10 @@
     )
     )
                        }
+                        else
+                {
+                    @MvcHtmlString.Create("<div style = 'color : Red'> No Data found with this Search Criteria </div>")
+                }
             }
                     </div>
                 </div>
@@ -64,13 +78,25 @@
                     return false;
                 });
                 $(document).ready(function () {
-                    $("#Model_className")[0].value = "";
-                    $("#Model_id")[0].value = "";
-                    $("#addClass").click(function () {
-                        $('form')[0].submit();
-                        //$("#Model_id")[0].value = "";
-                    });
+
                     
+
+
+                    $("#Model_className")[0].value = "";
+
+                    $("#Model_id")[0].value = "";
+
+                    $("#addClass").click(function () {
+                        var success = ValidateSubmit();
+
+                        if (success) {
+                            $('form')[0].submit();
+                        }
+                        else {
+                            return false;
+                        }
+                    });
+
                 });
 
                 function editClick(e) {
@@ -101,6 +127,17 @@
                     });
                     
                     return false;
-                    
-                } 
+
+                }
+
+
+                function ValidateSubmit() {
+                    var success = true;
+
+                    if ($("#Model_className") != undefined) {
+
+                        success = success & ValidateTextBoxRequired($("#Model_className"), "Please enter Class Name");
+                    }
+                    return success;
+                }
             </script>

@@ -17,18 +17,24 @@
                         <div class="form-group">
                                 @Html.Label("Subject Name")
                             
-                                @Html.TextBox("Model.SubjectName", Model.SubjectName == null ? string.Empty : Model.SubjectName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Subject'" , id="abcd"})
+                                @Html.TextBox("Model.SubjectName", Model.SubjectName == null ? string.Empty : Model.SubjectName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Subject'" })
                         </div>
                           
                             @Html.Hidden("Model.ID", Model.ID, new { id = "Model_ID" })
-                        <div class="form-group">
-                                <button id="addSubject" class="btn btn-default width-100" >Add</button>
+                        <div class="form-group double-btn">
+                                <button id="addSubject" type="button" class="btn btn-default width-50" >Add</button>
                                 
-                            </div>
-                            <div class="form-group">
-                                <button id="reset" type="reset" class="btn btn-default width-100">
+                            
+                                <button id="reset" type="reset" class="btn btn-default width-50">
                                     Reset</button>
                             </div>
+                             <div class="form-group single-btn">
+                            
+                             @MvcHtmlString.Create(Model.SuccessErrorMsg)
+            
+                            
+                            
+                              </div>
                         </div>
                     </fieldset>
                     <div id="myGrid">
@@ -49,6 +55,10 @@
     )
     )
                        }
+                        else
+                {
+                    @MvcHtmlString.Create("<div style = 'color : Red'> No Data found with this Search Criteria </div>")
+                }
             }
                     </div>
                 </div>
@@ -59,17 +69,27 @@
 </div>
 </div></div>
             <script type="text/javascript">
-                $("#reset").click(function () {
-                    $("#Model_SubjectName")[0].value = "";
-                    $("#Model_ID")[0].value = "";
-                    return false;
-                });
+               
                 $(document).ready(function () {
-                    $("#Model_SubjectName")[0].value = "";
-                    $("#Model_ID")[0].value = "";
+//                    $("#Model_SubjectName")[0].value = "";
+//                    $("#Model_ID")[0].value = "";
                     $("#addSubject").click(function () {
-                        $('form')[0].submit();
+                        
+                        var success = ValidateSubmit();
+                        
+                        if (success) {
+                            $('form')[0].submit();
+                        }
+                        else {
+                            return false;
+                        }
                         //$("#Model_id")[0].value = "";
+                    });
+
+                    $("#reset").click(function () {
+                        $("#Model_SubjectName")[0].value = "";
+                        $("#Model_ID")[0].value = "";
+                        return false;
                     });
 
                 });
@@ -103,5 +123,15 @@
 
                     return false;
 
-                } 
+                }
+
+                function ValidateSubmit() {
+                    var success = true;
+                    
+                    if ($("#Model_SubjectName") != undefined) {
+
+                        success = success & ValidateTextBoxRequired($("#Model_SubjectName"), "Please enter Subject Name");
+                    }
+                    return success;
+                }
             </script>

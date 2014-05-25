@@ -70,6 +70,11 @@
                                 <button id="AddActivity" class="btn btn-default width-100" >Add Activity</button>
                                 
                             </div>
+                            <div class="form-group single-btn">
+                            
+                             @MvcHtmlString.Create(Model.SuccessErrorMsg)
+                            
+                              </div>
                             </div> 
                         </fieldset>
                         </div>
@@ -97,6 +102,10 @@
                         }
                     </div>
                     }
+                     else
+                {
+                    @MvcHtmlString.Create("<div style = 'color : Red'> No Data found with this Search Criteria </div>")
+                }
                 </div>
                 @Html.Hidden("Action",null, new { id = "Action" })
 

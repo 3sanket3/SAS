@@ -17,7 +17,7 @@
                         <div class="form-group">
                                 @Html.Label("Class Name")
                             
-                                @Html.DropDownList("Model.SubjectMapping.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.SubjectMapping.ClassId)), new { @class = "" })
+                                @Html.DropDownList("Model.SubjectMapping.ClassId", Model.GetAllClassesSelectList(Convert.ToInt16(Model.SubjectMapping.ClassId)), new { @class = "", @required = "required" })
                             </div>
                             <div class="form-group">
                                 @Html.Label("Div Name")
@@ -112,7 +112,8 @@
                     $("#GetMapping").click(function () {
 
                         $("#Action")[0].value = "GetMapping";
-                        $('form')[0].submit();
+                        return ValidateGetMapping()
+                        //$('form')[0].submit();
                         //$("#Model_id")[0].value = "";
                     });
 
@@ -167,32 +168,10 @@
 
                     return false;
 
-                } 
+                }
 
-//        var url = window.location.href;
-//        url = url.substring(0, url.lastIndexOf("/Registration"));
-//        alert(url);
-//        $("#Faculty").autocomplete({
+                function ValidateGetMapping() {
 
-//            source: function (request, response) {
-//                var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-//                $.ajax({
-//                    url: url + "/Registration/GetAllFacultiesSelectList",
-//                    dataType: "json",
-//                    success: function (data) {
-//                        response($.map(data, function (v, i) {
-//                            var text = v.MainName;
-//                            if (text && (!request.term || matcher.test(text))) {
-//                                alert(text);
-//                                return {
-//                                    label: v.MainName,
-//                                    value: v.MainItemID
-//                                };
-//                            }
-//                        }));
-//                    }
-//                });
-//            }
-//        });
+                }
 
 </script>

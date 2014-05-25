@@ -18,11 +18,11 @@
                         <div class="form-group">
                                 @Html.Label("Short Name")
                             
-                                @Html.TextBox("Model.UniqueName", Model.UniqueName == null ? string.Empty : Model.UniqueName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Short Name'" })
+                                @Html.TextBox("Model.UniqueName", Model.UniqueName == null ? string.Empty : Model.UniqueName, new { @class = "form-control mrgn0 width-150", @style = " placeholder='Short Name'"})
                            </div>
                           
                             @Html.Hidden("Model.FacultyId", Model.FacultyId, new { id = "Model_FacultyId"})
-
+                            
                             <div class="form-group">
                                 @Html.Label("Faculty Name")
                             
@@ -44,17 +44,22 @@
                                  <button id="AddNewFaculty" class="btn btn-default" onclick='editClick(event,0);' type ="button">Add New Faculty</button>
                             </div>
 
-                            <div class="form-group single-btn">
-                                
-                             </div>
-
+                          
+                             
                              @Html.Hidden("Action", null, new { id = "Action" })
                         </div>
+                        <div class="form-group single-btn">
+                            
+                             @MvcHtmlString.Create(Model.SuccessErrorMsg)
+                            
+                              </div>
                         </div>
                         
                     </fieldset>
 
                     <div id = "FacultyProcessing">
+               
+
                     </div>
                     <div id="myGrid">
                         @{
@@ -64,9 +69,10 @@
                             @grid.GetHtml(
     tableStyle: "class_table mrgn-auto border",
         headerStyle: "",
+        
         rowStyle: "odd",
             alternatingRowStyle: "even",
-            selectedRowStyle: "",
+         selectedRowStyle: "",
     columns: grid.Columns(
 
       grid.Column("Action", "Action", format: (item) => MvcHtmlString.Create("<a id = edit_" + item.FacultyId + " href='#' onclick='editClick(event," + item.FacultyId + ");'>Edit </a>")),
@@ -76,6 +82,10 @@
     )
     )
                        }
+                        else
+                {
+                    @MvcHtmlString.Create("<div style = 'color : Red'> No Data found with this Search Criteria </div>")
+                }
             }
                     </div>
 
@@ -89,19 +99,30 @@
                 $(document).ready(function () {
 
                     $("#AddFacultyDetails1").click(function () {
-                        //alert($("#Action")[0].value);
-                        $("#Action")[0].value = "AddFacultyDetails";
-                        //alert($("#Action")[0].value);
-                        $('form')[0].submit();
+
+
                     });
 
                     $("#Search").click(function () {
-                        //alert($("#AddFacultyDetails1")[0]);
+
                         $("#Action")[0].value = "Search";
-                        $('form')[0].submit();
+
+
                     });
                 });
 
+
+                function AddFacultyDetails() {
+                
+                    $("#Action")[0].value = "AddFacultyDetails";
+                    var success = ValidateSubmit();
+                    if (success) {
+                        $('form')[0].submit();
+                    }
+                    else {
+                        return false;
+                    }
+                }
                 function editClick(e,facultyId) {
 
                     var $element = e.target.id;
@@ -126,9 +147,42 @@
 
                     return false;
 
-                } 
+                }
+
+                function ValidateSubmit() {
+                    var success = true;
+
+                    if ($("#Model_FacultyProcessingData_FacultyUniqueName") != undefined) {
+
+                        success = success & ValidateTextBoxRequired($("#Model_FacultyProcessingData_FacultyUniqueName"), "Please enter Unique Name");
+                    }
+                    if ($("#Model_FacultyProcessingData_FirstName") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_FacultyProcessingData_FirstName"), "Please enter First Name");
+                    }
+                    if ($("#Model_FacultyProcessingData_LastName") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_FacultyProcessingData_LastName"), "Please enter Last Name");
+                    }
+
+                    if ($("#Model_FacultyProcessingData_LastName") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_FacultyProcessingData_LastName"), "Please enter Last Name");
+                    }
+                    if ($("#Model_FacultyProcessingData_EmailAddress") != undefined) {
+
+                        success = success & validateEmail($("#Model_FacultyProcessingData_EmailAddress"), "Please enter valid email address");
+                    }
+                    if ($("#Model_FacultyProcessingData_Address") != undefined) {
+                        success = success & ValidateTextBoxRequired($("#Model_FacultyProcessingData_Address"), "Please enter Adderess");
+                    }
 
 
+                    
+
+                    return success;
+
+
+
+                    
+                }
 
 
             </script>

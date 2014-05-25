@@ -12,6 +12,7 @@ namespace SchoolAutomationSystem.Areas.Home.Models
         public string divName { get; set; }
         public int divId { get; set; }
         public int classID { get; set; }
+        public string SuccessErrorMsg { get; set; }
         DataOperations repository = new DataOperations();
 
         public SelectList getAllClassNames()

@@ -45,6 +45,50 @@ namespace SchoolAutomationSystem.Areas.Home
             return lstClasses.ToList();
         }
 
+        public bool IsClassExist(string className)
+        {
+            ClassDetail lstClasses = (from classes in homeEntities.ClassDetails where classes.Active == true  && classes.ClassName == className select classes).FirstOrDefault();
+
+            return lstClasses != null ? true : false;
+        }
+        public bool IsDivExist(int classID,string divName)
+        {
+            DivDetail lstDiv = (from div in homeEntities.DivDetails where div.ClassId == classID && div.Div == divName && div.Active == true select div).FirstOrDefault();
+            return lstDiv != null ? true : false;
+        }
+        public bool IsSubjectExist(string subject)
+        {
+            SubjectDetail subjectdetails = (from sub in homeEntities.SubjectDetails where sub.Active == true && sub.SubjectName == subject select sub).FirstOrDefault();
+
+            return subjectdetails != null ? true : false;
+        }
+        public bool IsFacultyExist(int FacultyID,string shortName)
+        {
+            FacultyDetail facultyDetails = (from faculty in homeEntities.FacultyDetails where faculty.Active == true && faculty.FacultyUniqueName == shortName select faculty).FirstOrDefault();
+            return facultyDetails != null ? (facultyDetails.FacultyId == FacultyID ? false : true)  : false;
+        }
+        public bool IsStudentExist(StudentDetail studentDetails, out string successerrorMsg)
+        {
+            StudentDetail student = (from stu in homeEntities.StudentDetails
+                                     where stu.Active == true && stu.GRNo == studentDetails.GRNo
+                                     select stu).FirstOrDefault();
+            if (student != null && studentDetails.Id != student.Id)
+            {
+                successerrorMsg = "<div id='SuccessErrorMessage' style = 'color : Red'> Student with GR NO '"+ studentDetails.GRNo+"' is already present </div>";
+                return true;
+            }
+            else
+            {
+                student = (from stu in homeEntities.StudentDetails
+                           where stu.Active == true && stu.RollNo == studentDetails.RollNo && stu.DivId == studentDetails.DivId
+                               && stu.ClassId == studentDetails.ClassId
+                           select stu).FirstOrDefault();
+                successerrorMsg = "<div id='SuccessErrorMessage' style = 'color : Red'> Student with Roll No'" + studentDetails.RollNo + "' is already present in '" + getClassNameById((int)studentDetails.ClassId) + " " + getDivNameById((int)studentDetails.DivId) + "'</div>";
+
+                return student != null ? (student.Id == studentDetails.Id ? false : true) : false;
+                
+            }
+        }
         public void saveNewClass(ClassDetailViewModel model)
         {
             if (model.id == 0)
@@ -155,7 +199,7 @@ namespace SchoolAutomationSystem.Areas.Home
                 if (model.SubjectName != null || model.SubjectName != string.Empty)
                 {
                     SubjectDetail SubjectDetails = new SubjectDetail();
-                    SubjectDetails.SubjectName = model.SubjectName;
+                    SubjectDetails.SubjectName = model.SubjectName.Trim();
                     SubjectDetails.Active = true;
                     homeEntities.AddToSubjectDetails(SubjectDetails);
                     homeEntities.SaveChanges();
@@ -165,7 +209,7 @@ namespace SchoolAutomationSystem.Areas.Home
             {
                 //existing id
                 SubjectDetail SubjectDetails = getSubjectDetailsFromID(model.ID);
-                SubjectDetails.SubjectName = model.SubjectName;
+                SubjectDetails.SubjectName = model.SubjectName.Trim();
                 SubjectDetails.Active = true;
                 homeEntities.SaveChanges();
 
@@ -186,6 +230,30 @@ namespace SchoolAutomationSystem.Areas.Home
         #endregion
 
         #region Faculty Methos
+
+        public SelectList GetAllBloodGroupSelectList(int selectedValues)
+        {
+            // var AllDiv = from div in homeEntities.DivDetails select div;
+            //ClassStaticDropdownItems
+
+            List<BloodGroup> AllBloodGroup = (from bloodGroup in homeEntities.BloodGroups
+                                             select bloodGroup).ToList();
+
+            IEnumerable<SelectListItem> selectListgroup = StaticDropdownItems.Concat(from tempLstgroup in AllBloodGroup
+                                                                                   select new SelectListItem
+                                                                                   {
+                                                                                       Value = tempLstgroup.ID + "",
+                                                                                       Text = tempLstgroup.BloodGroup1
+                                                                                   });
+
+            SelectList ddlBloodGroup = new SelectList(selectListgroup, "Value", "Text", selectedValues);
+
+
+            return ddlBloodGroup;
+
+            //return new SelectList(AllDiv, "Id", "Div", selectedValues);
+
+        }
 
         internal List<FacultyDetail> getFacultyDetailsList()
         {
@@ -232,17 +300,17 @@ namespace SchoolAutomationSystem.Areas.Home
 
         public void CopyFacultyDetails(FacultyDetail source, FacultyDetail destination)
         {
-            destination.FacultyUniqueName = source.FacultyUniqueName;
-            destination.FirstName = source.FirstName;
-            destination.LastName = source.LastName;
-            destination.MiddleName = source.MiddleName;
+            destination.FacultyUniqueName = source.FacultyUniqueName.Trim();
+            destination.FirstName = source.FirstName.Trim();
+            destination.LastName = source.LastName.Trim();
+        //    destination.MiddleName = source.MiddleName.Trim();
             destination.Password = source.Password;
             destination.PhoneNo = source.PhoneNo;
             destination.Address = source.Address;
             destination.BirthDate = source.BirthDate;
             destination.BloodGroup = source.BloodGroup;
             destination.EmailId = source.EmailId;
-            destination.Active = source.Active;
+            destination.Active = true;
         }
 
         public List<FacultyDetail> SearchFaculties(FacultyDetail faculty)
@@ -340,7 +408,7 @@ namespace SchoolAutomationSystem.Areas.Home
             destination.PFName = source.PFName;
             destination.PMName = source.PMName;
             destination.PLName = source.PLName;
-            destination.Active = source.Active;
+            destination.Active = true;
         }
 
         public List<StudentDetail> SearchStudents(SearchStudentData searchStudentDetails)
@@ -371,6 +439,18 @@ namespace SchoolAutomationSystem.Areas.Home
             {
                 lstAllStudents = (from students in lstAllStudents
                                   where students.RollNo != null && students.RollNo == searchStudentDetails.RollNo
+                                  select students).ToList();
+            }
+            if (searchStudentDetails.ClassId >0)
+            {
+                lstAllStudents = (from students in lstAllStudents
+                                  where students.ClassId != null && students.ClassId == searchStudentDetails.ClassId
+                                  select students).ToList();
+            }
+            if (searchStudentDetails.DivId > 0)
+            {
+                lstAllStudents = (from students in lstAllStudents
+                                  where students.DivId != null && students.DivId == searchStudentDetails.DivId
                                   select students).ToList();
             }
             return lstAllStudents;
